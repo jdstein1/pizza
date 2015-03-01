@@ -1,10 +1,18 @@
+<!-- <hr> -->
 <div ng-controller="cNav">
-    <ul>
-		<li><a href="#/">Home</a></li>
-		<li><a href="#/crusts">Crusts</a></li>
-		<li><a href="#/sauces">Sauces</a></li>
-		<li><a href="#/sizes">Sizes</a></li>
-		<li><a href="#/toppings">Toppings</a></li>
-    </ul>
-    <hr>
+<!-- <br clear="all"> -->
+<ul>
+	<li ng-repeat="item in nav | orderBy : navPredicate : navReverse">
+		<ng-switch on="item.disabled">
+			<div ng-switch-when="false">
+				<a class="navLink" href="#{{item.link}}" ng-class="{'disabled':item.disabled, 'active':isActiveNav(item.link)}">{{item.name}}</a>
+			</div>
+			<div ng-switch-default ng-class="{'disabled':item.disabled}">
+				<span class="navLink">{{item.name}}</span>
+			</div>
+		</ng-switch>
+	</li>
+</ul>
+<br clear="all">
 </div>
+<!-- <hr> -->
