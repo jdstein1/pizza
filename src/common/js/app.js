@@ -30,19 +30,19 @@ patterns that lack thought.
             controller: 'cPizzaHome'
         }).
         when('/toppings', {
-            templateUrl: 'm-toppings/index.html',
+            templateUrl: 'modules/toppings/index.html',
             controller: 'cPizzaToppings'
         }).
         when('/crusts', {
-            templateUrl: 'm-crusts/index.html',
+            templateUrl: 'modules/crusts/index.html',
             controller: 'cPizzaCrusts'
         }).
         when('/sauces', {
-            templateUrl: 'm-sauces/index.html',
+            templateUrl: 'modules/sauces/index.html',
             controller: 'cPizzaSauces'
         }).
         when('/sizes', {
-            templateUrl: 'm-sizes/index.html',
+            templateUrl: 'modules/sizes/index.html',
             controller: 'cPizzaSizes'
         }).
         otherwise({
