@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="pizza">
+<head>
+  <meta charset="UTF-8">
+  <title>Pizza Selector</title>
+  <style>
+    table, th, td {border:1px lightgrey solid;}
+  </style>
+  <link rel="stylesheet" type="text/css" href="common/css/reset.css">
+  <link rel="stylesheet/less" type="text/css" href="common/css/layout.less">
+</head>
+<body>
+  <header ng-include="'common/header.html'"></header>
+  <!-- <header ng-controller="cHeader">{{header}}</header> -->
+  <nav ng-include="'common/nav.html'"></nav>
+  <!-- <nav ng-controller="cNav">{{nav}}</nav> -->
+  <section ng-view></section>
+  <!-- <aside ng-include="'common/summary.html'"></aside> -->
+  <footer ng-include="'common/footer.html'"></footer>
+  <!-- <footer ng-controller="cFooter">{{footer}}</footer> -->
+  <script type="text/javascript" src="lib/less/less-1.4.1.min.js"></script>
+  <script type="text/javascript" src="lib/angular/angular.min.js"></script>
+  <script type="text/javascript" src="common/js/app.js"></script>
+  <!--<script type="text/javascript" src="m-toppings/js/s-toppings.js"></script>-->
+  <!--<script type="text/javascript" src="m-toppings/js/d-toppings.js"></script>-->
+  <!--<script type="text/javascript" src="m-toppings/js/c-toppings.js"></script>-->
+</body>
+</html>

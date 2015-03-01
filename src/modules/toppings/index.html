@@ -1,0 +1,96 @@
+<article ng-controller="cPizzaToppings">
+  <h2>Toppings</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Ingredient Name</th>
+        <th>Whole Pie</th>
+        <th>Left Side</th>
+        <th>Right Side</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="topping in toppings" class="{{topping.attributes[0]}}">
+        <th>{{topping.name}} -- {{$index}}</th>
+        <td>
+          <label>{{topping.price[0]}}
+          <input type="radio" 
+            ng-model="myToppings.whole[$index]"
+            ng-change=""
+            name="{{topping.id}}" 
+            value="{{topping.value}}">
+          </label>
+        </td>
+        <td>
+          <label>{{topping.price[1]}}
+          <input type="radio" 
+            ng-model="myToppings.left[$index]"
+            ng-change=""
+            name="{{topping.id}}" 
+            value="{{topping.value}}">
+          </label>
+        </td>
+        <td>
+          <label>{{topping.price[1]}}
+          <input type="radio" 
+            ng-model="myToppings.right[$index]"
+            ng-change=""
+            name="{{topping.id}}" 
+            value="{{topping.value}}">
+          </label>
+        </td>
+        <td>
+          <label>None
+          <input type="radio" 
+            ng-model="myToppings[$index]"
+            ng-change=""
+            name="{{topping.id}}" 
+            value="0" checked="checked">
+          </label>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th>Pizza base price of 
+          <select 
+            name="myCost" 
+            ng-model="myCost" 
+            ng-options="c.label for c in cost"></select>
+         {{units}} pizza</th>
+        <td colspan="3" align="center">
+          ${{myCost.value}}
+        </td>
+      </tr>
+      <tr>
+        <th rowspan="2">Topping price</th>
+        <th>Whole</th>
+        <th>Left</th>
+        <th>Right</th>
+      </tr>
+      <tr>
+        <td><span>{{myToppings.whole.value}}</span></td>
+        <td><span>{{myToppings.left.value}}</span></td>
+        <td><span>{{myToppings.right.value}}</span></td>
+      </tr>
+      <tr>
+        <th>Subtotal</th>
+        <td colspan="3">{{cost.subtotal}}</td>
+      </tr>
+      <tr>
+        <th>Total</th>
+        <td colspan="3">{{cost.total}}</td>
+      </tr>
+    </tfoot>
+  </table>
+  <h2>Models</h2>
+  <dl>
+    <dt>myToppings</dt><dd>{{myToppings}}</dd>
+    <dt>myCost</dt><dd>{{myCost}}</dd>
+    <dt>mySelected</dt><dd>{{mySelected}}</dd>
+    <dt>topping.id</dt><dd>{{topping.id}}</dd>
+    <dt>myWhole</dt><dd>{{myWhole}}</dd>
+    <dt>myLeft</dt><dd>{{myLeft}}</dd>
+    <dt>myRight</dt><dd>{{myRight}}</dd>
+  </dl>
+</article>

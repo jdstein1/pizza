@@ -1,0 +1,46 @@
+<article ng-controller="">
+  <h2>Sauces</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Ingredient Name</th>
+        <th>Whole Pie</th>
+        <th>Left Side</th>
+        <th>Right Side</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr repeat="topping in toppings">
+        <th>{{topping.name}}</th>
+        <td><label>{{topping.price[0]}}<input type="radio" name="topping.id" id="topping.id" value="topping.value"></label></td>
+        <td><label>{{topping.price[1]}}<input type="radio" name="topping.id" id="topping.id" value="topping.value"></label></td>
+        <td><label>{{topping.price[1]}}<input type="radio" name="topping.id" id="topping.id" value="topping.value"></label></td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th>Base price</th>
+        <td colspan="3">{{cost.base}}</td>
+      </tr>
+      <tr>
+        <th rowspan="2">Topping price</th>
+        <th>Whole</th>
+        <th>Left</th>
+        <th>Right</th>
+      </tr>
+      <tr>
+        <td>{{cost.toppings.w}}</td>
+        <td>{{cost.toppings.l}}</td>
+        <td>{{cost.toppings.r}}</td>
+      </tr>
+      <tr>
+        <th>Subtotal</th>
+        <td colspan="3">{{cost.subtotal}}</td>
+      </tr>
+      <tr>
+        <th>Total</th>
+        <td colspan="3">{{cost.total}}</td>
+      </tr>
+    </tfoot>
+  </table>
+</article>

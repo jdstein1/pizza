@@ -1,0 +1,48 @@
+<article ng-controller="cSizes">
+  <h2>Sizes</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Diameter</th>
+        <th>Price</th>
+        <th>Area</th>
+        <th>Price per square inch</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr repeat="size in sizes">
+        <th>{{size.name}}</th>
+        <td><label>{{size.price[0]}}<input type="radio" name="size.id" id="size.id" value="size.value"></label></td>
+        <td><label>{{size.price[1]}}<input type="radio" name="size.id" id="size.id" value="size.value"></label></td>
+        <td><label>{{size.price[1]}}<input type="radio" name="size.id" id="size.id" value="size.value"></label></td>
+        <td><label>{{size.price[1]}}<input type="radio" name="size.id" id="size.id" value="size.value"></label></td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th>Base price</th>
+        <td colspan="3">{{cost.base}}</td>
+      </tr>
+      <tr>
+        <th rowspan="2">size price</th>
+        <th>Whole</th>
+        <th>Left</th>
+        <th>Right</th>
+      </tr>
+      <tr>
+        <td>{{cost.sizes.w}}</td>
+        <td>{{cost.sizes.l}}</td>
+        <td>{{cost.sizes.r}}</td>
+      </tr>
+      <tr>
+        <th>Subtotal</th>
+        <td colspan="3">{{cost.subtotal}}</td>
+      </tr>
+      <tr>
+        <th>Total</th>
+        <td colspan="3">{{cost.total}}</td>
+      </tr>
+    </tfoot>
+  </table>
+</article>
