@@ -19,6 +19,21 @@ patterns that lack thought.
 
     angular
         .module('pizza')
+        .controller('cMain', cMain)
+
+    function cMain($scope, $rootScope) {
+        $scope.title = "cMain";
+        console.log('START',$scope.title);
+        $rootScope.myPizza = {};
+        console.log('$rootScope.myPizza',$rootScope.myPizza);
+    }
+
+// })();
+// (function() {
+//     'use strict';
+
+    angular
+        .module('pizza')
         .controller('cHeader', cHeader)
 
     function cHeader($scope) {

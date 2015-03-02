@@ -7,7 +7,7 @@
 		.module('pizza')
 		.controller('cToppings', cToppings)
 
-	function cToppings($scope, sToppings) {
+	function cToppings($scope, $rootScope, sToppings) {
 /*
 
 When you order a pizza, you have a FLAVOR or pizza in mind 
@@ -20,8 +20,17 @@ the flavor of the sauce, cheese and ingrdients.
 */
 		$scope.title = "cToppings";
 		console.log('START',$scope.title);
-
 		$scope.units = "inch";
+/*
+
+- [X] Create myPizza object in rootscope.
+- [X] Push data from services/factories into it for each 
+	module (toppings, crusts, sizes, etc.)
+- [] Modify sub-object attributes in rootscope object to 
+	indicate preferences and layout of pizza.
+- [] Topping layout values:  see 's-toppings.js'
+
+*/
 
 		$scope.clear = function () {
 
@@ -45,26 +54,28 @@ the flavor of the sauce, cheese and ingrdients.
 		}];
 		console.log('$scope.sizes: ', $scope.sizes);
 
-		$scope.defaults = $scope.sizes[0];
-		console.log('$scope.defaults: ', $scope.defaults);
+		$scope.defaultSize = $scope.sizes[0];
+		console.log('$scope.defaultSize: ', $scope.defaultSize);
 
-		$scope.myCost = $scope.defaults.value;
+		$scope.myCost = $scope.defaultSize.value;
 		console.log('$scope.myCost: ', $scope.myCost);
 
-		$scope.myPizza = {
-			"toppings":
-			{
-				"whole":[],
-				"left":[],
-				"right":[],
-				"none":[]
-			}
-		};
+		console.log('$rootScope.myPizza: ', $rootScope.myPizza);
+		$rootScope.myPizza.toppings = sToppings;
+		// $rootScope.myPizza = {
+		// 	"toppings":
+		// 	{
+		// 		"whole":[],
+		// 		"left":[],
+		// 		"right":[],
+		// 		"none":[]
+		// 	}
+		// };
 		// $scope.myToppings.whole = {};
 		// $scope.myToppings.left = {};
 		// $scope.myToppings.right = {};
-		console.log('$scope.myPizza: ', $scope.myPizza);
-		console.log('$scope.myPizza.toppings: ', $scope.myPizza.toppings);
+		console.log('$rootScope.myPizza: ', $rootScope.myPizza);
+		console.log('$rootScope.myPizza.toppings: ', $rootScope.myPizza.toppings);
 
 	}
 

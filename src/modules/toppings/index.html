@@ -8,6 +8,7 @@
         <th>Whole Pie</th>
         <th>Left Side</th>
         <th>Right Side</th>
+        <th>Clear</th>
       </tr>
     </thead>
     <tbody>
@@ -16,8 +17,8 @@
         <td>
           <label>{{topping.price[0]}}
           <input type="radio" 
-            ng-model="myPizza.toppings.whole[topping.id]" 
-            ng-change="fToppingLayout(1,topping.id)" 
+            ng-model="topping.layout" 
+            value="1"
             name="{{topping.id}}" 
             id="{{topping.id}}Whole">
           </label>
@@ -25,8 +26,8 @@
         <td>
           <label>{{topping.price[1]}}
           <input type="radio" 
-            ng-model="myPizza.toppings.left[topping.id]" 
-            ng-change="fToppingLayout(2,topping.id)" 
+            ng-model="topping.layout" 
+            value="2"
             name="{{topping.id}}" 
             id="{{topping.id}}Left">
           </label>
@@ -34,8 +35,8 @@
         <td>
           <label>{{topping.price[1]}}
           <input type="radio" 
-            ng-model="myPizza.toppings.right[topping.id]" 
-            ng-change="fToppingLayout(3,topping.id)" 
+            ng-model="topping.layout" 
+            value="3"
             name="{{topping.id}}" 
             id="{{topping.id}}Right">
           </label>
@@ -43,8 +44,8 @@
         <td>
           <label>None
           <input type="radio" 
-            ng-model="myPizza.toppings.none[topping.id]" 
-            ng-change="fToppingLayout(3,topping.id)" 
+            ng-model="topping.layout" 
+            value="0"
             name="{{topping.id}}" 
             id="{{topping.id}}None" 
             checked="checked">
@@ -58,7 +59,7 @@
           <select 
             name="myCost" 
             ng-model="myCost" 
-            ng-options="c.label for c in sizes"></select>
+            ng-options="item.label for item in sizes"></select>
          {{units}} pizza</th>
         <td colspan="3" align="center">
           ${{myCost.value}}
@@ -89,4 +90,7 @@
   <dl>
     <dt>myPizza</dt><dd>{{myPizza}}</dd>
   </dl>
+  <ul>
+    <li ng-repeat="item in myPizza.toppings">{{item.name}} ({{item.id}}) -- {{item.layout}}</li>
+  </ul>
 </article>
