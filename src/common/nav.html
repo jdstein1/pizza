@@ -5,10 +5,16 @@
 	<li ng-repeat="item in nav | orderBy : navPredicate : navReverse">
 		<ng-switch on="item.disabled">
 			<div ng-switch-when="false">
-				<a class="navLink" href="#{{item.link}}" ng-class="{'disabled':item.disabled, 'active':isActiveNav(item.link)}">{{item.name}}</a>
+				<a class="navLink" href="#{{item.link}}" ng-class="{'disabled':item.disabled, 'active':isActiveNav(item.link)}">
+					<small>Step {{item.order}}</small><br>
+					{{item.name}}
+				</a>
 			</div>
 			<div ng-switch-default ng-class="{'disabled':item.disabled}">
-				<span class="navLink">{{item.name}}</span>
+				<span class="navLink">
+					<small>Step {{item.order}}</small><br>
+					{{item.name}}
+				</span>
 			</div>
 		</ng-switch>
 	</li>

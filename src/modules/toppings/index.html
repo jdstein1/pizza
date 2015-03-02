@@ -16,37 +16,38 @@
         <td>
           <label>{{topping.price[0]}}
           <input type="radio" 
-            ng-model="myToppings.whole[$index]"
-            ng-change=""
+            ng-model="myPizza.toppings.whole[topping.id]" 
+            ng-change="fToppingLayout(1,topping.id)" 
             name="{{topping.id}}" 
-            value="{{topping.value}}">
+            id="{{topping.id}}Whole">
           </label>
         </td>
         <td>
           <label>{{topping.price[1]}}
           <input type="radio" 
-            ng-model="myToppings.left[$index]"
-            ng-change=""
+            ng-model="myPizza.toppings.left[topping.id]" 
+            ng-change="fToppingLayout(2,topping.id)" 
             name="{{topping.id}}" 
-            value="{{topping.value}}">
+            id="{{topping.id}}Left">
           </label>
         </td>
         <td>
           <label>{{topping.price[1]}}
           <input type="radio" 
-            ng-model="myToppings.right[$index]"
-            ng-change=""
+            ng-model="myPizza.toppings.right[topping.id]" 
+            ng-change="fToppingLayout(3,topping.id)" 
             name="{{topping.id}}" 
-            value="{{topping.value}}">
+            id="{{topping.id}}Right">
           </label>
         </td>
         <td>
           <label>None
           <input type="radio" 
-            ng-model="myToppings[$index]"
-            ng-change=""
+            ng-model="myPizza.toppings.none[topping.id]" 
+            ng-change="fToppingLayout(3,topping.id)" 
             name="{{topping.id}}" 
-            value="0" checked="checked">
+            id="{{topping.id}}None" 
+            checked="checked">
           </label>
         </td>
       </tr>
@@ -57,7 +58,7 @@
           <select 
             name="myCost" 
             ng-model="myCost" 
-            ng-options="c.label for c in cost"></select>
+            ng-options="c.label for c in sizes"></select>
          {{units}} pizza</th>
         <td colspan="3" align="center">
           ${{myCost.value}}
@@ -70,9 +71,9 @@
         <th>Right</th>
       </tr>
       <tr>
-        <td><span>{{myToppings.whole.value}}</span></td>
-        <td><span>{{myToppings.left.value}}</span></td>
-        <td><span>{{myToppings.right.value}}</span></td>
+        <td><span>{{myPizza.toppings.whole.price}}</span></td>
+        <td><span>{{myPizza.toppings.left.price}}</span></td>
+        <td><span>{{myPizza.toppings.right.price}}</span></td>
       </tr>
       <tr>
         <th>Subtotal</th>
@@ -86,12 +87,6 @@
   </table>
   <h3>Toppings Data Models</h3>
   <dl>
-    <dt>myToppings</dt><dd>{{myToppings}}</dd>
-    <dt>myCost</dt><dd>{{myCost}}</dd>
-    <dt>mySelected</dt><dd>{{mySelected}}</dd>
-    <dt>topping.id</dt><dd>{{topping.id}}</dd>
-    <dt>myWhole</dt><dd>{{myWhole}}</dd>
-    <dt>myLeft</dt><dd>{{myLeft}}</dd>
-    <dt>myRight</dt><dd>{{myRight}}</dd>
+    <dt>myPizza</dt><dd>{{myPizza}}</dd>
   </dl>
 </article>
