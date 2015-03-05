@@ -7,7 +7,7 @@
 		.module('pizza')
 		.controller('cToppings', cToppings)
 
-	function cToppings($scope, $rootScope, sToppings) {
+	function cToppings($scope, $rootScope, sToppingsArr, sToppingsObj) {
 /*
 
 When you order a pizza, you have a FLAVOR or pizza in mind 
@@ -36,32 +36,32 @@ the flavor of the sauce, cheese and ingrdients.
 
 		};
 
-		$scope.toppings = sToppings;
+		// $scope.toppings = sToppingsArr;
+		$scope.toppings = sToppingsObj;
 		console.log('$scope.toppings: ', $scope.toppings);
+		console.log('$scope.toppings.freshgarlic: ', $scope.toppings.freshgarlic);
 
 		$scope.sizes = [{
 			"label":10,
-			"value":9.50
+			"baseprice":9.50
 		},{
 			"label":12,
-			"value":12.50
+			"baseprice":12.50
 		},{
 			"label":14,
-			"value":15.50
+			"baseprice":15.50
 		},{
 			"label":16,
-			"value":19.50
+			"baseprice":19.50
 		}];
 		console.log('$scope.sizes: ', $scope.sizes);
 
 		$scope.defaultSize = $scope.sizes[0];
 		console.log('$scope.defaultSize: ', $scope.defaultSize);
 
-		$scope.myCost = $scope.defaultSize.value;
-		console.log('$scope.myCost: ', $scope.myCost);
+		$rootScope.myPizza.size = $scope.defaultSize;
 
-		console.log('$rootScope.myPizza: ', $rootScope.myPizza);
-		$rootScope.myPizza.toppings = sToppings;
+		$rootScope.myPizza.toppings = $scope.toppings;
 		// $rootScope.myPizza = {
 		// 	"toppings":
 		// 	{
@@ -76,6 +76,33 @@ the flavor of the sauce, cheese and ingrdients.
 		// $scope.myToppings.right = {};
 		console.log('$rootScope.myPizza: ', $rootScope.myPizza);
 		console.log('$rootScope.myPizza.toppings: ', $rootScope.myPizza.toppings);
+
+$scope.fPizzaSubtotal = function () {
+
+};
+$scope.fPizzaTax = function () {
+
+};
+$scope.fPizzaTotal = function () {
+
+};
+$scope.fToppingPrice = function (layout,name) {
+	console.log('layout,name: ',layout +','+ name);
+	console.log('$scope.toppings[name].price[0]: ', $scope.toppings[name].price[0]);
+	layout = parseInt(layout);
+	var price = 0;
+	if (layout === 1) {
+		price = $scope.toppings[name].price[0];
+	} else if (layout > 1) {
+		price = $scope.toppings[name].price[1];
+	} else {
+		// price = 0;
+	};
+	console.log('price: ',price)
+	// $scope.toppings[id];
+	return price;
+
+};
 
 	}
 

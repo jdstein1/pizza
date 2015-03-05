@@ -18,6 +18,7 @@
           <label>{{topping.price[0]}}
           <input type="radio" 
             ng-model="topping.layout" 
+            ng-change="fToppingModify(1,topping.seoname)" 
             value="1"
             name="{{topping.id}}" 
             id="{{topping.id}}Whole">
@@ -27,6 +28,7 @@
           <label>{{topping.price[1]}}
           <input type="radio" 
             ng-model="topping.layout" 
+            ng-change="fToppingModify(2,topping.seoname)" 
             value="2"
             name="{{topping.id}}" 
             id="{{topping.id}}Left">
@@ -36,6 +38,7 @@
           <label>{{topping.price[1]}}
           <input type="radio" 
             ng-model="topping.layout" 
+            ng-change="fToppingModify(3,topping.seoname)" 
             value="3"
             name="{{topping.id}}" 
             id="{{topping.id}}Right">
@@ -45,6 +48,7 @@
           <label>None
           <input type="radio" 
             ng-model="topping.layout" 
+            ng-change="fToppingModify(0,topping.seoname)" 
             value="0"
             name="{{topping.id}}" 
             id="{{topping.id}}None" 
@@ -57,12 +61,12 @@
       <tr>
         <th>Pizza base price of 
           <select 
-            name="myCost" 
-            ng-model="myCost" 
+            name="myPizza.size" 
+            ng-model="myPizza.size" 
             ng-options="item.label for item in sizes"></select>
          {{units}} pizza</th>
         <td colspan="3" align="center">
-          ${{myCost.value}}
+          ${{myPizza.size.baseprice}}
         </td>
       </tr>
       <tr>
@@ -78,19 +82,30 @@
       </tr>
       <tr>
         <th>Subtotal</th>
-        <td colspan="3">{{cost.subtotal}}</td>
+        <td colspan="3">${{fPizzaSubtotal()}}</td>
+      </tr>
+      <tr>
+        <th>Tax</th>
+        <td colspan="3">${{fPizzaTax()}}</td>
       </tr>
       <tr>
         <th>Total</th>
-        <td colspan="3">{{cost.total}}</td>
+        <td colspan="3">${{fPizzaTotal()}}</td>
       </tr>
     </tfoot>
   </table>
   <h3>Toppings Data Models</h3>
   <dl>
-    <dt>myPizza</dt><dd>{{myPizza}}</dd>
+    <!-- <dt>myPizza</dt><dd>{{myPizza}}</dd> -->
+    <dt>myPizza.size</dt><dd>{{myPizza.size}}</dd>
+    <dt>myPizza.toppings</dt><dd>{{myPizza.toppings}}</dd>
   </dl>
+  <h3>Toppings</h3>
   <ul>
-    <li ng-repeat="item in myPizza.toppings">{{item.name}} ({{item.id}}) -- {{item.layout}}</li>
+    <li ng-repeat="item in myPizza.toppings">{{item.name}} ({{item.id}}) -- {{item.layout}} -- {{fToppingPrice(item.layout,item.seoname)}}</li>
+  </ul>
+  <h3>Layout</h3>
+  <ul>
+    <li ng-repeat="item in myPizza.toppings">{{item.name}} ({{item.id}}) -- {{item.layout}} -- {{fToppingPrice(item.layout,item.seoname)}}</li>
   </ul>
 </article>
