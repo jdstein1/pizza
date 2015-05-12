@@ -7,7 +7,7 @@
 		.module('pizza')
 		.controller('cToppings', cToppings)
 
-	function cToppings($scope, $rootScope, sToppingsArr, sToppingsObj) {
+	function cToppings($scope, $rootScope, sToppings, sSizes) {
 /*
 
 When you order a pizza, you have a FLAVOR or pizza in mind 
@@ -37,26 +37,16 @@ the flavor of the sauce, cheese and ingrdients.
 		};
 
 		// $scope.toppings = sToppingsArr;
-		$scope.toppings = sToppingsObj;
+		$scope.toppings = sToppings.fToppingsArr();
+		// $scope.toppings = sToppings.fToppingsObj;
+		console.log('sToppings.fToppingsArr(): ', sToppings.fToppingsArr());
 		console.log('$scope.toppings: ', $scope.toppings);
-		console.log('$scope.toppings.freshgarlic: ', $scope.toppings.freshgarlic);
+		// console.log('$scope.toppings.freshgarlic: ', $scope.toppings.freshgarlic);
 
-		$scope.sizes = [{
-			"label":10,
-			"baseprice":9.50
-		},{
-			"label":12,
-			"baseprice":12.50
-		},{
-			"label":14,
-			"baseprice":15.50
-		},{
-			"label":16,
-			"baseprice":19.50
-		}];
+		$scope.sizes = sSizes.fSizesArr();
 		console.log('$scope.sizes: ', $scope.sizes);
 
-		$scope.defaultSize = $scope.sizes[0];
+		// $scope.defaultSize = $scope.sizes[0];
 		console.log('$scope.defaultSize: ', $scope.defaultSize);
 
 		$rootScope.myPizza.size = $scope.defaultSize;
