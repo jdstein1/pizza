@@ -36,63 +36,54 @@ the flavor of the sauce, cheese and ingrdients.
 
 		};
 
-		// $scope.toppings = sToppingsArr;
-		$scope.toppings = sToppings.fToppingsArr();
-		// $scope.toppings = sToppings.fToppingsObj;
-		console.log('sToppings.fToppingsArr(): ', sToppings.fToppingsArr());
+		// TOPPINGS
+		// console.log('sToppings.fToppingsArr(): ', sToppings.fToppingsArr());
+		// console.log('sToppings.fToppingsObj(): ', sToppings.fToppingsObj());
+		$scope.toppings = sToppings.fToppingsObj();
 		console.log('$scope.toppings: ', $scope.toppings);
-		// console.log('$scope.toppings.freshgarlic: ', $scope.toppings.freshgarlic);
+		$scope.defaultTopping = $scope.toppings['cheese'];
+		console.log('$scope.defaultTopping: ', $scope.defaultTopping);
+		$rootScope.myPizza.toppings = $scope.defaultTopping;
 
+		// SIZES
+		// console.log('sSizes.fSizesArr(): ', sSizes.fSizesArr());
+		// console.log('sSizes.fSizesObj(): ', sSizes.fSizesObj());
 		$scope.sizes = sSizes.fSizesArr();
 		console.log('$scope.sizes: ', $scope.sizes);
-
-		// $scope.defaultSize = $scope.sizes[0];
+		$scope.defaultSize = $scope.sizes[1];
 		console.log('$scope.defaultSize: ', $scope.defaultSize);
-
 		$rootScope.myPizza.size = $scope.defaultSize;
 
-		$rootScope.myPizza.toppings = $scope.toppings;
-		// $rootScope.myPizza = {
-		// 	"toppings":
-		// 	{
-		// 		"whole":[],
-		// 		"left":[],
-		// 		"right":[],
-		// 		"none":[]
-		// 	}
-		// };
-		// $scope.myToppings.whole = {};
-		// $scope.myToppings.left = {};
-		// $scope.myToppings.right = {};
-		console.log('$rootScope.myPizza: ', $rootScope.myPizza);
-		console.log('$rootScope.myPizza.toppings: ', $rootScope.myPizza.toppings);
+		$scope.fToppingModify = function (layout,name) {
 
-$scope.fPizzaSubtotal = function () {
+		};
 
-};
-$scope.fPizzaTax = function () {
+		$scope.fPizzaSubtotal = function () {
 
-};
-$scope.fPizzaTotal = function () {
+		};
+		$scope.fPizzaTax = function () {
 
-};
-$scope.fToppingPrice = function (layout,name) {
-	console.log('layout,name: ',layout +','+ name);
-	console.log('$scope.toppings[name].price[0]: ', $scope.toppings[name].price[0]);
-	layout = parseInt(layout);
-	var price = 0;
-	if (layout === 1) {
-		price = $scope.toppings[name].price[0];
-	} else if (layout > 1) {
-		price = $scope.toppings[name].price[1];
-	} else {
-		// price = 0;
-	};
-	console.log('price: ',price)
-	// $scope.toppings[id];
-	return price;
+		};
+		$scope.fPizzaTotal = function () {
 
-};
+		};
+		$scope.fToppingPrice = function (layout,name) {
+			console.log('layout,name: ',layout +','+ name);
+			// console.log('$scope.toppings[name].price[0]: ', $scope.toppings[name].price[0]);
+			layout = parseInt(layout);
+			var price = 0;
+			if (layout === 1) {
+				price = $scope.toppings[name].price[0];
+			} else if (layout > 1) {
+				price = $scope.toppings[name].price[1];
+			} else {
+				// price = 0;
+			};
+			console.log('price: ',price)
+			// $scope.toppings[id];
+			return price;
+
+		};
 
 	}
 

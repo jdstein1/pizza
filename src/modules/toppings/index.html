@@ -12,8 +12,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="topping in toppings" class="{{topping.attributes[0]}}">
-        <th>{{topping.name}} -- {{$index}}</th>
+      <tr ng-repeat="topping in toppings | orderBy:id:false" class="{{topping.attributes[0]}}">
+        <th>{{topping.name}} -- {{topping.id}}/{{$index}}</th>
         <td>
           <label>{{topping.price[0]}}
           <input type="radio" 
@@ -95,17 +95,23 @@
     </tfoot>
   </table>
   <h3>Toppings Data Models</h3>
-  <dl>
-    <!-- <dt>myPizza</dt><dd>{{myPizza}}</dd> -->
-    <dt>myPizza.size</dt><dd>{{myPizza.size}}</dd>
-    <dt>myPizza.toppings</dt><dd>{{myPizza.toppings}}</dd>
-  </dl>
+  <ul>
+    <li>myPizza
+      <pre>{{myPizza|json}}</pre>
+    </li>
+    <li>myPizza.size
+      <pre>{{myPizza.size|json}}</pre>
+    </li>
+    <li>myPizza.toppings
+      <pre>{{myPizza.toppings|json}}</pre>
+    </li>
+  </ul>
   <h3>Toppings</h3>
   <ul>
     <li ng-repeat="item in myPizza.toppings">{{item.name}} ({{item.id}}) -- {{item.layout}} -- {{fToppingPrice(item.layout,item.seoname)}}</li>
   </ul>
-  <h3>Layout</h3>
-  <ul>
-    <li ng-repeat="item in myPizza.toppings">{{item.name}} ({{item.id}}) -- {{item.layout}} -- {{fToppingPrice(item.layout,item.seoname)}}</li>
-  </ul>
+  <!-- <h3>Layout</h3> -->
+  <!-- <ul> -->
+    <!-- <li ng-repeat="item in myPizza.toppings">{{item.name}} ({{item.id}}) -- {{item.layout}} -- {{fToppingPrice(item.layout,item.seoname)}}</li> -->
+  <!-- </ul> -->
 </article>
