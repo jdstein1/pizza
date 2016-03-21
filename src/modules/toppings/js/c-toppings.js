@@ -32,42 +32,53 @@ the flavor of the sauce, cheese and ingrdients.
 
 */
 
-		$scope.clear = function () {
+		$scope.fClear = function () {
+      console.log('START fClear FUNCTION');
+    };
 
-		};
+    // TOPPINGS
+    // console.log('sToppings.fToppingsArr(): ', sToppings.fToppingsArr());
+    // console.log('sToppings.fToppingsObj(): ', sToppings.fToppingsObj());
+    $scope.toppings = sToppings.fToppingsArr();
+    // console.log('$scope.toppings: ', $scope.toppings);
+    $scope.defaultTopping = $scope.toppings[0];
+    console.log('$scope.defaultTopping: ', $scope.defaultTopping);
+    $rootScope.myPizza.toppings = [];
+    $rootScope.myPizza.toppings.push($scope.defaultTopping);
+    console.log('$rootScope.myPizza.toppings: ', $rootScope.myPizza.toppings);
 
-		// TOPPINGS
-		// console.log('sToppings.fToppingsArr(): ', sToppings.fToppingsArr());
-		// console.log('sToppings.fToppingsObj(): ', sToppings.fToppingsObj());
-		$scope.toppings = sToppings.fToppingsObj();
-		console.log('$scope.toppings: ', $scope.toppings);
-		$scope.defaultTopping = $scope.toppings['cheese'];
-		console.log('$scope.defaultTopping: ', $scope.defaultTopping);
-		$rootScope.myPizza.toppings = $scope.defaultTopping;
+    $scope.predicate = 'type';
+    $scope.reverse = true;
+    // $scope.fSorting = function (predicate) {
+    //   console.log('START fSorting FUNCTION');
+    //   console.log('predicate: ', predicate);
+    //   $scope.predicate = predicate;
+    //   $scope.reverese = !$scope.reverese;
+    // };
 
-		// SIZES
-		// console.log('sSizes.fSizesArr(): ', sSizes.fSizesArr());
-		// console.log('sSizes.fSizesObj(): ', sSizes.fSizesObj());
-		$scope.sizes = sSizes.fSizesArr();
-		console.log('$scope.sizes: ', $scope.sizes);
-		$scope.defaultSize = $scope.sizes[1];
-		console.log('$scope.defaultSize: ', $scope.defaultSize);
-		$rootScope.myPizza.size = $scope.defaultSize;
+    // SIZES
+    console.log('sSizes.fSizesArr(): ', sSizes.fSizesArr());
+    console.log('sSizes.fSizesObj(): ', sSizes.fSizesObj());
+    $scope.sizes = sSizes.fSizesArr();
+    // console.log('$scope.sizes: ', $scope.sizes);
+    $scope.defaultSize = $scope.sizes[1];
+    // console.log('$scope.defaultSize: ', $scope.defaultSize);
+    $rootScope.myPizza.size = $scope.defaultSize;
 
-		$scope.fToppingModify = function (layout,name) {
-
-		};
-
-		$scope.fPizzaSubtotal = function () {
-
-		};
-		$scope.fPizzaTax = function () {
-
-		};
-		$scope.fPizzaTotal = function () {
-
-		};
-		$scope.fToppingPrice = function (layout,name) {
+    $scope.fToppingModify = function (layout,name) {
+      console.log('START fToppingModify FUNCTION');
+    };
+    $scope.fPizzaSubtotal = function () {
+      console.log('START fPizzaSubtotal FUNCTION');
+    };
+    $scope.fPizzaTax = function () {
+      console.log('START fPizzaTax FUNCTION');
+    };
+    $scope.fPizzaTotal = function () {
+      console.log('START fPizzaTotal FUNCTION');
+    };
+    $scope.fToppingPrice = function (layout,name) {
+      console.log('START fToppingPrice FUNCTION');
 			console.log('layout,name: ',layout +','+ name);
 			// console.log('$scope.toppings[name].price[0]: ', $scope.toppings[name].price[0]);
 			layout = parseInt(layout);
@@ -82,7 +93,6 @@ the flavor of the sauce, cheese and ingrdients.
 			console.log('price: ',price)
 			// $scope.toppings[id];
 			return price;
-
 		};
 
 	}

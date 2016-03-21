@@ -1,6 +1,11 @@
 <article>
   <hr>
   <h2>Toppings</h2>
+  <ul class="sorting">
+    <li>sort toppings:</li>
+    <li><a ng-click="fSorting('price')">price</a></li>
+    <li><a ng-click="fSorting('type')">type</a></li>
+  </ul>
   <table>
     <thead>
       <tr>
@@ -12,8 +17,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="topping in toppings | orderBy:id:false" class="{{topping.attributes[0]}}">
-        <th>{{topping.name}} -- {{topping.id}}/{{$index}}</th>
+      <tr ng-repeat="topping in toppings | orderBy:predicate:reverse" class="{{topping.type}}">
+        <th class="align left">{{topping.name}}</th>
+        <!-- <th>{{topping.name}} - {{topping.id}}/{{$index}}</th> -->
         <td>
           <label>{{topping.price[0]}}
           <input type="radio" 
@@ -58,7 +64,7 @@
       </tr>
     </tbody>
     <tfoot>
-      <tr>
+      <!-- <tr>
         <th>Pizza base price of 
           <select 
             name="myPizza.size" 
@@ -68,7 +74,7 @@
         <td colspan="3" align="center">
           ${{myPizza.size.baseprice}}
         </td>
-      </tr>
+      </tr> -->
       <tr>
         <th rowspan="2">Topping price</th>
         <th>Whole</th>
@@ -82,36 +88,37 @@
       </tr>
       <tr>
         <th>Subtotal</th>
-        <td colspan="3">${{fPizzaSubtotal()}}</td>
+        <!-- <td colspan="3">${{fPizzaSubtotal()}}</td> -->
       </tr>
       <tr>
         <th>Tax</th>
-        <td colspan="3">${{fPizzaTax()}}</td>
+        <!-- <td colspan="3">${{fPizzaTax()}}</td> -->
       </tr>
       <tr>
         <th>Total</th>
-        <td colspan="3">${{fPizzaTotal()}}</td>
+        <!-- <td colspan="3">${{fPizzaTotal()}}</td> -->
       </tr>
     </tfoot>
   </table>
   <h3>Toppings Data Models</h3>
-  <ul>
-    <li>myPizza
-      <pre>{{myPizza|json}}</pre>
-    </li>
-    <li>myPizza.size
-      <pre>{{myPizza.size|json}}</pre>
-    </li>
-    <li>myPizza.toppings
-      <pre>{{myPizza.toppings|json}}</pre>
-    </li>
-  </ul>
-  <h3>Toppings</h3>
-  <ul>
-    <li ng-repeat="item in myPizza.toppings">{{item.name}} ({{item.id}}) -- {{item.layout}} -- {{fToppingPrice(item.layout,item.seoname)}}</li>
-  </ul>
+  <table>
+    <tr>
+      <th>myPizza</th>
+      <th>myPizza.size</th>
+      <th>myPizza.toppings</th>
+    </tr>
+    <tr>
+      <td><pre>{{myPizza|json}}</pre></td>
+      <td><pre>{{myPizza.size|json}}</pre></td>
+      <td><pre>{{myPizza.toppings|json}}</pre></td>
+    </tr>
+  </table>
+  <!-- <h3>Toppings</h3> -->
+  <!-- <ul> -->
+    <!-- <li ng-repeat="item in myPizza.toppings">{{item.name}} ({{item.id}}) - {{item.layout}} - {{fToppingPrice(item.layout,item.seoname)}}</li> -->
+  <!-- </ul> -->
   <!-- <h3>Layout</h3> -->
   <!-- <ul> -->
-    <!-- <li ng-repeat="item in myPizza.toppings">{{item.name}} ({{item.id}}) -- {{item.layout}} -- {{fToppingPrice(item.layout,item.seoname)}}</li> -->
+    <!-- <li ng-repeat="item in myPizza.toppings">{{item.name}} ({{item.id}}) - {{item.layout}} - {{fToppingPrice(item.layout,item.seoname)}}</li> -->
   <!-- </ul> -->
 </article>
