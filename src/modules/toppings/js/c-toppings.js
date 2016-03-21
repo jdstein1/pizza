@@ -49,12 +49,11 @@ the flavor of the sauce, cheese and ingrdients.
 
     $scope.predicate = 'type';
     $scope.reverse = true;
-    // $scope.fSorting = function (predicate) {
-    //   console.log('START fSorting FUNCTION');
-    //   console.log('predicate: ', predicate);
-    //   $scope.predicate = predicate;
-    //   $scope.reverese = !$scope.reverese;
-    // };
+    $scope.fSorting = function (predicate) {
+      console.log('START fSorting FUNCTION');
+      $scope.predicate = predicate;
+      $scope.reverse = !$scope.reverse;
+    };
 
     // SIZES
     console.log('sSizes.fSizesArr(): ', sSizes.fSizesArr());
