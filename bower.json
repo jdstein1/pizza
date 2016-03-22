@@ -1,0 +1,27 @@
+{
+  "name": "pizza",
+  "description": "online pizza configurator",
+  "main": "server.js",
+  "authors": [
+    "jdstein1"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/jdstein1/pizza",
+  "moduleType": [
+    "node"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.2",
+    "angular-route": "^1.5.2",
+    "angular-resource": "^1.5.2",
+    "less": "^2.6.1"
+  }
+}

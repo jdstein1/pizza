@@ -40,6 +40,16 @@ the flavor of the sauce, cheese and ingrdients.
     // console.log('sToppings.fToppingsArr(): ', sToppings.fToppingsArr());
     $scope.toppings = sToppings.fToppingsArr();
     // console.log('$scope.toppings: ', $scope.toppings);
+    // $scope.addKVtoObj = function (obj,value,key) {
+    //   console.log('obj',obj);
+    //   angular.forEach(obj, function(value, key) {
+    //     console.log('this',this);
+    //     this.push(key + ': ' + value);
+    //   });
+    // };
+    // $scope.addKVtoObj($scope.toppings,0,'layout');
+
+    // "layout":0 -- 0=none (default), 1=whole, 2=left, 3=right
     $scope.defaultTopping = $scope.toppings[0];
     console.log('$scope.defaultTopping: ', $scope.defaultTopping);
     $rootScope.myPizza.toppings = {};
@@ -70,7 +80,7 @@ the flavor of the sauce, cheese and ingrdients.
       layout = parseInt(layout);
       var price = '';
       if (item.price > 0) {
-        if (layout === 0) {
+        if (layout < 1) {
           // price = item.price * MULTIPLIER.WHOLE;
         } else if (layout === 1) {
           price = item.price * MULTIPLIER.WHOLE;
@@ -88,6 +98,19 @@ the flavor of the sauce, cheese and ingrdients.
       // console.log('price: ',price)
       // $scope.toppings[id];
     };
+
+    // Handle adding or removing toppings
+    $scope.fToppingToggle = function (item) {
+      console.log('START fToppingToggle FUNCTION');
+      if (item.layout < 1) {
+        item.layout = 1;
+      } else {
+        item.layout = 0;
+      }
+      // return item;
+    };
+    // $rootScope.myPizza.toppings.push($scope.defaultTopping);
+    // console.log('$rootScope.myPizza.toppings: ', $rootScope.myPizza.toppings);
 
     // Handle adding or removing toppings
     $scope.fToppingModify = function (layout,item) {

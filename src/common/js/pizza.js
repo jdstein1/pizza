@@ -14,7 +14,7 @@ patterns that lack thought.
     'use strict';
 
     angular
-        .module('pizza', [])
+        .module('pizza', ['ngResource','ngRoute'])
 
 // })();
 // (function() {
@@ -23,7 +23,7 @@ patterns that lack thought.
     angular
         .module('pizza')
         .config(['$routeProvider',
-        function($routeProvider) {
+        function($routeProvider, $locationProvider) {
         $routeProvider.
         when('/about', {
             templateUrl: 'common/about.html',
@@ -48,6 +48,8 @@ patterns that lack thought.
         otherwise({
             redirectTo: '/toppings'
         });
+
+        // $locationProvider.html5Mode(true);
   }]);
 
 })();

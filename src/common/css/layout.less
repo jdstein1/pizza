@@ -1,3 +1,7 @@
+body {
+  font-family: sans-serif;
+  line-height: 1.4;
+}
 header, nav, section, aside, footer {padding:1em;}
 header {background: #eee;}
 footer {background: #eee; 
@@ -28,7 +32,7 @@ dl {
 }
 hr {margin:1em 0;}
 nav {
-  background: rgba(153,204,255,0.25);
+  background: #abc;
   padding:0.25em; margin:0 0 0.25em;
   clear:both;
   ul {
@@ -43,35 +47,49 @@ nav {
         padding:0; margin:0;
         padding:0.5em;
         display:block;
-        background:rgba(204,0,204,0.25);
+        background:#def;
+        border: 1px rgba(0,0,0,0.25) solid;
       }
-      .disabled {background:rgba(0,255,0,0.25);}
-      .active {background:white;}
+      .active {background:yellow; color:#000;}
 
     }
   }
 }
-.meat {background:rgba(255,0,0,0.25);}
-.veggie {background:rgba(0,127,0,0.25);}
-.dairy {background:rgba(255,255,0,0.25);}
-.disabled {opacity:0.5;}
+.meat {background:rgba(255,0,0,0.125);}
+.veggie {background:rgba(0,127,0,0.125);}
+.dairy {background:rgba(255,255,0,0.125);}
+.disabled {
+  opacity:0.5;
+  a, .navLink {background:#999; color:#333;}
+}
 .align{
   &.left{text-align: left;}
   &.right{text-align: right;}
   &.center{text-align: center;}
 }
+.float{
+  display: inline-block;
+  width: auto;
+  &.left{float: left;}
+  &.right{float: right;}
+  &.center{float: center;}
+}
 ul{
   &.sorting {
     list-style-type: none;
-    // background: #ccc;
     padding: 0.5em 0;
     li {
       display: inline;
-      background: #eee;
       a {
-        padding: 0.5em;
-        background: #def;
+        // background: #def;
       }
     }
+  }
+}
+.icon {
+  a:after {content:"\02195";}
+  &.arrow {
+    &.up {a:after {content:"\025B3";}}
+    &.down {a:after {content:"\025BD";}}
   }
 }

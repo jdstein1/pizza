@@ -26,7 +26,7 @@
               "name":"Cheese",
               "checked":true,
               "seoname":"cheese",
-              "layout":0,
+              "layout":1,
               "price":0,
               "type":"dairy"
             },{

@@ -1,10 +1,16 @@
 <article>
-  <h2>Toppings</h2>
-  <ul class="sorting">
+  <ul class="sorting float right">
     <li>sort toppings:</li>
-    <li><a ng-click="fSorting('price')">price</a></li>
-    <li><a ng-click="fSorting('type')">type</a></li>
+    <li class="icon" 
+      ng-class="{'arrow':predicate==='price','up':reverse===false,'down':reverse===true}">
+      <a ng-click="fSorting('price')">price</a>
+    </li>
+    <li class="icon" 
+      ng-class="{'arrow':predicate==='type','up':reverse===false,'down':reverse===true}">
+      <a ng-click="fSorting('type')">type</a>
+    </li>
   </ul>
+  <h2>Toppings</h2>
   <table>
     <thead>
       <tr>
@@ -19,42 +25,54 @@
       <tr ng-repeat="topping in toppings | orderBy:predicate:reverse" class="{{topping.type}}">
         <th class="align left">
           <label for="{{topping.seoname}}">
-            <span>{{topping.name}} / <small>{{topping.checked}}</small> / {{item.layout}}</span>
-            <input type="checkbox" name="toppings" id="{{topping.seoname}}" ng-model="topping.checked">
+            <span>{{topping.name}} / <small>{{topping.checked}}</small></span>
+            <input type="checkbox" name="toppings" 
+              ng-model="topping.checked" 
+              ng-change="fToppingToggle(item)" 
+              id="{{topping.seoname}}">
           </label>
         </th>
         <!-- <th>{{topping.name}} - {{topping.id}}/{{$index}}</th> -->
         <td>
-          <label for="{{topping.id}}LayoutWhole">
-            <span>{{fToppingPrice(1,topping)}}</span>
+          <label for="{{topping.id}}LayoutWhole" 
+            ng-class="{'disabled':!topping.checked}">
+            <span>{{::fToppingPrice(1,topping)}}</span>
               <!-- ng-model="myPizza.toppings"  -->
               <!-- ng-change="fToppingModify(1,topping.seoname)"  -->
-            <input ng-disabled="!topping.checked" type="radio" 
-              ng-model="topping.layout" 
+            <input type="radio"
               name="{{topping.id}}Layout" 
-              id="{{topping.id}}LayoutWhole">
+              id="{{topping.id}}LayoutWhole" 
+              ng-model="topping.layout" 
+              ng-checked="topping.layout===1"
+              ng-disabled="!topping.checked">
           </label>
         </td>
         <td>
-          <label for="{{topping.id}}LayoutLeft">
-            <span>{{fToppingPrice(2,topping)}}</span>
+          <label for="{{topping.id}}LayoutLeft" 
+            ng-class="{'disabled':!topping.checked}">
+            <span>{{::fToppingPrice(2,topping)}}</span>
               <!-- ng-model="myPizza.toppings"  -->
               <!-- ng-change="fToppingModify(2,topping.seoname)"  -->
-            <input ng-disabled="!topping.checked" type="radio" 
-              ng-model="topping.layout" 
+            <input type="radio" 
               name="{{topping.id}}Layout" 
-              id="{{topping.id}}LayoutLeft">
+              id="{{topping.id}}LayoutLeft" 
+              ng-model="topping.layout" 
+              ng-checked="topping.layout===2"
+              ng-disabled="!topping.checked">
           </label>
         </td>
         <td>
-          <label for="{{topping.id}}LayoutRight">
-            <span>{{fToppingPrice(3,topping)}}</span>
+          <label for="{{topping.id}}LayoutRight" 
+            ng-class="{'disabled':!topping.checked}">
+            <span>{{::fToppingPrice(3,topping)}}</span>
               <!-- ng-model="myPizza.toppings"  -->
               <!-- ng-change="fToppingModify(3,topping.seoname)"  -->
-            <input ng-disabled="!topping.checked" type="radio" 
-              ng-model="topping.layout" 
+            <input type="radio" 
               name="{{topping.id}}Layout" 
-              id="{{topping.id}}LayoutRight">
+              id="{{topping.id}}LayoutRight" 
+              ng-model="topping.layout" 
+              ng-checked="topping.layout===3"
+              ng-disabled="!topping.checked">
           </label>
         </td>
         <!-- <td>
@@ -106,7 +124,7 @@
       </tr>
     </tfoot>
   </table>
-  <!-- <h3>Toppings Data Models</h3>
+  <h3>Toppings Data Models</h3>
   <table style="table-layout: fixed;">
     <tr>
       <th>myPizza</th>
@@ -118,7 +136,7 @@
       <td><pre>{{myPizza.size|json}}</pre></td>
       <td><pre>{{myPizza.toppings|json}}</pre></td>
     </tr>
-  </table> -->
+  </table>
   <!-- <h3>Toppings</h3>
   <ul>
     <li ng-repeat="item in myPizza.toppings">
@@ -127,7 +145,7 @@
         <td>topping:{{item.name}}</td>
         <td>id:{{item.id}}</td>
         <td>layout:{{item.layout}}</td>
-        <td>price:{{fToppingPrice(item.layout,item)}}</td>
+        <td>price:{{::fToppingPrice(item.layout,item)}}</td>
       </tr>
     </table>
     </li>
