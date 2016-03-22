@@ -15,13 +15,10 @@ patterns that lack thought.
 
     angular
         .module('pizza')
-        .filter('filterReverse', function () {
-          return filterReverse;
+        .constant('MULTIPLIER', {
+          // topping price multipliers
+          'WHOLE':1,
+          'HALF':0.5
         })
-
-    function filterReverse(input) {
-        $scope.title = "filterReverse";
-        console.log('START',$scope.title);
-    }
 
 })();

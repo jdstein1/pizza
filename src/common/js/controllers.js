@@ -61,8 +61,9 @@ patterns that lack thought.
         console.log('$location.$$path: ',$location.$$path);
 
         $scope.isActiveNav = function (link) {
-            console.log('START isActiveNav FUNCTION');
-            // console.log('link: ',link);
+            console.log('nav START isActiveNav FUNCTION');
+            console.log('nav path: '+$location.$$path);
+            console.log('nav link: '+link);
             return $location.$$path === link;
         };
     }

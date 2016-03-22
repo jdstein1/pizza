@@ -1,5 +1,4 @@
 <article>
-  <hr>
   <h2>Toppings</h2>
   <ul class="sorting">
     <li>sort toppings:</li>
@@ -13,54 +12,61 @@
         <th>Whole Pie</th>
         <th>Left Side</th>
         <th>Right Side</th>
-        <th>Clear</th>
+        <!-- <th>Clear</th> -->
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="topping in toppings | orderBy:predicate:reverse" class="{{topping.type}}">
-        <th class="align left">{{topping.name}}</th>
+        <th class="align left">
+          <label for="{{topping.seoname}}">
+            <span>{{topping.name}} / <small>{{topping.checked}}</small> / {{item.layout}}</span>
+            <input type="checkbox" name="toppings" id="{{topping.seoname}}" ng-model="topping.checked">
+          </label>
+        </th>
         <!-- <th>{{topping.name}} - {{topping.id}}/{{$index}}</th> -->
         <td>
-          <label>{{topping.price[0]}}
-          <input type="radio" 
-            ng-model="topping.layout" 
-            ng-change="fToppingModify(1,topping.seoname)" 
-            value="1"
-            name="{{topping.id}}" 
-            id="{{topping.id}}Whole">
+          <label for="{{topping.id}}LayoutWhole">
+            <span>{{fToppingPrice(1,topping)}}</span>
+              <!-- ng-model="myPizza.toppings"  -->
+              <!-- ng-change="fToppingModify(1,topping.seoname)"  -->
+            <input ng-disabled="!topping.checked" type="radio" 
+              ng-model="topping.layout" 
+              name="{{topping.id}}Layout" 
+              id="{{topping.id}}LayoutWhole">
           </label>
         </td>
         <td>
-          <label>{{topping.price[1]}}
-          <input type="radio" 
-            ng-model="topping.layout" 
-            ng-change="fToppingModify(2,topping.seoname)" 
-            value="2"
-            name="{{topping.id}}" 
-            id="{{topping.id}}Left">
+          <label for="{{topping.id}}LayoutLeft">
+            <span>{{fToppingPrice(2,topping)}}</span>
+              <!-- ng-model="myPizza.toppings"  -->
+              <!-- ng-change="fToppingModify(2,topping.seoname)"  -->
+            <input ng-disabled="!topping.checked" type="radio" 
+              ng-model="topping.layout" 
+              name="{{topping.id}}Layout" 
+              id="{{topping.id}}LayoutLeft">
           </label>
         </td>
         <td>
-          <label>{{topping.price[1]}}
-          <input type="radio" 
-            ng-model="topping.layout" 
-            ng-change="fToppingModify(3,topping.seoname)" 
-            value="3"
-            name="{{topping.id}}" 
-            id="{{topping.id}}Right">
+          <label for="{{topping.id}}LayoutRight">
+            <span>{{fToppingPrice(3,topping)}}</span>
+              <!-- ng-model="myPizza.toppings"  -->
+              <!-- ng-change="fToppingModify(3,topping.seoname)"  -->
+            <input ng-disabled="!topping.checked" type="radio" 
+              ng-model="topping.layout" 
+              name="{{topping.id}}Layout" 
+              id="{{topping.id}}LayoutRight">
           </label>
         </td>
-        <td>
+        <!-- <td>
           <label>None
           <input type="radio" 
-            ng-model="topping.layout" 
+            ng-model="myPizza.toppings" 
             ng-change="fToppingModify(0,topping.seoname)" 
-            value="0"
             name="{{topping.id}}" 
             id="{{topping.id}}None" 
             checked="checked">
           </label>
-        </td>
+        </td> -->
       </tr>
     </tbody>
     <tfoot>
@@ -100,8 +106,8 @@
       </tr>
     </tfoot>
   </table>
-  <h3>Toppings Data Models</h3>
-  <table>
+  <!-- <h3>Toppings Data Models</h3>
+  <table style="table-layout: fixed;">
     <tr>
       <th>myPizza</th>
       <th>myPizza.size</th>
@@ -112,13 +118,18 @@
       <td><pre>{{myPizza.size|json}}</pre></td>
       <td><pre>{{myPizza.toppings|json}}</pre></td>
     </tr>
-  </table>
-  <!-- <h3>Toppings</h3> -->
-  <!-- <ul> -->
-    <!-- <li ng-repeat="item in myPizza.toppings">{{item.name}} ({{item.id}}) - {{item.layout}} - {{fToppingPrice(item.layout,item.seoname)}}</li> -->
-  <!-- </ul> -->
-  <!-- <h3>Layout</h3> -->
-  <!-- <ul> -->
-    <!-- <li ng-repeat="item in myPizza.toppings">{{item.name}} ({{item.id}}) - {{item.layout}} - {{fToppingPrice(item.layout,item.seoname)}}</li> -->
-  <!-- </ul> -->
+  </table> -->
+  <!-- <h3>Toppings</h3>
+  <ul>
+    <li ng-repeat="item in myPizza.toppings">
+    <table style="table-layout: fixed;">
+      <tr>
+        <td>topping:{{item.name}}</td>
+        <td>id:{{item.id}}</td>
+        <td>layout:{{item.layout}}</td>
+        <td>price:{{fToppingPrice(item.layout,item)}}</td>
+      </tr>
+    </table>
+    </li>
+  </ul> -->
 </article>

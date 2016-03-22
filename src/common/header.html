@@ -1,4 +1,5 @@
-<hgroup ng-controller="cHeader">
-	<a class="" style="" href="#/" ng-class="{'active':isActiveNav(item.link)}">Home</a>
-    <h1>Online Pizza Configurator</h1>
+<hgroup ng-controller="cHeader" class="clearfix">
+  <h1>Online Pizza Configurator</h1>
+  <div ng-include="'common/nav.html'"></div>
+  <!-- <div ng-controller="cNav">{{nav}}</div> -->
 </hgroup>

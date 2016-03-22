@@ -25,8 +25,8 @@ patterns that lack thought.
         .config(['$routeProvider',
         function($routeProvider) {
         $routeProvider.
-        when('/', {
-            templateUrl: 'common/home.html',
+        when('/about', {
+            templateUrl: 'common/about.html',
             controller: 'cHome'
         }).
         when('/toppings', {
@@ -46,7 +46,7 @@ patterns that lack thought.
             controller: 'cSizes'
         }).
         otherwise({
-            redirectTo: '/'
+            redirectTo: '/toppings'
         });
   }]);
 
