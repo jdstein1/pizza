@@ -15,7 +15,7 @@
     // "name":"Pepperoni" -- Display name
     // "seoname":"pepperoni" -- SEO name
     // "layout":0 -- 0=none (default), 1=whole, 2=left, 3=right
-    // "price":[2.95,1.85] -- price of whole layout and half layout
+    // "price":[2.95,1.85] -- array or prices: whole layout and half layout
     // "type":"meat" -- topping category
 
         this.fToppingsArr = function () {
