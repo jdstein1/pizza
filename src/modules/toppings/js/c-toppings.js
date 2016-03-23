@@ -53,9 +53,6 @@ the flavor of the sauce, cheese and ingrdients.
     $scope.defaultTopping = $scope.toppings[0];
     console.log('$scope.defaultTopping: ', $scope.defaultTopping);
     $rootScope.myPizza.toppings = {};
-    $rootScope.myPizza.toppings.whole = [];
-    $rootScope.myPizza.toppings.left = [];
-    $rootScope.myPizza.toppings.right = [];
 
     // TOPPINGS REPEAT PARAMS
     $scope.predicate = 'type';
@@ -95,6 +92,38 @@ the flavor of the sauce, cheese and ingrdients.
         console.groupEnd();
         return price;
       }
+      // console.log('price: ',price)
+      // $scope.toppings[id];
+    };
+
+    // Calculate totals for toppings in each layout zone
+    $scope.fToppingsTotal = function (layout) {
+      console.group('START fToppingsTotal FUNCTION');
+      console.log('layout: '+layout);
+      layout = parseInt(layout);
+      var amount = 0;
+      // iterate over key 'layout' in myPizza.toppings to match 
+      // layout zone value...
+
+      // convert if/else to switch/case...
+      switch(layout) {
+        case 1:
+          console.log('layout: WHOLE');
+          break;
+        case 2:
+          console.log('layout: LEFT');
+          break;
+        case 3:
+          console.log('layout: RIGHT');
+          break;
+        default:
+          console.log('error!');
+          break;
+      }
+      amount = $filter('currency')(amount);
+      return amount;
+      console.groupEnd();
+      // return price;
       // console.log('price: ',price)
       // $scope.toppings[id];
     };

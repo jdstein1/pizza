@@ -3,13 +3,14 @@ body {
   line-height: 1.4;
 }
 header, nav, section, aside, footer {padding:1em;}
-header {background: #eee;}
+header {background: #fff;}
 footer {background: #eee; 
   // position:static; top:auto; right:0; bottom: 0; left:0;
 }
 section, aside {}
 article {padding:1em; margin:0;}
 table {width:100%;}
+a {color: #00f;text-decoration: none;}
 ul, ol, dl {
   width:100%;
   text-indent:0; 
@@ -33,7 +34,9 @@ dl {
 hr {margin:1em 0;}
 nav {
   background: #abc;
-  padding:0.25em; margin:0 0 0.25em;
+  box-shadow: 0 1.5em 1.5em -1em rgba(0,0,0,0.25) inset;
+  border-top: 1px solid #ccc;
+  padding:0.5em 1em 0; margin:0 -1em -1em;
   clear:both;
   ul {
     padding:0; margin:0;
@@ -44,14 +47,18 @@ nav {
       list-style:none;
       text-align:center;
       a, .navLink {
-        padding:0; margin:0;
-        padding:0.5em;
+        padding:0.75em 1em 0.5em;
+        margin:0;
         display:block;
-        background:#def;
-        border: 1px rgba(0,0,0,0.25) solid;
+        background:#eee;
+        // border: 1px rgba(0,0,0,0.25) solid;
+        border-bottom: none;
+        border-radius: 0.25em 0.25em 0 0;
+        box-shadow: 0 -0.5em 1em -0.5em rgba(0,0,0,0.125) inset;
       }
-      .active {background:yellow; color:#000;}
-
+      .active {background:#fff; border:none;
+        box-shadow:none;
+      }
     }
   }
 }
@@ -60,7 +67,7 @@ nav {
 .dairy {background:rgba(255,255,0,0.125);}
 .disabled {
   opacity:0.5;
-  a, .navLink {background:#999; color:#333;}
+  // a, .navLink {background:#999; color:#333;}
 }
 .align{
   &.left{text-align: left;}
@@ -80,11 +87,14 @@ ul{
     padding: 0.5em 0;
     li {
       display: inline;
-      a {
-        // background: #def;
-      }
+      a {}
     }
   }
+}
+.btn {
+  background: #eee;
+  border-radius: 0.25em;
+  padding:0.25em 0.75em;
 }
 .icon {
   a:after {content:"\02195";}

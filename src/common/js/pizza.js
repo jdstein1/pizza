@@ -27,7 +27,7 @@ patterns that lack thought.
         $routeProvider.
         when('/about', {
             templateUrl: 'common/about.html',
-            controller: 'cHome'
+            controller: 'cAbout'
         }).
         when('/toppings', {
             templateUrl: 'modules/toppings/index.html',

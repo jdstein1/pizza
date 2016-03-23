@@ -3,14 +3,15 @@
     <li>sort toppings:</li>
     <li class="icon" 
       ng-class="{'arrow':predicate==='price','up':reverse===false,'down':reverse===true}">
-      <a ng-click="fSorting('price')">price</a>
+      <a class="btn" ng-click="fSorting('price')">price</a>
     </li>
     <li class="icon" 
       ng-class="{'arrow':predicate==='type','up':reverse===false,'down':reverse===true}">
-      <a ng-click="fSorting('type')">type</a>
+      <a class="btn" ng-click="fSorting('type')">type</a>
     </li>
   </ul>
   <h2>Toppings</h2>
+  <form action=""></form>
   <table>
     <thead>
       <tr>
@@ -26,6 +27,7 @@
         <th class="align left">
           <label for="{{topping.seoname}}">
             <span>{{topping.name}} / <small>{{topping.checked}}</small></span>
+              <!-- ng-model="myPizza.toppings[topping.seoname]"  -->
             <input type="checkbox" name="toppings" 
               ng-model="topping.checked" 
               ng-change="fToppingToggle(item)" 
@@ -42,7 +44,6 @@
             <input type="radio"
               name="{{topping.id}}Layout" 
               id="{{topping.id}}LayoutWhole" 
-              ng-model="topping.layout" 
               ng-checked="topping.layout===1"
               ng-disabled="!topping.checked">
           </label>
@@ -56,7 +57,6 @@
             <input type="radio" 
               name="{{topping.id}}Layout" 
               id="{{topping.id}}LayoutLeft" 
-              ng-model="topping.layout" 
               ng-checked="topping.layout===2"
               ng-disabled="!topping.checked">
           </label>
@@ -70,7 +70,6 @@
             <input type="radio" 
               name="{{topping.id}}Layout" 
               id="{{topping.id}}LayoutRight" 
-              ng-model="topping.layout" 
               ng-checked="topping.layout===3"
               ng-disabled="!topping.checked">
           </label>
@@ -106,9 +105,9 @@
         <th>Right</th>
       </tr>
       <tr>
-        <td><span>{{myPizza.toppings.whole.price}}</span></td>
-        <td><span>{{myPizza.toppings.left.price}}</span></td>
-        <td><span>{{myPizza.toppings.right.price}}</span></td>
+        <td><span>{{fToppingsTotal(1)}}</span></td>
+        <td><span>{{fToppingsTotal(2)}}</span></td>
+        <td><span>{{fToppingsTotal(3)}}</span></td>
       </tr>
       <tr>
         <th>Subtotal</th>

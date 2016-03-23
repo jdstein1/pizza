@@ -100,10 +100,10 @@ patterns that lack thought.
 
     angular
         .module('pizza')
-        .controller('cHome', cHome)
+        .controller('cAbout', cAbout)
 
-    function cHome($scope) {
-        $scope.title = "cHome";
+    function cAbout($scope) {
+        $scope.title = "cAbout";
         console.log('START '+$scope.title+' CONTROLLER');
     }
 
