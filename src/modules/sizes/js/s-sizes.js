@@ -14,20 +14,20 @@
         this.fSizesArr = function () {
           var sizesArr = [{
             "label":"10",
-            "size":10,
-            "baseprice":9.50
+            "value":10,
+            "price":9.50
           },{
             "label":"12",
-            "size":12,
-            "baseprice":12.50
+            "value":12,
+            "price":12.25
           },{
             "label":"14",
-            "size":14,
-            "baseprice":15.50
+            "value":14,
+            "price":15.75
           },{
             "label":"16",
-            "size":16,
-            "baseprice":19.50
+            "value":16,
+            "price":19.00
           }];
           return sizesArr;
         }

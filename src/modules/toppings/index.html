@@ -1,4 +1,5 @@
 <article>
+  <hr>
   <ul class="sorting float right">
     <li>sort toppings:</li>
     <li class="icon" 
@@ -11,8 +12,8 @@
     </li>
   </ul>
   <h2>Toppings</h2>
-  <form action=""></form>
-  <table>
+  <form action="" ng-model="myPizzaForm">
+  <table style="table-layout: fixed;">
     <thead>
       <tr>
         <th>Ingredient Name</th>
@@ -25,96 +26,87 @@
       <tr ng-repeat="topping in toppings | orderBy:predicate:reverse" class="{{topping.type}}">
         <th class="align left">
           <label for="{{topping.seoname}}">
-            <span>{{topping.name}} / <small>{{topping.checked}}</small></span>
+            <span>{{topping.name}}</span>
               <!-- ng-model="myPizza.toppings[topping.seoname]"  -->
-            <input type="checkbox" name="toppings" 
+            <!-- <input type="checkbox" name="toppings" 
               ng-model="topping.checked" 
               ng-checked="topping.checked" 
               ng-change="fToppingToggle(item)" 
-              id="{{topping.seoname}}">
+              id="{{topping.seoname}}"> -->
           </label>
         </th>
         <!-- LEFT -->
         <td>
-          <label for="{{topping.id}}LayoutLeft" 
-            ng-class="{'disabled':!topping.checked}">
-            <span>{{::fToppingPrice("left",topping)}}</span>
-              <!-- ng-model="myPizza.toppings"  -->
-              <!-- ng-change="fToppingModify(2,topping.seoname)"  -->
+          <label for="{{topping.id}}ToppingsLeft">
+            <span>{{fToppingPrice(topping)}}</span>
             <input type="checkbox" 
-              name="{{topping.id}}Layout" 
-              id="{{topping.id}}LayoutLeft" 
-              ng-checked="true"
-              ng-disabled="!topping.checked">
+              name="Topping{{topping.id}}" 
+              id="ToppingsLeft{{topping.id}}" 
+              ng-model="myPizzaForm.toppings[$index].left"
+              ng-click="fPizzaToppingsSubtotal('left',topping)"
+              ng-checked="topping.layout.left">
           </label>
         </td>
         <!-- RIGHT -->
         <td>
-          <label for="{{topping.id}}LayoutRight" 
-            ng-class="{'disabled':!topping.checked}">
-            <span>{{::fToppingPrice("right",topping)}}</span>
-              <!-- ng-model="myPizza.toppings"  -->
-              <!-- ng-change="fToppingModify(3,topping.seoname)"  -->
+          <label for="{{topping.id}}LayoutRight">
+            <span>{{fToppingPrice(topping)}}</span>
             <input type="checkbox" 
-              name="{{topping.id}}Layout" 
-              id="{{topping.id}}LayoutRight" 
-              ng-checked="true"
-              ng-disabled="!topping.checked">
+              name="Toppings{{topping.id}}" 
+              id="ToppingsRight{{topping.id}}" 
+              ng-model="myPizzaForm.toppings[$index].right"
+              ng-click="fPizzaToppingsSubtotal('right',topping)"
+              ng-checked="topping.layout.right">
           </label>
         </td>
-        <!-- <td>
-          <label>None
-          <input type="radio" 
-            ng-model="myPizza.toppings" 
-            ng-change="fToppingModify(0,topping.seoname)" 
-            name="{{topping.id}}" 
-            id="{{topping.id}}None" 
-            checked="checked">
-          </label>
-        </td> -->
       </tr>
     </tbody>
-  </table>
-  <table>
-    <tbody>
-      <!-- <tr>
-        <th>Pizza base price of 
-          <select 
-            name="myPizza.size" 
-            ng-model="myPizza.size" 
-            ng-options="item.label for item in sizes"></select>
-         {{units}} pizza</th>
-        <td colspan="3" align="center">
-          ${{myPizza.size.baseprice}}
-        </td>
-      </tr> -->
+    <tfoot>
       <tr>
-        <th rowspan="2">Topping Subtotal</th>
-        <th>Whole</th>
+        <th rowspan="4">Subtotal</th>
+        <!-- <th>Whole</th> -->
         <th>Left</th>
         <th>Right</th>
       </tr>
       <tr>
-        <td><span>{{fToppingsTotal("whole")}}</span></td>
-        <td><span>{{fToppingsTotal("left")}}</span></td>
-        <td><span>{{fToppingsTotal("right")}}</span></td>
+        <!-- <td>{{fPizzaToppingsSubtotal("whole")}}</td> -->
+        <td>{{pizzaToppingsSubtotal.left}}</td>
+        <td>{{pizzaToppingsSubtotal.right}}</td>
       </tr>
       <tr>
-        <th>Pizza Subtotal</th>
-        <!-- <td colspan="3">${{fPizzaSubtotal()}}</td> -->
+        <!-- <td>{{fPizzaToppingsSubtotal("whole")}}</td> -->
+        <td>{{pizzaToppingsSubtotal.sum.left|currency}}</td>
+        <td>{{pizzaToppingsSubtotal.sum.right|currency}}</td>
       </tr>
-      <!-- <tr> -->
-        <!-- <th>Tax</th> -->
-        <!-- <td colspan="3">${{fPizzaTax()}}</td> -->
-      <!-- </tr> -->
       <tr>
-        <th>Total</th>
-        <!-- <td colspan="3">${{fPizzaTotal()}}</td> -->
+        <!-- <td>{{fPizzaToppingsSubtotal("whole")}}</td> -->
+        <td>{{ToppingsLeft}}</td>
+        <td>{{ToppingsRight}}</td>
       </tr>
-    </tbody>
+    </tfoot>
   </table>
-  <h3>Toppings Data Models</h3>
+  <hr>
+  <select 
+    class="float right" 
+    name="myPizza.size" 
+    ng-model="myPizza.size" 
+    ng-options="item.label+' '+units for item in sizes">
+    <option value="">choose...</option></select>
+  <h2>Size</h2>
   <table style="table-layout: fixed;">
+    <tbody>
+      <tr>
+        <th>Subtotal</th>
+        <td>
+          {{myPizza.size.price|currency}}
+        </td>
+      </tr>
+  </table>
+  <hr>
+  <span class="float right">{{myPizza.totals.toppings+myPizza.size.price|currency}}</span>
+  <h2>Total</h2>
+  <hr>
+  <table>
     <tr>
       <th>myPizza</th>
       <th>myPizza.size</th>
@@ -126,17 +118,18 @@
       <td><pre>{{myPizza.toppings|json}}</pre></td>
     </tr>
   </table>
-  <!-- <h3>Toppings</h3>
   <ul>
     <li ng-repeat="item in myPizza.toppings">
-    <table style="table-layout: fixed;">
+    <table>
       <tr>
         <td>topping:{{item.name}}</td>
         <td>id:{{item.id}}</td>
         <td>layout:{{item.layout}}</td>
-        <td>price:{{::fToppingPrice(item.layout,item)}}</td>
+        <td>price:{{::fToppingPrice(item)}}</td>
       </tr>
     </table>
     </li>
-  </ul> -->
+  </ul>
+  </form>
+  {{myPizzaForm|json}}
 </article>

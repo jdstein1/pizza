@@ -23,9 +23,9 @@ patterns that lack thought.
 
     function cMain($scope, $rootScope) {
         $scope.title = "cMain";
-        console.log('START '+$scope.title+' CONTROLLER');
+        // console.log('START '+$scope.title+' CONTROLLER');
         $rootScope.myPizza = {};
-        console.log('$rootScope.myPizza',$rootScope.myPizza);
+        // console.log('$rootScope.myPizza',$rootScope.myPizza);
     }
 
 // })();
@@ -38,7 +38,7 @@ patterns that lack thought.
 
     function cHeader($scope) {
         $scope.title = "cHeader";
-        console.log('START '+$scope.title+' CONTROLLER');
+        // console.log('START '+$scope.title+' CONTROLLER');
     }
 
 // })();
@@ -51,19 +51,19 @@ patterns that lack thought.
 
     function cNav($scope, $location, sNav) {
         $scope.title = "cNav";
-        console.log('START '+$scope.title+' CONTROLLER');
+        // console.log('START '+$scope.title+' CONTROLLER');
 
         $scope.navPredicate = 'order';
         $scope.navReverse = false;
 
         $scope.nav = sNav;
-        console.log('$scope.nav: ',$scope.nav);
-        console.log('$location.$$path: ',$location.$$path);
+        // console.log('$scope.nav: ',$scope.nav);
+        // console.log('$location.$$path: ',$location.$$path);
 
         $scope.isActiveNav = function (link) {
-            console.log('nav START isActiveNav FUNCTION');
-            console.log('nav path: '+$location.$$path);
-            console.log('nav link: '+link);
+            // console.log('nav START isActiveNav FUNCTION');
+            // console.log('nav path: '+$location.$$path);
+            // console.log('nav link: '+link);
             return $location.$$path === link;
         };
     }
@@ -78,7 +78,7 @@ patterns that lack thought.
 
     function cFooter($scope) {
         $scope.title = "cFooter";
-        console.log('START '+$scope.title+' CONTROLLER');
+        // console.log('START '+$scope.title+' CONTROLLER');
     }
 
 // })();
@@ -91,7 +91,7 @@ patterns that lack thought.
 
     function cSummary($scope) {
         $scope.title = "cSummary";
-        console.log('START '+$scope.title+' CONTROLLER');
+        // console.log('START '+$scope.title+' CONTROLLER');
     }
 
 // })();
@@ -104,7 +104,7 @@ patterns that lack thought.
 
     function cAbout($scope) {
         $scope.title = "cAbout";
-        console.log('START '+$scope.title+' CONTROLLER');
+        // console.log('START '+$scope.title+' CONTROLLER');
     }
 
 // })();
@@ -117,7 +117,7 @@ patterns that lack thought.
 
     function cCrusts($scope) {
         $scope.title = "cCrusts";
-        console.log('START '+$scope.title+' CONTROLLER');
+        // console.log('START '+$scope.title+' CONTROLLER');
     }
 
 // })();
@@ -130,7 +130,7 @@ patterns that lack thought.
 
     function cSauces($scope) {
         $scope.title = "cSauces";
-        console.log('START '+$scope.title+' CONTROLLER');
+        // console.log('START '+$scope.title+' CONTROLLER');
     }
 
 // })();
@@ -153,7 +153,7 @@ will have on the price of your happiness.
 */
 
         $scope.title = "cSizes";
-        console.log('START '+$scope.title+' CONTROLLER');
+        // console.log('START '+$scope.title+' CONTROLLER');
     }
 
 })();

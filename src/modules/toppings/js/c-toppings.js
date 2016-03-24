@@ -20,38 +20,60 @@ the flavor of the sauce, cheese and ingrdients.
 */
     $scope.title = "cToppings";
     console.group('START',$scope.title);
-    $scope.units = "inch";
-/*
+    $scope.units = "inches";
+    $scope.myPizzaForm = {};
+    $scope.pizzaToppingsSubtotal = {"left":[],"right":[],"sum":{"left":0,"right":0}};
 
-- [X] Create myPizza object in rootscope.
-- [X] Push data from services/factories into it for each 
-  module (toppings, crusts, sizes, etc.)
-- [] Modify sub-object attributes in rootscope object to 
-  indicate preferences and layout of pizza.
-- [] Topping layout values:  see 's-toppings.js'
-
-*/
+    // util function for doing a sum
+    var newSum = 0;
+    var fSum = function (previousValue, currentValue) {
+      console.log('START fSum FUNCTION');
+      console.log('-- arr: ', arr);
+      console.log('-- newSum: ', newSum);
+      return previousValue + currentValue;
+      // for (var i = 0; i < arr.length; i++) {
+      //   console.log('arr[i]: ', arr[i]);
+      //   // var val = arr[i];
+      //   // newSum += arr[i];
+      //   var val = parseFloat(arr[i]);
+      //   newSum += val;
+      // }
+      // return newSum;
+    };
 
     $scope.fClear = function () {
       console.log('START fClear FUNCTION');
     };
 
-    // TOPPINGS ARRAY
-    // console.log('sToppings.fToppingsArr(): ', sToppings.fToppingsArr());
-    $scope.toppings = sToppings.fToppingsArr();
-    // console.log('$scope.toppings: ', $scope.toppings);
-    // $scope.addKVtoObj = function (obj,value,key) {
-    //   console.log('obj',obj);
-    //   angular.forEach(obj, function(value, key) {
-    //     console.log('this',this);
-    //     this.push(key + ': ' + value);
-    //   });
-    // };
-    // $scope.addKVtoObj($scope.toppings,0,'layout');
+    var toppingsDefaultsArr = [11,5,27]; // id of default ingredient(s)
 
-    $scope.defaultTopping = $scope.toppings[0];
-    console.log('$scope.defaultTopping: ', $scope.defaultTopping);
-    $rootScope.myPizza.toppings = {};
+    // TOPPINGS ARRAY
+    console.log('sToppings.fToppingsArr(): ', sToppings.fToppingsArr());
+    $scope.toppings = sToppings.fToppingsArr();
+    $scope.defaultToppings = [];
+
+    // set default ingrdients
+    $scope.setDefaults = function (obj,defaults) {
+      console.group('START setDefaults');
+      for (var i = 0; i < obj.length; i++) {
+        for (var j = 0; j < defaults.length; j++) {
+          if (obj[i].id === defaults[j]) {
+            obj[i].layout = {};
+            obj[i].layout.left = true;
+            obj[i].layout.right = true;
+            // if (obj[i].price>0) {
+              $scope.pizzaToppingsSubtotal.left.push(obj[i].price);
+              $scope.pizzaToppingsSubtotal.right.push( obj[i].price);
+            // }
+            $scope.defaultToppings.push(obj[i]);
+            console.log('$scope.pizzaToppingsSubtotal: ', $scope.pizzaToppingsSubtotal);
+          }
+        }
+      }
+      console.groupEnd();
+    };
+    $scope.setDefaults($scope.toppings,toppingsDefaultsArr);
+    $rootScope.myPizza.toppings = $scope.defaultToppings;
 
     // TOPPINGS REPEAT PARAMS
     $scope.predicate = 'type';
@@ -70,67 +92,49 @@ the flavor of the sauce, cheese and ingrdients.
     // console.log('$scope.defaultSize: ', $scope.defaultSize);
     $rootScope.myPizza.size = $scope.defaultSize;
 
-    $scope.fToppingPrice = function (layout,item) {
-      console.group('START fToppingPrice FUNCTION');
-      console.log('layout,item: '+layout +','+ item.name+'');
-      // layout = parseInt(layout);
+    $scope.fToppingPrice = function (item) {
+      // console.group('START fToppingPrice FUNCTION');
       var price = '';
       if (item.price > 0) {
-        // convert if/else to switch/case...
-        switch(layout) {
-          case "whole":
-            console.log('layout: WHOLE');
-            price = item.price * MULTIPLIER.WHOLE;
-            break;
-          case "left":
-            console.log('layout: LEFT');
-          case "right":
-            console.log('layout: RIGHT');
-            price = item.price * MULTIPLIER.HALF;
-            break;
-          default:
-            console.log('error!');
-            break;
-        }
+        price = item.price;
         price = $filter('currency')(price);
-        console.groupEnd();
-        return price;
       } else {
         price = "FREE";
-        console.groupEnd();
-        return price;
       }
-      // console.log('price: ',price)
-      // $scope.toppings[id];
+      // console.groupEnd();
+      return price;
     };
 
     // Calculate totals for toppings in each layout zone
-    $scope.fToppingsTotal = function (layout) {
-      console.group('START fToppingsTotal FUNCTION');
-      console.log('layout: '+layout);
-      // layout = parseInt(layout);
-      var amount = 0;
+    $scope.fPizzaToppingsSubtotal = function (layout,obj) {
+      console.group('START fPizzaToppingsSubtotal FUNCTION');
+      // console.log('layout: ',layout);
+      // console.log('obj.layout: ',obj.layout);
+      // console.log('obj: ',obj);
+      // console.log('obj.price: ',obj.price);
+      // console.log('Object.keys(obj): ',Object.keys(obj));
+      if (obj.layout){
+        if (obj.layout[layout]===true) {
+          obj.layout[layout] = false;
+          // need to get the index of the item w the desired value...
+          // then pop that item:
+          $scope.pizzaToppingsSubtotal[layout].pop(0,1);
+          console.log('true pop',$scope.pizzaToppingsSubtotal[layout]);
+        } else {
+          obj.layout[layout] = true;
+          $scope.pizzaToppingsSubtotal[layout].push(obj.price);
+          console.log('false push',$scope.pizzaToppingsSubtotal[layout]);
+        }
+      } else {
+        obj.layout = {};
+        obj.layout[layout] = true;
+        $scope.pizzaToppingsSubtotal[layout].push(obj.price);
+        console.log('push', $scope.pizzaToppingsSubtotal[layout]);
+      }
       // iterate over key 'layout' in myPizza.toppings to match 
       // layout zone value...
-
-      // convert if/else to switch/case...
-      switch(layout) {
-        case "whole":
-          console.log('layout: WHOLE');
-          break;
-        case "left":
-          console.log('layout: LEFT');
-          break;
-        case "right":
-          console.log('layout: RIGHT');
-          break;
-        default:
-          console.log('error!');
-          break;
-      }
-      amount = $filter('currency')(amount);
       console.groupEnd();
-      return amount;
+      // return $scope.pizzaToppingsSubtotal;
       // return price;
       // console.log('price: ',price)
       // $scope.toppings[id];
@@ -139,26 +143,25 @@ the flavor of the sauce, cheese and ingrdients.
     // Handle adding or removing toppings
     $scope.fToppingToggle = function (item) {
       console.log('START fToppingToggle FUNCTION');
-      if (item.layout < 1) {
-        item.layout = 1;
-      } else {
-        item.layout = 0;
-      }
-      // return item;
     };
-    // $rootScope.myPizza.toppings.push($scope.defaultTopping);
+    // $rootScope.myPizza.toppings.push($scope.defaultToppings);
     // console.log('$rootScope.myPizza.toppings: ', $rootScope.myPizza.toppings);
 
     // Handle adding or removing toppings
     $scope.fToppingModify = function (layout,item) {
       console.log('START fToppingModify FUNCTION');
     };
-    // $rootScope.myPizza.toppings.push($scope.defaultTopping);
-    // console.log('$rootScope.myPizza.toppings: ', $rootScope.myPizza.toppings);
 
-    $scope.fPizzaSubtotal = function () {
+    $scope.fPizzaSubtotal = function (size) {
       console.log('START fPizzaSubtotal FUNCTION');
+      var pizzaSubtotal = $filter('currency')(size.price);
+      return pizzaSubtotal;
     };
+
+    $rootScope.myPizza.totals = {};
+    $rootScope.myPizza.totals.toppings = {};
+    $rootScope.myPizza.totals.total = $rootScope.myPizza.totals.toppings.left
++ $rootScope.myPizza.totals.toppings.right + $rootScope.myPizza.size.price;
 
     $scope.fPizzaTax = function () {
       console.log('START fPizzaTax FUNCTION');
