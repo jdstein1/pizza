@@ -16,7 +16,6 @@
     <thead>
       <tr>
         <th>Ingredient Name</th>
-        <th>Whole Pie</th>
         <th>Left Side</th>
         <th>Right Side</th>
         <!-- <th>Clear</th> -->
@@ -30,47 +29,36 @@
               <!-- ng-model="myPizza.toppings[topping.seoname]"  -->
             <input type="checkbox" name="toppings" 
               ng-model="topping.checked" 
+              ng-checked="topping.checked" 
               ng-change="fToppingToggle(item)" 
               id="{{topping.seoname}}">
           </label>
         </th>
-        <!-- <th>{{topping.name}} - {{topping.id}}/{{$index}}</th> -->
-        <td>
-          <label for="{{topping.id}}LayoutWhole" 
-            ng-class="{'disabled':!topping.checked}">
-            <span>{{::fToppingPrice(1,topping)}}</span>
-              <!-- ng-model="myPizza.toppings"  -->
-              <!-- ng-change="fToppingModify(1,topping.seoname)"  -->
-            <input type="radio"
-              name="{{topping.id}}Layout" 
-              id="{{topping.id}}LayoutWhole" 
-              ng-checked="topping.layout===1"
-              ng-disabled="!topping.checked">
-          </label>
-        </td>
+        <!-- LEFT -->
         <td>
           <label for="{{topping.id}}LayoutLeft" 
             ng-class="{'disabled':!topping.checked}">
-            <span>{{::fToppingPrice(2,topping)}}</span>
+            <span>{{::fToppingPrice("left",topping)}}</span>
               <!-- ng-model="myPizza.toppings"  -->
               <!-- ng-change="fToppingModify(2,topping.seoname)"  -->
-            <input type="radio" 
+            <input type="checkbox" 
               name="{{topping.id}}Layout" 
               id="{{topping.id}}LayoutLeft" 
-              ng-checked="topping.layout===2"
+              ng-checked="true"
               ng-disabled="!topping.checked">
           </label>
         </td>
+        <!-- RIGHT -->
         <td>
           <label for="{{topping.id}}LayoutRight" 
             ng-class="{'disabled':!topping.checked}">
-            <span>{{::fToppingPrice(3,topping)}}</span>
+            <span>{{::fToppingPrice("right",topping)}}</span>
               <!-- ng-model="myPizza.toppings"  -->
               <!-- ng-change="fToppingModify(3,topping.seoname)"  -->
-            <input type="radio" 
+            <input type="checkbox" 
               name="{{topping.id}}Layout" 
               id="{{topping.id}}LayoutRight" 
-              ng-checked="topping.layout===3"
+              ng-checked="true"
               ng-disabled="!topping.checked">
           </label>
         </td>
@@ -86,7 +74,9 @@
         </td> -->
       </tr>
     </tbody>
-    <tfoot>
+  </table>
+  <table>
+    <tbody>
       <!-- <tr>
         <th>Pizza base price of 
           <select 
@@ -99,29 +89,29 @@
         </td>
       </tr> -->
       <tr>
-        <th rowspan="2">Topping price</th>
+        <th rowspan="2">Topping Subtotal</th>
         <th>Whole</th>
         <th>Left</th>
         <th>Right</th>
       </tr>
       <tr>
-        <td><span>{{fToppingsTotal(1)}}</span></td>
-        <td><span>{{fToppingsTotal(2)}}</span></td>
-        <td><span>{{fToppingsTotal(3)}}</span></td>
+        <td><span>{{fToppingsTotal("whole")}}</span></td>
+        <td><span>{{fToppingsTotal("left")}}</span></td>
+        <td><span>{{fToppingsTotal("right")}}</span></td>
       </tr>
       <tr>
-        <th>Subtotal</th>
+        <th>Pizza Subtotal</th>
         <!-- <td colspan="3">${{fPizzaSubtotal()}}</td> -->
       </tr>
-      <tr>
-        <th>Tax</th>
+      <!-- <tr> -->
+        <!-- <th>Tax</th> -->
         <!-- <td colspan="3">${{fPizzaTax()}}</td> -->
-      </tr>
+      <!-- </tr> -->
       <tr>
         <th>Total</th>
         <!-- <td colspan="3">${{fPizzaTotal()}}</td> -->
       </tr>
-    </tfoot>
+    </tbody>
   </table>
   <h3>Toppings Data Models</h3>
   <table style="table-layout: fixed;">

@@ -13,9 +13,8 @@
 
     // "id":3 -- Unique numerical identifier
     // "name":"Pepperoni" -- Display name
-    // "checked":false -- default topping status
+    // "checked":[true|false] -- default topping status = false
     // "seoname":"pepperoni" -- SEO name
-    // "layout":0 -- 0=none (default), 1=whole, 2=left, 3=right
     // "price":[2.95,1.85] -- whole layout price.  half layout will be handled by a constant multiplier.
     // "type":"meat" -- topping category
 
@@ -26,7 +25,6 @@
               "name":"Cheese",
               "checked":true,
               "seoname":"cheese",
-              "layout":1,
               "price":0,
               "type":"dairy"
             },{
@@ -34,7 +32,6 @@
               "name":"Pepperoni",
               "checked":false,
               "seoname":"pepperoni",
-              "layout":0,
               "price":2.90,
               "type":"meat"
             },{
@@ -42,7 +39,6 @@
               "name":"Fresh Garlic",
               "checked":false,
               "seoname":"freshgarlic",
-              "layout":0,
               "price":2.30,
               "type":"veggie"
             },{
@@ -50,7 +46,6 @@
               "name":"Sausage",
               "checked":false,
               "seoname":"sausage",
-              "layout":0,
               "price":2.50,
               "type":"meat"
             },{
@@ -58,7 +53,6 @@
               "name":"Pineapple",
               "checked":false,
               "seoname":"pineapple",
-              "layout":0,
               "price":2.70,
               "type":"veggie"
             },{
@@ -66,7 +60,6 @@
               "name":"Buffalo Mozzarella",
               "checked":false,
               "seoname":"buffalomozzarella",
-              "layout":0,
               "price":3.10,
               "type":"dairy"
             }

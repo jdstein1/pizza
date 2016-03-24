@@ -49,7 +49,6 @@ the flavor of the sauce, cheese and ingrdients.
     // };
     // $scope.addKVtoObj($scope.toppings,0,'layout');
 
-    // "layout":0 -- 0=none (default), 1=whole, 2=left, 3=right
     $scope.defaultTopping = $scope.toppings[0];
     console.log('$scope.defaultTopping: ', $scope.defaultTopping);
     $rootScope.myPizza.toppings = {};
@@ -74,15 +73,24 @@ the flavor of the sauce, cheese and ingrdients.
     $scope.fToppingPrice = function (layout,item) {
       console.group('START fToppingPrice FUNCTION');
       console.log('layout,item: '+layout +','+ item.name+'');
-      layout = parseInt(layout);
+      // layout = parseInt(layout);
       var price = '';
       if (item.price > 0) {
-        if (layout < 1) {
-          // price = item.price * MULTIPLIER.WHOLE;
-        } else if (layout === 1) {
-          price = item.price * MULTIPLIER.WHOLE;
-        } else {
-          price = item.price * MULTIPLIER.HALF;
+        // convert if/else to switch/case...
+        switch(layout) {
+          case "whole":
+            console.log('layout: WHOLE');
+            price = item.price * MULTIPLIER.WHOLE;
+            break;
+          case "left":
+            console.log('layout: LEFT');
+          case "right":
+            console.log('layout: RIGHT');
+            price = item.price * MULTIPLIER.HALF;
+            break;
+          default:
+            console.log('error!');
+            break;
         }
         price = $filter('currency')(price);
         console.groupEnd();
@@ -100,20 +108,20 @@ the flavor of the sauce, cheese and ingrdients.
     $scope.fToppingsTotal = function (layout) {
       console.group('START fToppingsTotal FUNCTION');
       console.log('layout: '+layout);
-      layout = parseInt(layout);
+      // layout = parseInt(layout);
       var amount = 0;
       // iterate over key 'layout' in myPizza.toppings to match 
       // layout zone value...
 
       // convert if/else to switch/case...
       switch(layout) {
-        case 1:
+        case "whole":
           console.log('layout: WHOLE');
           break;
-        case 2:
+        case "left":
           console.log('layout: LEFT');
           break;
-        case 3:
+        case "right":
           console.log('layout: RIGHT');
           break;
         default:
@@ -121,8 +129,8 @@ the flavor of the sauce, cheese and ingrdients.
           break;
       }
       amount = $filter('currency')(amount);
-      return amount;
       console.groupEnd();
+      return amount;
       // return price;
       // console.log('price: ',price)
       // $scope.toppings[id];
