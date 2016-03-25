@@ -105,7 +105,7 @@ the flavor of the sauce, cheese and ingrdients.
 
     $scope.fToppingPrice = function (item) {
       // console.group('START fToppingPrice FUNCTION');
-      var price = '';
+      var price = 0;
       if (item.price > 0) {
         price = item.price * MULTIPLIER.HALF;
         price = $filter('currency')(price);
@@ -116,20 +116,27 @@ the flavor of the sauce, cheese and ingrdients.
       return price;
     };
 
-    $scope.fToppingCharge = function (item) {
+    // Calculate the charge for an individual topping based on 
+    // pie layout...
+    $scope.fToppingCharge = function (item,layout) {
       // console.group('START fToppingCharge FUNCTION');
-      var price = 0;
-      var discountMsg = '';
-      if (item.price > 0 && item.layout) {
-        // console.log('item.layout.left: ', item.layout.left);
-        // console.log('item.layout.right: ', item.layout.right);
-        if (item.layout.left && item.layout.right) {
+      var price = 0, discountMsg = '';
+      // if layout undefined, use layout object of item
+      if (!layout) {
+        layout = item.layout;
+      } else if (layout==='full') {
+        layout = {"left":true,"right":true}
+      }
+      if (item.price > 0 && layout) {
+        // console.log('layout.left: ', layout.left);
+        // console.log('layout.right: ', layout.right);
+        if (layout.left && layout.right) {
           // charge for topping on whole pizza
           price = item.price * MULTIPLIER.WHOLE;
           if (discount) {
             discountMsg = ' (' + discount + ' off!)';
           }
-        } else if (!item.layout.left && !item.layout.right) {
+        } else if (!layout.left && !layout.right) {
           // charge for no topping
         } else {
           // charge for topping on half pizza
@@ -138,15 +145,24 @@ the flavor of the sauce, cheese and ingrdients.
         price = $filter('currency')(price);
         price = price + discountMsg;
       } else {
-        price = "NONE";
+        price = "";
       }
       // console.groupEnd();
       return price;
     };
 
+    // Calculate the charge for a side of the pizza based on 
+    // topping layout...
+    $scope.fSideCharge = function (item,layout) {
+      // console.group('START fSideCharge FUNCTION');
+      var price = 0;
+      // console.groupEnd();
+      return price;
+    };
+
     // Calculate totals for toppings in each layout zone
-    $scope.fPizzaToppingsSubtotal = function (layout,obj) {
-      console.group('START fPizzaToppingsSubtotal FUNCTION');
+    $scope.fToppingsSubtotal = function (layout,obj) {
+      console.group('START fToppingsSubtotal FUNCTION');
       // console.log('layout: ',layout);
       // console.log('obj.layout: ',obj.layout);
       // console.log('obj: ',obj);

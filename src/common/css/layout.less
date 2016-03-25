@@ -66,8 +66,11 @@ nav {
   }
 }
 .meat {background:rgba(255,0,0,0.125);}
-.veggie {background:rgba(0,127,0,0.125);}
-.dairy {background:rgba(255,255,0,0.125);}
+.meat th:after {content:'M'; float: right; color:rgba(153,0,0,0.5);}
+.veggie {background:rgba(0,153,0,0.125);}
+.veggie th:after {content:'V'; float: right; color:rgba(0,51,0,0.5);}
+.dairy {background:rgba(255,204,0,0.125);}
+.dairy th:after {content:'D'; float: right; color:rgba(153,102,0,0.5);}
 .disabled {
   opacity:0.5;
   // a, .navLink {background:#999; color:#333;}
