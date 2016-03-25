@@ -1,30 +1,33 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="pizza">
 <head>
+
   <meta charset="UTF-8">
   <title>Pizza Selector</title>
   <style>
     table, th, td {border:1px lightgrey solid;}
   </style>
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" type="text/css" href="common/css/reset.css">
   <link rel="stylesheet" type="text/css" href="common/css/clearfix.css">
   <link rel="stylesheet/less" type="text/css" href="common/css/layout.less">
+
 </head>
 <body ng-controller="cMain">
+
   <header ng-include="'common/header.html'"></header>
   <!-- <header ng-controller="cHeader">{{header}}</header> -->
   <section ng-view></section>
   <!-- <aside ng-include="'common/summary.html'"></aside> -->
   <footer ng-include="'common/footer.html'"></footer>
   <!-- <footer ng-controller="cFooter">{{footer}}</footer> -->
-
   <!-- bower:js -->
   <script src="../bower_components/angular/angular.js"></script>
   <script src="../bower_components/angular-route/angular-route.js"></script>
   <script src="../bower_components/angular-resource/angular-resource.js"></script>
   <script src="../bower_components/less/dist/less.js"></script>
   <!-- endbower -->
-
   <!-- <script type="text/javascript" src="lib/less/less-1.4.1.min.js"></script> -->
   <!-- <script type="text/javascript" src="lib/angular/angular.min.js"></script> -->
   <script type="text/javascript" src="common/js/utils.js"></script>
@@ -43,5 +46,6 @@
   <script type="text/javascript" src="modules/sizes/js/s-sizes.js"></script>
   <script type="text/javascript" src="modules/sizes/js/d-sizes.js"></script>
   <script type="text/javascript" src="modules/sizes/js/c-sizes.js"></script>
+
 </body>
 </html>

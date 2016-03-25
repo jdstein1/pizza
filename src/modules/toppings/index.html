@@ -3,6 +3,10 @@
   <ul class="sorting float right">
     <li>sort toppings:</li>
     <li class="icon" 
+      ng-class="{'arrow':predicate==='seoname','up':reverse===false,'down':reverse===true}">
+      <a class="btn" ng-click="fSorting('seoname')">name</a>
+    </li>
+    <li class="icon" 
       ng-class="{'arrow':predicate==='price','up':reverse===false,'down':reverse===true}">
       <a class="btn" ng-click="fSorting('price')">price</a>
     </li>
@@ -65,15 +69,10 @@
       </tbody>
       <tfoot>
         <tr>
-          <th rowspan="4">Subtotal</th>
+          <th rowspan="3">Toppings Subtotal</th>
           <!-- <th>Whole</th> -->
-          <th>Left</th>
-          <th>Right</th>
-        </tr>
-        <tr>
-          <!-- <td>{{fPizzaToppingsSubtotal("whole")}}</td> -->
-          <td>{{myPizza.totals.toppings.left}}</td>
-          <td>{{myPizza.totals.toppings.right}}</td>
+          <th>Left <small>{{myPizza.totals.toppings.left|json}}</small> {{myPizza.totals.toppings.sum.left|currency}}</th>
+          <th>Right <small>{{myPizza.totals.toppings.right|json}}</small> {{myPizza.totals.toppings.sum.right|currency}}</th>
         </tr>
         <tr>
           <!-- <td>{{fPizzaToppingsSubtotal("whole")}}</td> -->
@@ -82,63 +81,76 @@
         </tr>
         <tr>
           <!-- <td>{{fPizzaToppingsSubtotal("whole")}}</td> -->
-          <td>{{ToppingsLeft}}</td>
-          <td>{{ToppingsRight}}</td>
+          <td>{{fSideCharge('left')}}</td>
+          <td>{{fSideCharge('right')}}</td>
         </tr>
       </tfoot>
     </table>
     <hr>
       <!-- ng-model="myPizza.size"  -->
-    <select 
-      class="float right" 
-      name="myPizza.size" 
-      ng-model="myPizzaForm.size" 
-      ng-options="item.label+' '+units for item in sizes">
-      <option value="">choose...</option></select>
     <h2>Size</h2>
     <table style="table-layout: fixed;">
       <tbody>
         <tr>
-          <th>Subtotal</th>
+          <th>Size
+      <select 
+        name="myPizza.size" 
+        ng-model="myPizzaForm.size" 
+        ng-options="item.label+' '+units for item in sizes">
+        <option value="">choose...</option></select>
+          Subtotal</th>
           <td>
             {{myPizza.size.price|currency}}
           </td>
         </tr>
     </table>
     <hr>
-    <span class="float right">{{myPizza.totals.toppings+myPizza.size.price|currency}}</span>
-    <h2>Total</h2>
-    <hr>
-    <table>
+    <table style="table-layout: fixed;">
+      <tbody>
+        <tr>
+          <th>Total</th>
+          <td>
+            {{myPizza.totals|currency}}
+          </td>
+        </tr>
+    </table>
+    <!-- <hr> -->
+    <!-- <table style="table-layout: fixed;">
       <tr>
         <th>myPizzaForm</th>
-        <!-- <th>myPizza</th> -->
+        <th>myPizza</th>
         <th>myPizza.size</th>
         <th>myPizza.toppings</th>
       </tr>
       <tr>
         <td><pre>{{myPizzaForm|json}}</pre></td>
-        <!-- <td><pre>{{myPizza|json}}</pre></td> -->
+        <td><pre>{{myPizza|json}}</pre></td>
         <td><pre>{{myPizza.size|json}}</pre></td>
         <td><pre>{{myPizza.toppings|json}}</pre></td>
       </tr>
-    </table>
-    <table>
+    </table> -->
+    <!-- <hr> -->
+    <!-- <h3>myPizza.toppings</h3> -->
+    <!-- <table style="table-layout: fixed;">
       <tr ng-repeat="item in myPizza.toppings">
         <th>{{item.name}}</th>
-        <td>seo:{{item.seoname}}</td>
-        <td>id:{{item.id}}</td>
-        <td>layout:{{item.layout}}</td>
-        <td>price:{{::fToppingPrice(item)}}</td>
+        <td>seo: {{item.seoname}}</td>
+        <td>id: {{item.id}}</td>
+        <td>price: {{fToppingPrice(item)}}</td>
+        <td>layout: <pre>{{item.layout|json}}</pre></td>
+        <td>charge: {{fToppingCharge(item)}}</td>
       </tr>
-    </table>
-    <table>
+    </table> -->
+    <hr>
+    <h3>toppings</h3>
+    <table style="table-layout: fixed;">
       <tr ng-repeat="item in toppings">
         <th>{{item.name}}</th>
-        <td>seo:{{item.seoname}}</td>
-        <td>id:{{item.id}}</td>
-        <td>layout:{{item.layout}}</td>
-        <td>price:{{::fToppingPrice(item)}}</td>
+        <td>seo: {{item.seoname}}</td>
+        <td>id: {{item.id}}</td>
+        <td>price: {{fToppingPrice(item)}}</td>
+        <td>layout: <pre>{{item.layout|json}}</pre></td>
+        <td>charge: {{fToppingCharge(item)}}</td>
       </tr>
     </table>
   </form>

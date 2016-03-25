@@ -25,6 +25,13 @@ the flavor of the sauce, cheese and ingrdients.
     $rootScope.myPizza.totals = {};
     $rootScope.myPizza.totals.toppings = {"left":[],"right":[],"sum":{"left":0,"right":0}};
 
+    // Calculate the current discount rate for topping whole 
+    // pizza with ingredient...
+    if (1-MULTIPLIER.WHOLE>0) {
+      var discount = Math.round((1-MULTIPLIER.WHOLE)*100)+'%';
+      console.log('discount', discount);
+    }
+
     // util function for doing a sum
     var fSum = function (arr) {
       console.log('START fSum FUNCTION');
@@ -65,21 +72,22 @@ the flavor of the sauce, cheese and ingrdients.
             obj[i].layout.left = true;
             obj[i].layout.right = true;
             // if (obj[i].price>0) {
-              $rootScope.myPizza.totals.toppings.left.push(obj[i].price);
-              $rootScope.myPizza.totals.toppings.right.push( obj[i].price);
+              // $rootScope.myPizza.totals.toppings.left.push(obj[i].price);
+              // $rootScope.myPizza.totals.toppings.right.push( obj[i].price);
             // }
-            $scope.defaultToppings.push(obj[i]);
-            console.log('$rootScope.myPizza.totals.toppings: ', $rootScope.myPizza.totals.toppings);
+            // $scope.defaultToppings.push(obj[i]);
+            // console.log('$rootScope.myPizza.totals.toppings: ', $rootScope.myPizza.totals.toppings);
           }
         }
       }
       console.groupEnd();
     };
     $scope.setDefaults($scope.toppings,toppingsDefaultsArr);
-    $rootScope.myPizza.toppings = $scope.defaultToppings;
+    $rootScope.myPizza.toppings = $scope.toppings;
+    // $rootScope.myPizza.toppings = $scope.defaultToppings;
 
     // TOPPINGS REPEAT PARAMS
-    $scope.predicate = 'type';
+    $scope.predicate = 'seoname';
     $scope.reverse = true;
     $scope.fSorting = function (predicate) {
       console.log('START fSorting FUNCTION');
@@ -99,10 +107,38 @@ the flavor of the sauce, cheese and ingrdients.
       // console.group('START fToppingPrice FUNCTION');
       var price = '';
       if (item.price > 0) {
-        price = item.price;
+        price = item.price * MULTIPLIER.HALF;
         price = $filter('currency')(price);
       } else {
         price = "FREE";
+      }
+      // console.groupEnd();
+      return price;
+    };
+
+    $scope.fToppingCharge = function (item) {
+      // console.group('START fToppingCharge FUNCTION');
+      var price = 0;
+      var discountMsg = '';
+      if (item.price > 0 && item.layout) {
+        // console.log('item.layout.left: ', item.layout.left);
+        // console.log('item.layout.right: ', item.layout.right);
+        if (item.layout.left && item.layout.right) {
+          // charge for topping on whole pizza
+          price = item.price * MULTIPLIER.WHOLE;
+          if (discount) {
+            discountMsg = ' (' + discount + ' off!)';
+          }
+        } else if (!item.layout.left && !item.layout.right) {
+          // charge for no topping
+        } else {
+          // charge for topping on half pizza
+          price = item.price * MULTIPLIER.HALF;
+        }
+        price = $filter('currency')(price);
+        price = price + discountMsg;
+      } else {
+        price = "NONE";
       }
       // console.groupEnd();
       return price;
@@ -115,7 +151,7 @@ the flavor of the sauce, cheese and ingrdients.
       // console.log('obj.layout: ',obj.layout);
       // console.log('obj: ',obj);
       // console.log('obj.price: ',obj.price);
-      // console.log('Object.keys(obj): ',Object.keys(obj));
+      console.log('Object.keys(obj): ',Object.keys(obj));
       if (obj.layout){
         if (obj.layout[layout]===true) {
           obj.layout[layout] = false;

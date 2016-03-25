@@ -17,7 +17,7 @@ patterns that lack thought.
         .module('pizza')
         .constant('MULTIPLIER', {
           // topping price multipliers
-          'WHOLE':1,
+          'WHOLE':0.9,
           'HALF':0.5
         })
 

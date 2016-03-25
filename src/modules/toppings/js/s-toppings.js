@@ -29,25 +29,25 @@
               "id":27,
               "name":"Pepperoni",
               "seoname":"pepperoni",
-              "price":2.90,
+              "price":3.5,
               "type":"meat"
             },{
               "id":89,
               "name":"Fresh Garlic",
               "seoname":"freshgarlic",
-              "price":2.30,
+              "price":2.9,
               "type":"veggie"
             },{
               "id":95,
               "name":"Sausage",
               "seoname":"sausage",
-              "price":2.50,
+              "price":3.1,
               "type":"meat"
             },{
               "id":76,
               "name":"Pineapple",
               "seoname":"pineapple",
-              "price":2.70,
+              "price":3.3,
               "type":"veggie"
             },{
               "id":5,
@@ -59,7 +59,7 @@
               "id":45,
               "name":"Buffalo Mozzarella",
               "seoname":"buffalomozzarella",
-              "price":3.10,
+              "price":3.7,
               "type":"dairy"
             }
           ];
