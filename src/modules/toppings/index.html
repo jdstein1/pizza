@@ -12,124 +12,134 @@
     </li>
   </ul>
   <h2>Toppings</h2>
-  <form action="" ng-model="myPizzaForm">
-  <table style="table-layout: fixed;">
-    <thead>
-      <tr>
-        <th>Ingredient Name</th>
-        <th>Left Side</th>
-        <th>Right Side</th>
-        <!-- <th>Clear</th> -->
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="topping in toppings | orderBy:predicate:reverse" class="{{topping.type}}">
-        <th class="align left">
-          <label for="{{topping.seoname}}">
-            <span>{{topping.name}}</span>
-              <!-- ng-model="myPizza.toppings[topping.seoname]"  -->
-            <!-- <input type="checkbox" name="toppings" 
-              ng-model="topping.checked" 
-              ng-checked="topping.checked" 
-              ng-change="fToppingToggle(item)" 
-              id="{{topping.seoname}}"> -->
-          </label>
-        </th>
-        <!-- LEFT -->
-        <td>
-          <label for="{{topping.id}}ToppingsLeft">
-            <span>{{fToppingPrice(topping)}}</span>
-            <input type="checkbox" 
-              name="Topping{{topping.id}}" 
-              id="ToppingsLeft{{topping.id}}" 
-              ng-model="myPizzaForm.toppings[$index].left"
-              ng-click="fPizzaToppingsSubtotal('left',topping)"
-              ng-checked="topping.layout.left">
-          </label>
-        </td>
-        <!-- RIGHT -->
-        <td>
-          <label for="{{topping.id}}LayoutRight">
-            <span>{{fToppingPrice(topping)}}</span>
-            <input type="checkbox" 
-              name="Toppings{{topping.id}}" 
-              id="ToppingsRight{{topping.id}}" 
-              ng-model="myPizzaForm.toppings[$index].right"
-              ng-click="fPizzaToppingsSubtotal('right',topping)"
-              ng-checked="topping.layout.right">
-          </label>
-        </td>
-      </tr>
-    </tbody>
-    <tfoot>
-      <tr>
-        <th rowspan="4">Subtotal</th>
-        <!-- <th>Whole</th> -->
-        <th>Left</th>
-        <th>Right</th>
-      </tr>
-      <tr>
-        <!-- <td>{{fPizzaToppingsSubtotal("whole")}}</td> -->
-        <td>{{pizzaToppingsSubtotal.left}}</td>
-        <td>{{pizzaToppingsSubtotal.right}}</td>
-      </tr>
-      <tr>
-        <!-- <td>{{fPizzaToppingsSubtotal("whole")}}</td> -->
-        <td>{{pizzaToppingsSubtotal.sum.left|currency}}</td>
-        <td>{{pizzaToppingsSubtotal.sum.right|currency}}</td>
-      </tr>
-      <tr>
-        <!-- <td>{{fPizzaToppingsSubtotal("whole")}}</td> -->
-        <td>{{ToppingsLeft}}</td>
-        <td>{{ToppingsRight}}</td>
-      </tr>
-    </tfoot>
-  </table>
-  <hr>
-  <select 
-    class="float right" 
-    name="myPizza.size" 
-    ng-model="myPizza.size" 
-    ng-options="item.label+' '+units for item in sizes">
-    <option value="">choose...</option></select>
-  <h2>Size</h2>
-  <table style="table-layout: fixed;">
-    <tbody>
-      <tr>
-        <th>Subtotal</th>
-        <td>
-          {{myPizza.size.price|currency}}
-        </td>
-      </tr>
-  </table>
-  <hr>
-  <span class="float right">{{myPizza.totals.toppings+myPizza.size.price|currency}}</span>
-  <h2>Total</h2>
-  <hr>
-  <table>
-    <tr>
-      <th>myPizza</th>
-      <th>myPizza.size</th>
-      <th>myPizza.toppings</th>
-    </tr>
-    <tr>
-      <td><pre>{{myPizza|json}}</pre></td>
-      <td><pre>{{myPizza.size|json}}</pre></td>
-      <td><pre>{{myPizza.toppings|json}}</pre></td>
-    </tr>
-  </table>
-  <ul>
-    <li ng-repeat="item in myPizza.toppings">
+  <form action="" id="myPizzaForm">
+    <table style="table-layout: fixed;">
+      <thead>
+        <tr>
+          <th>Ingredient Name</th>
+          <th>Left Side</th>
+          <th>Right Side</th>
+          <!-- <th>Clear</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="topping in toppings | orderBy:predicate:reverse" class="{{topping.type}}">
+          <th class="align left">
+            <label for="{{topping.seoname}}">
+              <span>{{topping.name}}</span>
+                <!-- ng-model="myPizza.toppings[topping.seoname]"  -->
+              <!-- <input type="checkbox" name="toppings" 
+                ng-model="topping.checked" 
+                ng-checked="topping.checked" 
+                ng-change="fToppingToggle(item)" 
+                id="{{topping.seoname}}"> -->
+            </label>
+          </th>
+          <!-- LEFT -->
+          <td>
+            <label for="{{topping.id}}ToppingsLeft">
+              <span>{{fToppingPrice(topping)}}</span>
+                <!-- ng-model="myPizzaForm.toppings[$index].left"  -->
+              <input type="checkbox" 
+                name="Topping{{topping.id}}" 
+                id="ToppingsLeft{{topping.id}}" 
+                ng-model="myPizzaForm.toppings[topping.id].left" 
+                ng-click="fPizzaToppingsSubtotal('left',topping)"
+                ng-checked="topping.layout.left">
+            </label>
+          </td>
+          <!-- RIGHT -->
+          <td>
+            <label for="{{topping.id}}LayoutRight">
+              <span>{{fToppingPrice(topping)}}</span>
+                <!-- ng-model="myPizzaForm.toppings[$index].right"  -->
+              <input type="checkbox" 
+                name="Toppings{{topping.id}}" 
+                id="ToppingsRight{{topping.id}}" 
+                ng-model="myPizzaForm.toppings[topping.id].right" 
+                ng-click="fPizzaToppingsSubtotal('right',topping)"
+                ng-checked="topping.layout.right">
+            </label>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th rowspan="4">Subtotal</th>
+          <!-- <th>Whole</th> -->
+          <th>Left</th>
+          <th>Right</th>
+        </tr>
+        <tr>
+          <!-- <td>{{fPizzaToppingsSubtotal("whole")}}</td> -->
+          <td>{{myPizza.totals.toppings.left}}</td>
+          <td>{{myPizza.totals.toppings.right}}</td>
+        </tr>
+        <tr>
+          <!-- <td>{{fPizzaToppingsSubtotal("whole")}}</td> -->
+          <td>{{myPizza.totals.toppings.sum.left|currency}}</td>
+          <td>{{myPizza.totals.toppings.sum.right|currency}}</td>
+        </tr>
+        <tr>
+          <!-- <td>{{fPizzaToppingsSubtotal("whole")}}</td> -->
+          <td>{{ToppingsLeft}}</td>
+          <td>{{ToppingsRight}}</td>
+        </tr>
+      </tfoot>
+    </table>
+    <hr>
+      <!-- ng-model="myPizza.size"  -->
+    <select 
+      class="float right" 
+      name="myPizza.size" 
+      ng-model="myPizzaForm.size" 
+      ng-options="item.label+' '+units for item in sizes">
+      <option value="">choose...</option></select>
+    <h2>Size</h2>
+    <table style="table-layout: fixed;">
+      <tbody>
+        <tr>
+          <th>Subtotal</th>
+          <td>
+            {{myPizza.size.price|currency}}
+          </td>
+        </tr>
+    </table>
+    <hr>
+    <span class="float right">{{myPizza.totals.toppings+myPizza.size.price|currency}}</span>
+    <h2>Total</h2>
+    <hr>
     <table>
       <tr>
-        <td>topping:{{item.name}}</td>
+        <th>myPizzaForm</th>
+        <!-- <th>myPizza</th> -->
+        <th>myPizza.size</th>
+        <th>myPizza.toppings</th>
+      </tr>
+      <tr>
+        <td><pre>{{myPizzaForm|json}}</pre></td>
+        <!-- <td><pre>{{myPizza|json}}</pre></td> -->
+        <td><pre>{{myPizza.size|json}}</pre></td>
+        <td><pre>{{myPizza.toppings|json}}</pre></td>
+      </tr>
+    </table>
+    <table>
+      <tr ng-repeat="item in myPizza.toppings">
+        <th>{{item.name}}</th>
+        <td>seo:{{item.seoname}}</td>
         <td>id:{{item.id}}</td>
         <td>layout:{{item.layout}}</td>
         <td>price:{{::fToppingPrice(item)}}</td>
       </tr>
     </table>
-    </li>
-  </ul>
+    <table>
+      <tr ng-repeat="item in toppings">
+        <th>{{item.name}}</th>
+        <td>seo:{{item.seoname}}</td>
+        <td>id:{{item.id}}</td>
+        <td>layout:{{item.layout}}</td>
+        <td>price:{{::fToppingPrice(item)}}</td>
+      </tr>
+    </table>
   </form>
-  {{myPizzaForm|json}}
 </article>

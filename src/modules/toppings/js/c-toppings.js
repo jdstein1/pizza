@@ -22,24 +22,27 @@ the flavor of the sauce, cheese and ingrdients.
     console.group('START',$scope.title);
     $scope.units = "inches";
     $scope.myPizzaForm = {};
-    $scope.pizzaToppingsSubtotal = {"left":[],"right":[],"sum":{"left":0,"right":0}};
+    $rootScope.myPizza.totals = {};
+    $rootScope.myPizza.totals.toppings = {"left":[],"right":[],"sum":{"left":0,"right":0}};
 
     // util function for doing a sum
-    var newSum = 0;
-    var fSum = function (previousValue, currentValue) {
+    var fSum = function (arr) {
       console.log('START fSum FUNCTION');
       console.log('-- arr: ', arr);
-      console.log('-- newSum: ', newSum);
-      return previousValue + currentValue;
-      // for (var i = 0; i < arr.length; i++) {
-      //   console.log('arr[i]: ', arr[i]);
-      //   // var val = arr[i];
-      //   // newSum += arr[i];
-      //   var val = parseFloat(arr[i]);
-      //   newSum += val;
-      // }
-      // return newSum;
+      var newSum = 0;
+      for (var i = 0; i < arr.length; i++) {
+        // console.log('arr[i]: ', arr[i]);
+        newSum = newSum + arr[i];
+        console.log('newSum', newSum);
+      }
+      return newSum;
     };
+    $scope.$watchCollection("myPizza.totals.toppings.left", function () {
+      $rootScope.myPizza.totals.toppings.sum.left = fSum($rootScope.myPizza.totals.toppings.left);
+    });
+    $scope.$watchCollection("myPizza.totals.toppings.right", function () {
+      $rootScope.myPizza.totals.toppings.sum.right = fSum($rootScope.myPizza.totals.toppings.right);
+    });
 
     $scope.fClear = function () {
       console.log('START fClear FUNCTION');
@@ -62,11 +65,11 @@ the flavor of the sauce, cheese and ingrdients.
             obj[i].layout.left = true;
             obj[i].layout.right = true;
             // if (obj[i].price>0) {
-              $scope.pizzaToppingsSubtotal.left.push(obj[i].price);
-              $scope.pizzaToppingsSubtotal.right.push( obj[i].price);
+              $rootScope.myPizza.totals.toppings.left.push(obj[i].price);
+              $rootScope.myPizza.totals.toppings.right.push( obj[i].price);
             // }
             $scope.defaultToppings.push(obj[i]);
-            console.log('$scope.pizzaToppingsSubtotal: ', $scope.pizzaToppingsSubtotal);
+            console.log('$rootScope.myPizza.totals.toppings: ', $rootScope.myPizza.totals.toppings);
           }
         }
       }
@@ -118,23 +121,23 @@ the flavor of the sauce, cheese and ingrdients.
           obj.layout[layout] = false;
           // need to get the index of the item w the desired value...
           // then pop that item:
-          $scope.pizzaToppingsSubtotal[layout].pop(0,1);
-          console.log('true pop',$scope.pizzaToppingsSubtotal[layout]);
+          $rootScope.myPizza.totals.toppings[layout].pop(0,1);
+          console.log('true pop',$rootScope.myPizza.totals.toppings[layout]);
         } else {
           obj.layout[layout] = true;
-          $scope.pizzaToppingsSubtotal[layout].push(obj.price);
-          console.log('false push',$scope.pizzaToppingsSubtotal[layout]);
+          $rootScope.myPizza.totals.toppings[layout].push(obj.price);
+          console.log('false push',$rootScope.myPizza.totals.toppings[layout]);
         }
       } else {
         obj.layout = {};
         obj.layout[layout] = true;
-        $scope.pizzaToppingsSubtotal[layout].push(obj.price);
-        console.log('push', $scope.pizzaToppingsSubtotal[layout]);
+        $rootScope.myPizza.totals.toppings[layout].push(obj.price);
+        console.log('push', $rootScope.myPizza.totals.toppings[layout]);
       }
       // iterate over key 'layout' in myPizza.toppings to match 
       // layout zone value...
       console.groupEnd();
-      // return $scope.pizzaToppingsSubtotal;
+      // return $rootScope.myPizza.totals.toppings;
       // return price;
       // console.log('price: ',price)
       // $scope.toppings[id];
@@ -158,8 +161,7 @@ the flavor of the sauce, cheese and ingrdients.
       return pizzaSubtotal;
     };
 
-    $rootScope.myPizza.totals = {};
-    $rootScope.myPizza.totals.toppings = {};
+    // $rootScope.myPizza.totals.toppings = {};
     $rootScope.myPizza.totals.total = $rootScope.myPizza.totals.toppings.left
 + $rootScope.myPizza.totals.toppings.right + $rootScope.myPizza.size.price;
 
