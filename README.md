@@ -9,6 +9,7 @@ by jeff stein
 * activate Node.js (see "Resources")
 * run the web server: ```node server```
 * enter url in browser: ```http://localhost:8000/```
+* you will see a file system, click on "src", then "index.html"
 
 ## Resources
 
