@@ -11,13 +11,13 @@ module.exports = function(grunt) {
         common: {
           js:'./src/common/js/*.js',
           css:'./src/common/css/*.css',
-          less:'./src/common/css/*.less'
+          less:'./src/common/css/*.less',
           html:'./src/common/*.html',
         },
         modules: {
           js:'./src/modules/**/js/*.js',
           css:'./src/modules/**/css/*.css',
-          less:'./src/modules/**/css/*.less'
+          less:'./src/modules/**/css/*.less',
           html:'./src/modules/**/*.html',
         }
       },
@@ -27,13 +27,13 @@ module.exports = function(grunt) {
         common: {
           js:'./dist/common/js/*.js',
           css:'./dist/common/css/*.css',
-          less:'./dist/common/css/*.less'
+          less:'./dist/common/css/*.less',
           html:'./dist/common/*.html',
         },
         modules: {
           js:'./dist/modules/**/js/*.js',
           css:'./dist/modules/**/css/*.css',
-          less:'./dist/modules/**/css/*.less'
+          less:'./dist/modules/**/css/*.less',
           html:'./dist/modules/**/*.html',
         }
       }
@@ -61,8 +61,7 @@ module.exports = function(grunt) {
         }
       }
     },
-    concat: {
-    },
+    concat: {},
     uglify: {
       //static_mappings: {},
       //dynamic_mappings: {},
@@ -93,10 +92,10 @@ module.exports = function(grunt) {
       }
     },
     wiredep: {
-      target: {
-        src: 'src/index.html' // point to your HTML file.
+      dev: {
+        src: './src/index.html'
       }
-    },
+    }
   });
 
   // Load the plugin that provides the "uglify" task.
@@ -114,11 +113,13 @@ module.exports = function(grunt) {
   grunt.registerTask('default', [
     'wiredep'
   ]);
+
   grunt.registerTask('dev', [
-    'clean:dev',
-    'copy:dev',
-    'wiredep:dev',
-    'watch:dev',
-    'browserSync:dev'
+    'clean',
+    'copy',
+    'wiredep',
+    'watch',
+    'browserSync'
   ]);
+
 };
