@@ -8,16 +8,7 @@
     .controller('cToppings', cToppings)
 
   function cToppings($scope, $rootScope, sToppings, sSizes, MULTIPLIER, $filter) {
-/*
 
-When you order a pizza, you have a FLAVOR or pizza in mind 
-first, NOT a size or thickness!
-
-Indulge your senses by imagining the aroma of your freshly 
-baked pie, then the texture as you bite into it, and then 
-the flavor of the sauce, cheese and ingrdients.
-
-*/
     $scope.title = "cToppings";
     console.group('START',$scope.title);
     $scope.units = "inches";

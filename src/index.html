@@ -9,6 +9,10 @@
   </style>
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <!-- bower:css -->
+  <!-- endbower -->
+
   <link rel="stylesheet" type="text/css" href="common/css/reset.css">
   <link rel="stylesheet" type="text/css" href="common/css/clearfix.css">
   <link rel="stylesheet/less" type="text/css" href="common/css/layout.less">
@@ -22,21 +26,38 @@
   <!-- <aside ng-include="'common/summary.html'"></aside> -->
   <footer ng-include="'common/footer.html'"></footer>
   <!-- <footer ng-controller="cFooter">{{footer}}</footer> -->
+
   <!-- bower:js -->
   <script src="../bower_components/angular/angular.js"></script>
   <script src="../bower_components/angular-route/angular-route.js"></script>
   <script src="../bower_components/angular-resource/angular-resource.js"></script>
-  <script src="../bower_components/less/dist/less.js"></script>
   <!-- endbower -->
+
   <!-- <script type="text/javascript" src="lib/less/less-1.4.1.min.js"></script> -->
   <!-- <script type="text/javascript" src="lib/angular/angular.min.js"></script> -->
+
+  <!-- START JS files that are common to the app -->
+  <!-- utility funxtions that don't depend on AngularJS -->
   <script type="text/javascript" src="common/js/utils.js"></script>
+  <!-- main app JS -->
   <script type="text/javascript" src="common/js/pizza.js"></script>
+  <!-- constants -->
   <script type="text/javascript" src="common/js/constants.js"></script>
-  <script type="text/javascript" src="common/js/services.js"></script>
+  <!-- services -->
+  <script type="text/javascript" src="common/js/s-nav.js"></script>
+  <!-- filters -->
   <script type="text/javascript" src="common/js/filters.js"></script>
+  <!-- directives -->
   <script type="text/javascript" src="common/js/directives.js"></script>
-  <script type="text/javascript" src="common/js/controllers.js"></script>
+  <!-- controllers -->
+  <script type="text/javascript" src="common/js/c-main.js"></script>
+  <script type="text/javascript" src="common/js/c-header.js"></script>
+  <script type="text/javascript" src="common/js/c-nav.js"></script>
+  <script type="text/javascript" src="common/js/c-footer.js"></script>
+  <script type="text/javascript" src="common/js/c-about.js"></script>
+  <script type="text/javascript" src="common/js/c-summary.js"></script>
+  <!-- END JS files that are common to the app -->
+
   <!-- START Module-based JS files -->
   <!-- TOPPINGS -->
   <script type="text/javascript" src="modules/toppings/js/s-toppings.js"></script>
@@ -46,6 +67,7 @@
   <script type="text/javascript" src="modules/sizes/js/s-sizes.js"></script>
   <script type="text/javascript" src="modules/sizes/js/d-sizes.js"></script>
   <script type="text/javascript" src="modules/sizes/js/c-sizes.js"></script>
+  <!-- END Module-based JS files -->
 
 </body>
 </html>

@@ -4,9 +4,61 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    wiredep: {
-      target: {
-        src: 'src/index.html' // point to your HTML file.
+    appinfo: {
+      src: {
+        dir:'./src/',
+        html:'./src/index.html',
+        common: {
+          js:'./src/common/js/*.js',
+          css:'./src/common/css/*.css',
+          less:'./src/common/css/*.less'
+          html:'./src/common/*.html',
+        },
+        modules: {
+          js:'./src/modules/**/js/*.js',
+          css:'./src/modules/**/css/*.css',
+          less:'./src/modules/**/css/*.less'
+          html:'./src/modules/**/*.html',
+        }
+      },
+      dist: {
+        dir:'./dist/',
+        html:'./dist/index.html',
+        common: {
+          js:'./dist/common/js/*.js',
+          css:'./dist/common/css/*.css',
+          less:'./dist/common/css/*.less'
+          html:'./dist/common/*.html',
+        },
+        modules: {
+          js:'./dist/modules/**/js/*.js',
+          css:'./dist/modules/**/css/*.css',
+          less:'./dist/modules/**/css/*.less'
+          html:'./dist/modules/**/*.html',
+        }
+      }
+    },
+    bower_concat: {},
+    browserSync: {
+      dev: {
+        bsFiles: {
+          src : [
+            './src/*.html',
+            './src/comon/js/*.js',
+            './src/comon/css/*.css',
+            './src/comon/*.html',
+            './src/modules/**/js/*.js',
+            './src/modules/**/css/*.css',
+            './src/modules/**/*.html',
+          ]
+        },
+        options: {
+          watchTask: true,
+          server: {
+            baseDir: ['<%= appinfo.src.dir %>'],
+            index: 'index.html'
+          }
+        }
       }
     },
     concat: {
@@ -22,21 +74,29 @@ module.exports = function(grunt) {
         //dest: 'build/common/js/<%= pkg.name %>.min.js'
       //}
     },
-    bower_concat: {},
-    browserSync: {
-      dev: {
-        bsFiles: {
-          src : [
-            'app/css/*.css',
-            'app/*.html'
-          ]
-        },
-        options: {
-          watchTask: true,
-          server: './app'
-        }
+    watch: {
+      html: {
+        files: ['<%= appinfo.src.html %>'],
+        tasks: ['copy:html']
+      },
+      js: {
+        files: ['<%= appinfo.src.js %>'],
+        tasks: ['copy:js','uglify']
+      },
+      css: {
+        files: ['<%= appinfo.src.css %>'],
+        tasks: ['copy:css','cssmin']
+      },
+      libs: {
+        files: ['./bower_components/**/*'],
+        tasks: ['wiredep']
       }
-    }
+    },
+    wiredep: {
+      target: {
+        src: 'src/index.html' // point to your HTML file.
+      }
+    },
   });
 
   // Load the plugin that provides the "uglify" task.
@@ -51,5 +111,14 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-wiredep');
 
   // Default task(s).
-  grunt.registerTask('default', ['wiredep']);
+  grunt.registerTask('default', [
+    'wiredep'
+  ]);
+  grunt.registerTask('dev', [
+    'clean:dev',
+    'copy:dev',
+    'wiredep:dev',
+    'watch:dev',
+    'browserSync:dev'
+  ]);
 };
