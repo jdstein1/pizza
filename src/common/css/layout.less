@@ -1,3 +1,4 @@
+
 body {
   font-family: sans-serif;
   line-height: 1.4;
@@ -65,12 +66,15 @@ nav {
     }
   }
 }
+.meat th:after, 
+.veggie th:after, 
+.dairy th:after {float: left; color: #fff; border-radius: 1em; padding:0.25em; margin:0 0.5em; min-width: 1em; min-height: 1em; text-align: center; line-height: 1;}
 .meat {background:rgba(255,0,0,0.125);}
-.meat th:after {content:'M'; float: right; color:rgba(153,0,0,0.5);}
+.meat th:after {content:'M'; background:rgba(153,0,0,0.5);}
 .veggie {background:rgba(0,153,0,0.125);}
-.veggie th:after {content:'V'; float: right; color:rgba(0,51,0,0.5);}
+.veggie th:after {content:'V'; background:rgba(0,51,0,0.5);}
 .dairy {background:rgba(255,204,0,0.125);}
-.dairy th:after {content:'D'; float: right; color:rgba(153,102,0,0.5);}
+.dairy th:after {content:'D'; background:rgba(153,102,0,0.5);}
 .disabled {
   opacity:0.5;
   // a, .navLink {background:#999; color:#333;}
@@ -109,3 +113,6 @@ ul{
     &.down {a:after {content:"\025BD";}}
   }
 }
+.topping.left label:after, 
+.topping.right label:after {font-size: 1.5em; line-height: 0; content: "\02ACF";}
+.topping.right label:after {content: "\02AD0";}

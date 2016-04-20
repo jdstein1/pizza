@@ -24,7 +24,8 @@
               "name":"Cheese",
               "seoname":"cheese",
               "price":0,
-              "type":"dairy"
+              "type":"dairy",
+              "base":true
             },{
               "id":27,
               "name":"Pepperoni",
@@ -54,7 +55,8 @@
               "name":"Pizza Sauce",
               "seoname":"pizzasauce",
               "price":0,
-              "type":"veggie"
+              "type":"veggie",
+              "base":true
             },{
               "id":45,
               "name":"Buffalo Mozzarella",

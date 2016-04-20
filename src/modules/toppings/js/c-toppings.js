@@ -41,6 +41,9 @@
     $scope.$watchCollection("myPizza.totals.toppings.right", function () {
       $rootScope.myPizza.totals.toppings.sum.right = fSum($rootScope.myPizza.totals.toppings.right);
     });
+    $scope.$watchCollection("myPizza.totals.toppings.whole", function () {
+      $rootScope.myPizza.totals.toppings.sum.whole = fSum($rootScope.myPizza.totals.toppings.whole);
+    });
 
     $scope.fClear = function () {
       console.log('START fClear FUNCTION');
@@ -119,6 +122,7 @@
         layout = {"left":true,"right":true}
       }
       if (item.price > 0 && layout) {
+        // topping is not free
         // console.log('layout.left: ', layout.left);
         // console.log('layout.right: ', layout.right);
         if (layout.left && layout.right) {
@@ -129,6 +133,7 @@
           }
         } else if (!layout.left && !layout.right) {
           // charge for no topping
+          price = "";
         } else {
           // charge for topping on half pizza
           price = item.price * MULTIPLIER.HALF;
@@ -136,6 +141,7 @@
         price = $filter('currency')(price);
         price = price + discountMsg;
       } else {
+        // topping is free
         price = "";
       }
       // console.groupEnd();
@@ -168,13 +174,13 @@
           console.log('true pop',$rootScope.myPizza.totals.toppings[layout]);
         } else {
           obj.layout[layout] = true;
-          $rootScope.myPizza.totals.toppings[layout].push(obj.price);
+          $rootScope.myPizza.totals.toppings[layout].push(obj.price * MULTIPLIER.HALF);
           console.log('false push',$rootScope.myPizza.totals.toppings[layout]);
         }
       } else {
         obj.layout = {};
         obj.layout[layout] = true;
-        $rootScope.myPizza.totals.toppings[layout].push(obj.price);
+        $rootScope.myPizza.totals.toppings[layout].push(obj.price * MULTIPLIER.WHOLE);
         console.log('push', $rootScope.myPizza.totals.toppings[layout]);
       }
       // iterate over key 'layout' in myPizza.toppings to match 

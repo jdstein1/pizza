@@ -17,21 +17,22 @@
   </ul>
   <h2>Toppings</h2>
   <form action="" id="myPizzaForm">
-    <table style="table-layout: fixed;">
+    <table style="">
       <thead>
         <tr>
-          <th>Ingredient Name</th>
-          <th>L</th>
-          <th>R</th>
-          <th>Charge</th>
+          <th style="width:50%;">Ingredient Name</th>
+          <th style="width:100px;">L</th>
+          <th style="width:100px;">R</th>
+          <th style="width:auto;">Charge</th>
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="topping in toppings | orderBy:predicate:reverse" class="{{topping.type}}">
+        <tr ng-repeat="topping in toppings | orderBy:predicate:reverse" class="{{topping.type}}" ng-class="{'disabled':topping.base}">
           <th class="align left">
             <label for="{{topping.seoname}}">
             <!-- <small class="float right">{{fToppingCharge(topping,'full')}}</small> -->
               <span>{{topping.name}}</span>
+              <i ng-show="topping.base">(default)</i>
               <!-- TODO: Add mechanism to "favorite" a topping -->
               <!-- <span>fav</span> -->
                 <!-- ng-model="myPizza.toppings[topping.seoname]"  -->
@@ -43,9 +44,9 @@
             </label>
           </th>
           <!-- LEFT -->
-          <td>
+          <td class="topping left">
             <label for="ToppingsLeft{{topping.id}}">
-              <span>{{fToppingPrice(topping)}}</span>
+              <!-- <span>{{fToppingPrice(topping)}}</span> -->
                 <!-- ng-model="myPizzaForm.toppings[$index].left"  -->
               <input type="checkbox" 
                 name="Topping{{topping.id}}" 
@@ -56,12 +57,12 @@
             </label>
           </td>
           <!-- RIGHT -->
-          <td>
-            <label for="LayoutRight{{topping.id}}">
-              <span>{{fToppingPrice(topping)}}</span>
+          <td class="topping right">
+            <label for="ToppingsRight{{topping.id}}">
+              <!-- <span>{{fToppingPrice(topping)}}</span> -->
                 <!-- ng-model="myPizzaForm.toppings[$index].right"  -->
               <input type="checkbox" 
-                name="Toppings{{topping.id}}" 
+                name="Topping{{topping.id}}" 
                 id="ToppingsRight{{topping.id}}" 
                 ng-model="myPizzaForm.toppings[topping.id].right" 
                 ng-click="fToppingsSubtotal('right',topping)"
@@ -79,7 +80,7 @@
           <!-- <th>Whole</th> -->
           <th>Left <small>{{myPizza.totals.toppings.left|json}}</small> {{myPizza.totals.toppings.sum.left|currency}}</th>
           <th>Right <small>{{myPizza.totals.toppings.right|json}}</small> {{myPizza.totals.toppings.sum.right|currency}}</th>
-          <th>Whole <small>{{myPizza.totals.toppings.right|json}}</small> {{myPizza.totals.toppings.sum.right|currency}}</th>
+          <th>Whole <small>{{myPizza.totals.toppings.whole|json}}</small> {{myPizza.totals.toppings.sum.whole|currency}}</th>
         </tr>
         <tr>
           <!-- <td>{{fToppingsSubtotal("whole")}}</td> -->
