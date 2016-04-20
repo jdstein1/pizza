@@ -36,6 +36,6 @@ Order a pizza in a way that makes sense to your senses with Jeff Stein's Pizza C
             * [grunt-contrib-less](https://github.com/gruntjs/grunt-contrib-less)
             * [grunt-contrib-uglify](https://github.com/gruntjs/grunt-contrib-uglify)
             * [grunt-contrib-watch](https://github.com/gruntjs/grunt-contrib-watch)
-            * [grunt-wiredep]()
+            * [grunt-wiredep](https://github.com/stephenplusplus/grunt-wiredep)
     * [Bower]()
 * [AngularJS](http://angularjs.org)
