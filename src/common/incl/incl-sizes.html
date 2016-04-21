@@ -1,0 +1,18 @@
+<!-- ng-model="myPizza.size"  -->
+<h2>Size</h2>
+<table style="table-layout: fixed;">
+  <tbody>
+    <tr>
+      <th>Size
+        <select 
+          name="myPizza.size" 
+          ng-model="myPizzaForm.size" 
+          ng-options="item.label+' '+units for item in sizes">
+          <option value="">choose...</option></select>
+      </th>
+      <td>
+        {{myPizza.size.price|currency}}
+      </td>
+    </tr>
+</table>
+<hr>

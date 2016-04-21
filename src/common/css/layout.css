@@ -22,6 +22,10 @@ article {
 table {
   width: 100%;
 }
+th,
+td {
+  text-align: center;
+}
 pre {
   overflow: hidden;
   text-align: left;
@@ -178,12 +182,12 @@ ul.sorting li {
 .icon.arrow.down a:after {
   content: "\025BD";
 }
-.topping.left label:after,
-.topping.right label:after {
+.topping-left label:before,
+.topping-right label:after {
   font-size: 1.5em;
   line-height: 0;
   content: "\02ACF";
 }
-.topping.right label:after {
+.topping-right label:after {
   content: "\02AD0";
 }

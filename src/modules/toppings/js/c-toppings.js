@@ -14,7 +14,7 @@
     $scope.units = "inches";
     $scope.myPizzaForm = {};
     $rootScope.myPizza.totals = {};
-    $rootScope.myPizza.totals.toppings = {"left":[],"right":[],"sum":{"left":0,"right":0}};
+    $rootScope.myPizza.totals.toppings = {"left":[],"right":[],"whole":[],"sum":{"left":0,"right":0,"whole":0}};
 
     // Calculate the current discount rate for topping whole 
     // pizza with ingredient...
@@ -49,7 +49,7 @@
       console.log('START fClear FUNCTION');
     };
 
-    var toppingsDefaultsArr = [11,5,27]; // id of default ingredient(s)
+    var toppingsDefaultsArr = [11,5]; // id of default ingredient(s)
 
     // TOPPINGS ARRAY
     console.log('sToppings.fToppingsArr(): ', sToppings.fToppingsArr());
@@ -112,8 +112,8 @@
 
     // Calculate the charge for an individual topping based on 
     // pie layout...
-    $scope.fToppingCharge = function (item,layout) {
-      // console.group('START fToppingCharge FUNCTION');
+    $scope.fPizzaToppingCharge = function (item,layout) {
+      console.group('START fPizzaToppingCharge FUNCTION');
       var price = 0, discountMsg = '';
       // if layout undefined, use layout object of item
       if (!layout) {
@@ -144,7 +144,7 @@
         // topping is free
         price = "";
       }
-      // console.groupEnd();
+      console.groupEnd();
       return price;
     };
 
@@ -158,11 +158,11 @@
     };
 
     // Calculate totals for toppings in each layout zone
-    $scope.fToppingsSubtotal = function (layout,obj) {
-      console.group('START fToppingsSubtotal FUNCTION');
-      // console.log('layout: ',layout);
+    $scope.fPizzaSideCharge = function (layout,obj) {
+      console.group('START fPizzaSideCharge FUNCTION');
+      console.log('layout: ',layout);
       // console.log('obj.layout: ',obj.layout);
-      // console.log('obj: ',obj);
+      console.log('obj: ',obj);
       // console.log('obj.price: ',obj.price);
       console.log('Object.keys(obj): ',Object.keys(obj));
       if (obj.layout){

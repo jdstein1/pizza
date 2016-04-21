@@ -1,7 +1,8 @@
 <article>
   <hr>
-  <ul class="sorting float right">
-    <li>sort toppings:</li>
+  <h2>Toppings</h2>
+  <ul class="sorting">
+    <li>sort by:</li>
     <li class="icon" 
       ng-class="{'arrow':predicate==='seoname','up':reverse===false,'down':reverse===true}">
       <a class="btn" ng-click="fSorting('seoname')">name</a>
@@ -15,14 +16,13 @@
       <a class="btn" ng-click="fSorting('type')">type</a>
     </li>
   </ul>
-  <h2>Toppings</h2>
   <form action="" id="myPizzaForm">
     <table style="">
       <thead>
         <tr>
           <th style="width:50%;">Ingredient Name</th>
-          <th style="width:100px;">L</th>
-          <th style="width:100px;">R</th>
+          <th class="topping-left" style="width:100px;"><label>( L _ )</label></th>
+          <th class="topping-right" style="width:100px;"><label>( _ R )</label></th>
           <th style="width:auto;">Charge</th>
         </tr>
       </thead>
@@ -30,7 +30,7 @@
         <tr ng-repeat="topping in toppings | orderBy:predicate:reverse" class="{{topping.type}}" ng-class="{'disabled':topping.base}">
           <th class="align left">
             <label for="{{topping.seoname}}">
-            <!-- <small class="float right">{{fToppingCharge(topping,'full')}}</small> -->
+            <!-- <small class="float right">{{fPizzaToppingCharge(topping,'full')}}</small> -->
               <span>{{topping.name}}</span>
               <i ng-show="topping.base">(default)</i>
               <!-- TODO: Add mechanism to "favorite" a topping -->
@@ -44,7 +44,7 @@
             </label>
           </th>
           <!-- LEFT -->
-          <td class="topping left">
+          <td class="topping-left">
             <label for="ToppingsLeft{{topping.id}}">
               <!-- <span>{{fToppingPrice(topping)}}</span> -->
                 <!-- ng-model="myPizzaForm.toppings[$index].left"  -->
@@ -52,12 +52,12 @@
                 name="Topping{{topping.id}}" 
                 id="ToppingsLeft{{topping.id}}" 
                 ng-model="myPizzaForm.toppings[topping.id].left" 
-                ng-click="fToppingsSubtotal('left',topping)"
+                ng-click="fPizzaSideCharge('left',topping)"
                 ng-checked="topping.layout.left">
             </label>
           </td>
           <!-- RIGHT -->
-          <td class="topping right">
+          <td class="topping-right">
             <label for="ToppingsRight{{topping.id}}">
               <!-- <span>{{fToppingPrice(topping)}}</span> -->
                 <!-- ng-model="myPizzaForm.toppings[$index].right"  -->
@@ -65,65 +65,42 @@
                 name="Topping{{topping.id}}" 
                 id="ToppingsRight{{topping.id}}" 
                 ng-model="myPizzaForm.toppings[topping.id].right" 
-                ng-click="fToppingsSubtotal('right',topping)"
+                ng-click="fPizzaSideCharge('right',topping)"
                 ng-checked="topping.layout.right">
             </label>
           </td>
           <td>
-              <span>{{fToppingCharge(topping)}}</span>
+            <span>{{fPizzaToppingCharge(topping)}}</span>
           </td>
         </tr>
       </tbody>
-      <tfoot>
+    </table>
+    <table>
+      <tbody>
         <tr>
           <th rowspan="3">Toppings Subtotal</th>
           <!-- <th>Whole</th> -->
-          <th>Left <small>{{myPizza.totals.toppings.left|json}}</small> {{myPizza.totals.toppings.sum.left|currency}}</th>
-          <th>Right <small>{{myPizza.totals.toppings.right|json}}</small> {{myPizza.totals.toppings.sum.right|currency}}</th>
-          <th>Whole <small>{{myPizza.totals.toppings.whole|json}}</small> {{myPizza.totals.toppings.sum.whole|currency}}</th>
+          <th>Left <small>{{myPizza.totals.toppings.left|json}}</small></th>
+          <th>Right <small>{{myPizza.totals.toppings.right|json}}</small></th>
+          <th>Whole <small>{{myPizza.totals.toppings.whole|json}}</small></th>
         </tr>
         <tr>
-          <!-- <td>{{fToppingsSubtotal("whole")}}</td> -->
+          <!-- <td>{{fPizzaSideCharge("whole")}}</td> -->
           <td>{{myPizza.totals.toppings.sum.left|currency}}</td>
           <td>{{myPizza.totals.toppings.sum.right|currency}}</td>
           <td>{{myPizza.totals.toppings.sum.whole|currency}}</td>
         </tr>
         <tr>
-          <!-- <td>{{fToppingsSubtotal("whole")}}</td> -->
+          <!-- <td>{{fPizzaSideCharge("whole")}}</td> -->
           <td><span ng-model="ToppingsLeft">{{fSideCharge('left')}}</span></td>
           <td><span ng-model="ToppingsRight">{{fSideCharge('right')}}</span></td>
           <td><span ng-model="ToppingsWhole">{{fSideCharge('whole')}}</span></td>
         </tr>
-      </tfoot>
+      </tbody>
     </table>
     <hr>
-      <!-- ng-model="myPizza.size"  -->
-    <h2>Size</h2>
-    <table style="table-layout: fixed;">
-      <tbody>
-        <tr>
-          <th>Size
-      <select 
-        name="myPizza.size" 
-        ng-model="myPizzaForm.size" 
-        ng-options="item.label+' '+units for item in sizes">
-        <option value="">choose...</option></select>
-          Subtotal</th>
-          <td>
-            {{myPizza.size.price|currency}}
-          </td>
-        </tr>
-    </table>
-    <hr>
-    <table style="table-layout: fixed;">
-      <tbody>
-        <tr>
-          <th>Total</th>
-          <td>
-            {{myPizza.totals|currency}}
-          </td>
-        </tr>
-    </table>
+    <div ng-include="'common/incl/incl-sizes.html'"></div>
+    <div ng-include="'common/incl/incl-total.html'"></div>
     <!-- <hr> -->
     <!-- <table style="table-layout: fixed;">
       <tr>
@@ -148,7 +125,7 @@
         <td>id: {{item.id}}</td>
         <td>price: {{fToppingPrice(item)}}</td>
         <td>layout: <pre>{{item.layout|json}}</pre></td>
-        <td>charge: {{fToppingCharge(item)}}</td>
+        <td>charge: {{fPizzaToppingCharge(item)}}</td>
       </tr>
     </table> -->
     <hr>
@@ -170,7 +147,7 @@
         <td>{{item.id}}</td>
         <td>{{fToppingPrice(item)}}</td>
         <td><pre>{{item.layout|json}}</pre></td>
-        <td>{{fToppingCharge(item)}}</td>
+        <td>{{fPizzaToppingCharge(item)}}</td>
       </tr>
     </table>
   </form>

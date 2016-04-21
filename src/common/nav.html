@@ -1,5 +1,11 @@
 <nav ng-controller="cNav">
   <ul>
+    <li>
+      <div>
+        <a class="navLink" href="#/about" 
+          ng-class="{'active':isActiveNav('/about')}">About</a>
+          </div>
+    </li>
     <li ng-repeat="item in nav | orderBy : navPredicate : navReverse">
       <ng-switch on="item.disabled">
         <div ng-switch-when="false">
@@ -17,12 +23,6 @@
           </span>
         </div>
       </ng-switch>
-    </li>
-    <li>
-      <div>
-        <a class="navLink" style="" href="#/about" 
-          ng-class="{'active':isActiveNav('/about')}">About</a>
-          </div>
     </li>
   </ul>
 </nav>
