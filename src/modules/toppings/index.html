@@ -86,17 +86,17 @@
       </tbody>
       <tfoot>
         <tr>
-          <th rowspan="1">Separate Subtotal</th>
+          <th>Separate Subtotals</th>
           <td>{{subtotal.left|currency}}</td>
           <td>{{subtotal.right|currency}}</td>
-          <th rowspan="1">Split</th>
+          <th>Split Subtotals</th>
           <td>{{subtotal.left+(subtotal.both/2)|currency}}</td>
           <td>{{subtotal.right+(subtotal.both/2)|currency}}</td>
         </tr>
         <tr>
-          <th rowspan="1">Both Subtotal</th>
+          <th>Both Subtotal</th>
           <th colspan="2">{{subtotal.both|currency}}</th>
-          <th rowspan="1">Total</th>
+          <th>Whole Subtotal</th>
           <th colspan="2">{{subtotal.left+subtotal.right+subtotal.both|currency}}</th>
         </tr>
       </tfoot>
