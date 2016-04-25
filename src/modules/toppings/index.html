@@ -1,5 +1,5 @@
 <article>
-  <hr>
+  <!-- <div ng-include="'common/subnav.html'"></div> -->
   <h2>Toppings</h2>
   <ul class="sorting">
     <li>sort by:</li>
@@ -21,86 +21,89 @@
       <thead>
         <tr>
           <th style="width:50%;">Ingredient Name</th>
-          <th class="topping-left" style="width:100px;"><label>( L _ )</label></th>
-          <th class="topping-right" style="width:100px;"><label>( _ R )</label></th>
-          <th style="width:auto;">Charge</th>
+          <th class="topping-left" style="width:10%;">Left <a href="" ng-click="fClear('left')">clear</a></th>
+          <th class="topping-right" style="width:10%;">Right <a href="" ng-click="fClear('right')">clear</a></th>
+          <th class="" style="width:10%;">Price Per Side</th>
+          <th colspan="2" style="width:20%;">Charge</th>
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="topping in toppings | orderBy:predicate:reverse" class="{{topping.type}}" ng-class="{'disabled':topping.base}">
+        <tr 
+          class="{{topping.type}}" 
+          ng-repeat="topping in toppings | orderBy:predicate:reverse" 
+          ng-class="{'default':topping.base}"
+        >
           <th class="align left">
             <label for="{{topping.seoname}}">
-            <!-- <small class="float right">{{fPizzaToppingCharge(topping,'full')}}</small> -->
+            <!-- <small class="float right">{{fToppingCharge(topping,'full')}}</small> -->
+              <s class="light">{{$index}}</s>
               <span>{{topping.name}}</span>
-              <i ng-show="topping.base">(default)</i>
+              <i class="light" ng-show="topping.base">(default)</i>
+              <i class="light">{{topping.id}}</i>
               <!-- TODO: Add mechanism to "favorite" a topping -->
               <!-- <span>fav</span> -->
                 <!-- ng-model="myPizza.toppings[topping.seoname]"  -->
               <!-- <input type="checkbox" name="toppings" 
                 ng-model="topping.checked" 
                 ng-checked="topping.checked" 
-                ng-change="fToppingToggle(item)" 
                 id="{{topping.seoname}}"> -->
             </label>
           </th>
           <!-- LEFT -->
           <td class="topping-left">
             <label for="ToppingsLeft{{topping.id}}">
-              <!-- <span>{{fToppingPrice(topping)}}</span> -->
+              <!-- <span class="price">{{fToppingPrice(topping)}}</span> -->
                 <!-- ng-model="myPizzaForm.toppings[$index].left"  -->
               <input type="checkbox" 
                 name="Topping{{topping.id}}" 
                 id="ToppingsLeft{{topping.id}}" 
                 ng-model="myPizzaForm.toppings[topping.id].left" 
-                ng-click="fPizzaSideCharge('left',topping)"
+                ng-click="fToppingToggle('left',topping)"
                 ng-checked="topping.layout.left">
             </label>
           </td>
           <!-- RIGHT -->
           <td class="topping-right">
             <label for="ToppingsRight{{topping.id}}">
-              <!-- <span>{{fToppingPrice(topping)}}</span> -->
+              <!-- <span class="price">{{fToppingPrice(topping)}}</span> -->
                 <!-- ng-model="myPizzaForm.toppings[$index].right"  -->
               <input type="checkbox" 
                 name="Topping{{topping.id}}" 
                 id="ToppingsRight{{topping.id}}" 
                 ng-model="myPizzaForm.toppings[topping.id].right" 
-                ng-click="fPizzaSideCharge('right',topping)"
+                ng-click="fToppingToggle('right',topping)"
                 ng-checked="topping.layout.right">
             </label>
           </td>
-          <td>
-            <span>{{fPizzaToppingCharge(topping)}}</span>
+          <!-- PRICE PER SIDE -->
+          <td class="">
+            <span class="price">{{fToppingPrice(topping)}}</span>
+          </td>
+          <td colspan="2">
+            <span>{{fToppingCharge(topping)}}</span>
           </td>
         </tr>
       </tbody>
-    </table>
-    <table>
-      <tbody>
+      <tfoot>
         <tr>
-          <th rowspan="3">Toppings Subtotal</th>
-          <!-- <th>Whole</th> -->
-          <th>Left <small>{{myPizza.totals.toppings.left|json}}</small></th>
-          <th>Right <small>{{myPizza.totals.toppings.right|json}}</small></th>
-          <th>Whole <small>{{myPizza.totals.toppings.whole|json}}</small></th>
+          <th rowspan="1">Separate Subtotal</th>
+          <td>{{subtotal.left|currency}}</td>
+          <td>{{subtotal.right|currency}}</td>
+          <th rowspan="1">Split</th>
+          <td>{{subtotal.left+(subtotal.both/2)|currency}}</td>
+          <td>{{subtotal.right+(subtotal.both/2)|currency}}</td>
         </tr>
         <tr>
-          <!-- <td>{{fPizzaSideCharge("whole")}}</td> -->
-          <td>{{myPizza.totals.toppings.sum.left|currency}}</td>
-          <td>{{myPizza.totals.toppings.sum.right|currency}}</td>
-          <td>{{myPizza.totals.toppings.sum.whole|currency}}</td>
+          <th rowspan="1">Both Subtotal</th>
+          <th colspan="2">{{subtotal.both|currency}}</th>
+          <th rowspan="1">Total</th>
+          <th colspan="2">{{subtotal.left+subtotal.right+subtotal.both|currency}}</th>
         </tr>
-        <tr>
-          <!-- <td>{{fPizzaSideCharge("whole")}}</td> -->
-          <td><span ng-model="ToppingsLeft">{{fSideCharge('left')}}</span></td>
-          <td><span ng-model="ToppingsRight">{{fSideCharge('right')}}</span></td>
-          <td><span ng-model="ToppingsWhole">{{fSideCharge('whole')}}</span></td>
-        </tr>
-      </tbody>
+      </tfoot>
     </table>
     <hr>
-    <div ng-include="'common/incl/incl-sizes.html'"></div>
-    <div ng-include="'common/incl/incl-total.html'"></div>
+    <!-- <div ng-include="'common/incl/incl-sizes.html'"></div> -->
+    <!-- <div ng-include="'common/incl/incl-total.html'"></div> -->
     <!-- <hr> -->
     <!-- <table style="table-layout: fixed;">
       <tr>
@@ -125,12 +128,11 @@
         <td>id: {{item.id}}</td>
         <td>price: {{fToppingPrice(item)}}</td>
         <td>layout: <pre>{{item.layout|json}}</pre></td>
-        <td>charge: {{fPizzaToppingCharge(item)}}</td>
+        <td>charge: {{fToppingCharge(item)}}</td>
       </tr>
     </table> -->
-    <hr>
-    <h3>toppings</h3>
-    <table>
+    <!-- <hr> -->
+    <!-- <table>
       <tr>
         <th>name</th>
         <th>seoname</th>
@@ -147,8 +149,20 @@
         <td>{{item.id}}</td>
         <td>{{fToppingPrice(item)}}</td>
         <td><pre>{{item.layout|json}}</pre></td>
-        <td>{{fPizzaToppingCharge(item)}}</td>
+        <td>{{fToppingCharge(item)}}</td>
       </tr>
-    </table>
+      <tr>
+        <th colspan="6">total left</th>
+        <td>{{myPizza.totals.toppings.sum.left|currency}}</td>
+      </tr>
+      <tr>
+        <th colspan="6">total right</th>
+        <td>{{myPizza.totals.toppings.sum.right|currency}}</td>
+      </tr>
+      <tr>
+        <th colspan="6">total whole</th>
+        <td>{{myPizza.totals.toppings.sum.whole|currency}}</td>
+      </tr>
+    </table> -->
   </form>
 </article>

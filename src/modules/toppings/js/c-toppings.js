@@ -11,21 +11,28 @@
 
     $scope.title = "cToppings";
     console.group('START',$scope.title);
-    $scope.units = "inches";
-    $scope.myPizzaForm = {};
+    console.log('run the controller');
+
+    // declare public vars
+    // $scope.units = "inches";
+    // $scope.myPizzaForm = {};
     $rootScope.myPizza.totals = {};
     $rootScope.myPizza.totals.toppings = {"left":[],"right":[],"whole":[],"sum":{"left":0,"right":0,"whole":0}};
+
+    // declare private vars
+    var toppingsDefaultsArr = [11,5]; // id of default ingredient(s)
+    var discount = 0;
 
     // Calculate the current discount rate for topping whole 
     // pizza with ingredient...
     if (1-MULTIPLIER.WHOLE>0) {
-      var discount = Math.round((1-MULTIPLIER.WHOLE)*100)+'%';
+      discount = Math.round((1-MULTIPLIER.WHOLE)*100)+'%';
       console.log('discount', discount);
     }
 
     // util function for doing a sum
     var fSum = function (arr) {
-      console.log('START fSum FUNCTION');
+      console.group('START fSum FUNCTION');
       console.log('-- arr: ', arr);
       var newSum = 0;
       for (var i = 0; i < arr.length; i++) {
@@ -33,44 +40,61 @@
         newSum = newSum + arr[i];
         console.log('newSum', newSum);
       }
+      console.groupEnd();
       return newSum;
     };
+
     $scope.$watchCollection("myPizza.totals.toppings.left", function () {
+      console.log('$watchCollection: myPizza.totals.toppings.left');
       $rootScope.myPizza.totals.toppings.sum.left = fSum($rootScope.myPizza.totals.toppings.left);
     });
+
     $scope.$watchCollection("myPizza.totals.toppings.right", function () {
+      console.log('$watchCollection: myPizza.totals.toppings.right');
       $rootScope.myPizza.totals.toppings.sum.right = fSum($rootScope.myPizza.totals.toppings.right);
     });
+
     $scope.$watchCollection("myPizza.totals.toppings.whole", function () {
+      console.log('$watchCollection: myPizza.totals.toppings.whole');
       $rootScope.myPizza.totals.toppings.sum.whole = fSum($rootScope.myPizza.totals.toppings.whole);
     });
 
-    $scope.fClear = function () {
+    $scope.fClear = function (side) {
       console.log('START fClear FUNCTION');
+      switch(side) {
+        case 'left':
+          for (var i = 0; i < $scope.toppings.length; i++) {
+            if ($scope.toppings[i].layout) {
+              $scope.toppings[i].layout.left = false;
+            }
+          }
+          break;
+        case 'right':
+          for (var i = 0; i < $scope.toppings.length; i++) {
+            if ($scope.toppings[i].layout) {
+              $scope.toppings[i].layout.right = false;
+            }
+          }
+          break;
+      }
     };
 
-    var toppingsDefaultsArr = [11,5]; // id of default ingredient(s)
 
     // TOPPINGS ARRAY
-    console.log('sToppings.fToppingsArr(): ', sToppings.fToppingsArr());
+    // console.log('sToppings.fToppingsArr(): ', sToppings.fToppingsArr());
     $scope.toppings = sToppings.fToppingsArr();
     $scope.defaultToppings = [];
 
     // set default ingrdients
     $scope.setDefaults = function (obj,defaults) {
       console.group('START setDefaults');
+      console.log('defaults: ', defaults);
       for (var i = 0; i < obj.length; i++) {
         for (var j = 0; j < defaults.length; j++) {
           if (obj[i].id === defaults[j]) {
             obj[i].layout = {};
             obj[i].layout.left = true;
             obj[i].layout.right = true;
-            // if (obj[i].price>0) {
-              // $rootScope.myPizza.totals.toppings.left.push(obj[i].price);
-              // $rootScope.myPizza.totals.toppings.right.push( obj[i].price);
-            // }
-            // $scope.defaultToppings.push(obj[i]);
-            // console.log('$rootScope.myPizza.totals.toppings: ', $rootScope.myPizza.totals.toppings);
           }
         }
       }
@@ -81,8 +105,8 @@
     // $rootScope.myPizza.toppings = $scope.defaultToppings;
 
     // TOPPINGS REPEAT PARAMS
-    $scope.predicate = 'seoname';
-    $scope.reverse = true;
+    $scope.predicate = 'price';
+    $scope.reverse = false;
     $scope.fSorting = function (predicate) {
       console.log('START fSorting FUNCTION');
       $scope.predicate = predicate;
@@ -112,115 +136,150 @@
 
     // Calculate the charge for an individual topping based on 
     // pie layout...
-    $scope.fPizzaToppingCharge = function (item,layout) {
-      console.group('START fPizzaToppingCharge FUNCTION');
+    $scope.fToppingCharge = function (item,layout) {
+      console.group('START fToppingCharge FUNCTION');
       var price = 0, discountMsg = '';
+
       // if layout undefined, use layout object of item
       if (!layout) {
         layout = item.layout;
       } else if (layout==='full') {
         layout = {"left":true,"right":true}
       }
-      if (item.price > 0 && layout) {
-        // topping is not free
-        // console.log('layout.left: ', layout.left);
-        // console.log('layout.right: ', layout.right);
-        if (layout.left && layout.right) {
-          // charge for topping on whole pizza
-          price = item.price * MULTIPLIER.WHOLE;
-          if (discount) {
-            discountMsg = ' (' + discount + ' off!)';
+
+      // check for layout...
+      if (layout) {
+        if (item.price > 0) {
+          // topping is not free
+          // console.log('layout.left: ', layout.left);
+          // console.log('layout.right: ', layout.right);
+          // check layout arrangement...
+          if (layout.left && layout.right) {
+            // charge for topping on whole pizza
+            price = item.price * MULTIPLIER.WHOLE;
+            if (discount) {
+              discountMsg = ' (' + discount + ' off!)';
+            }
+          } else if (!layout.left && !layout.right) {
+            // charge for no topping
+            price = false;
+          } else {
+            // charge for topping on half pizza
+            price = item.price * MULTIPLIER.HALF;
           }
-        } else if (!layout.left && !layout.right) {
-          // charge for no topping
-          price = "";
+          price = $filter('currency')(price);
+          price = price + discountMsg;
         } else {
-          // charge for topping on half pizza
-          price = item.price * MULTIPLIER.HALF;
+          // topping is free
+          price = "FREE";
         }
-        price = $filter('currency')(price);
-        price = price + discountMsg;
       } else {
-        // topping is free
-        price = "";
+        if (item.price > 0) {
+          price = "";
+
+        } else {
+          price = "FREE";
+
+        }
+
       }
+
       console.groupEnd();
       return price;
     };
 
     // Calculate the charge for a side of the pizza based on 
     // topping layout...
-    $scope.fSideCharge = function (item,layout) {
-      // console.group('START fSideCharge FUNCTION');
-      var price = 0;
-      // console.groupEnd();
-      return price;
+    $scope.fSideCharge = function () {
+      console.group('START fSideCharge FUNCTION');
+      // console.log('side ('+side+'): ', $rootScope.myPizza.totals.toppings.sum[side]);
+
+      $scope.subtotal = {'right':0,'left':0,'both':0,'whole':0};
+
+      // iterate over toppings
+      for (var i = 0; i < $scope.toppings.length; i++) {
+        // console.log('$scope.toppings[i].layout: ', $scope.toppings[i].layout);
+        var myTopping = $scope.toppings[i];
+
+        // check layout value
+        if (myTopping.layout) {
+          // layout is defined.
+          console.group(''+ myTopping.name +' MIGHT BE on the pizza');
+
+          if (myTopping.layout.right && !myTopping.layout.left) {
+            console.log('right side');
+            $scope.subtotal.right += (myTopping.price * MULTIPLIER.HALF);
+
+          } else if (myTopping.layout.left && !myTopping.layout.right) {
+            console.log('left side');
+            $scope.subtotal.left += (myTopping.price * MULTIPLIER.HALF);
+
+          } else if (myTopping.layout.left && myTopping.layout.right) {
+            console.log('both sides');
+            $scope.subtotal.both += (myTopping.price * MULTIPLIER.WHOLE);
+
+          } else {
+            console.log('neither side');
+          }
+
+          console.groupEnd();
+
+        } else {
+          // layout is undefined.
+          console.log(''+ myTopping.name +' IS NOT on the pizza');
+        }
+      }
+
+      console.log('subtotal: ', $scope.subtotal);
+      console.groupEnd();
+      // return $scope.subtotal;
+
     };
+    $scope.fSideCharge();
 
     // Calculate totals for toppings in each layout zone
-    $scope.fPizzaSideCharge = function (layout,obj) {
-      console.group('START fPizzaSideCharge FUNCTION');
-      console.log('layout: ',layout);
+    $scope.fToppingToggle = function (side,obj) {
+      console.group('START fToppingToggle FUNCTION');
+      // console.log('side: ',side);
+      // console.log('obj: ',obj);
       // console.log('obj.layout: ',obj.layout);
-      console.log('obj: ',obj);
       // console.log('obj.price: ',obj.price);
-      console.log('Object.keys(obj): ',Object.keys(obj));
-      if (obj.layout){
-        if (obj.layout[layout]===true) {
-          obj.layout[layout] = false;
+      // console.log('Object.keys(obj): ',Object.keys(obj));
+      if (obj.layout) {
+        if (obj.layout[side]===true) {
+          // layout is true...
+          // toggle layout[side] to false
+          obj.layout[side] = false;
+          $scope.fSideCharge();
           // need to get the index of the item w the desired value...
           // then pop that item:
-          $rootScope.myPizza.totals.toppings[layout].pop(0,1);
-          console.log('true pop',$rootScope.myPizza.totals.toppings[layout]);
+          $rootScope.myPizza.totals.toppings[side].pop(0,1);
+          console.log('pop',$rootScope.myPizza.totals.toppings[side]);
         } else {
-          obj.layout[layout] = true;
-          $rootScope.myPizza.totals.toppings[layout].push(obj.price * MULTIPLIER.HALF);
-          console.log('false push',$rootScope.myPizza.totals.toppings[layout]);
+          // layout is false...
+          // toggle layout[side] to true
+          obj.layout[side] = true;
+          $scope.fSideCharge();
+          // add half-topping price to array
+          $rootScope.myPizza.totals.toppings[side].push(obj.price * MULTIPLIER.HALF);
+          console.log('push',$rootScope.myPizza.totals.toppings[side]);
         }
       } else {
+        // layout is undefined...
         obj.layout = {};
-        obj.layout[layout] = true;
-        $rootScope.myPizza.totals.toppings[layout].push(obj.price * MULTIPLIER.WHOLE);
-        console.log('push', $rootScope.myPizza.totals.toppings[layout]);
+        // set layout[side] value to true
+        obj.layout[side] = true;
+        $scope.fSideCharge();
+        // add half-topping price to array
+        $rootScope.myPizza.totals.toppings[side].push(obj.price * MULTIPLIER.HALF);
+        console.log('push', $rootScope.myPizza.totals.toppings[side]);
       }
-      // iterate over key 'layout' in myPizza.toppings to match 
-      // layout zone value...
       console.groupEnd();
-      // return $rootScope.myPizza.totals.toppings;
-      // return price;
-      // console.log('price: ',price)
-      // $scope.toppings[id];
-    };
-
-    // Handle adding or removing toppings
-    $scope.fToppingToggle = function (item) {
-      console.log('START fToppingToggle FUNCTION');
-    };
-    // $rootScope.myPizza.toppings.push($scope.defaultToppings);
-    // console.log('$rootScope.myPizza.toppings: ', $rootScope.myPizza.toppings);
-
-    // Handle adding or removing toppings
-    $scope.fToppingModify = function (layout,item) {
-      console.log('START fToppingModify FUNCTION');
-    };
-
-    $scope.fPizzaSubtotal = function (size) {
-      console.log('START fPizzaSubtotal FUNCTION');
-      var pizzaSubtotal = $filter('currency')(size.price);
-      return pizzaSubtotal;
     };
 
     // $rootScope.myPizza.totals.toppings = {};
     $rootScope.myPizza.totals.total = $rootScope.myPizza.totals.toppings.left
 + $rootScope.myPizza.totals.toppings.right + $rootScope.myPizza.size.price;
-
-    $scope.fPizzaTax = function () {
-      console.log('START fPizzaTax FUNCTION');
-    };
-
-    $scope.fPizzaTotal = function () {
-      console.log('START fPizzaTotal FUNCTION');
-    };
 
     console.groupEnd();
   }

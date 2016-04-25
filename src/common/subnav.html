@@ -1,0 +1,22 @@
+<nav ng-controller="cNav" class="subnav steps">
+  <ul>
+    <li ng-repeat="item in nav | orderBy : navPredicate : navReverse">
+      <ng-switch on="item.disabled">
+        <span ng-switch-when="false">
+          <a class="navLink" href="#{{item.link}}" 
+            ng-class="{'disabled':item.disabled, 'active':isActiveNav(item.link)}">
+            <small>Step {{item.order}}</small><br>
+            {{item.name}}
+          </a>
+        </span>
+        <span ng-switch-default 
+          ng-class="{'disabled':item.disabled}">
+          <span class="navLink">
+            <small>Step {{item.order}}</small><br>
+            {{item.name}}
+          </span>
+        </span>
+      </ng-switch>
+    </li>
+  </ul>
+</nav>

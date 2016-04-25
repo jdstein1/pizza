@@ -4,7 +4,7 @@ body {
   line-height: 1.4;
 }
 header, nav, section, aside, footer {padding:1em;}
-header {background: #fff;}
+header {background: #eee;}
 footer {background: #eee; 
   // position:static; top:auto; right:0; bottom: 0; left:0;
 }
@@ -36,10 +36,17 @@ dl {
   dd {font-weight:100;background:#fef;text-indent:1em;}
 }
 hr {margin:1em 0;}
-nav {
+.header {
   background: #abc;
   box-shadow: 0 1.5em 1.5em -1em rgba(0,0,0,0.25) inset;
-  border-top: 1px solid #ccc;
+  // border-top: 1px solid #ccc;
+  h1 {color: #fff;}
+}
+.nav,
+.subnav {
+  background: #abc;
+  // box-shadow: 0 1.5em 1.5em -1em rgba(0,0,0,0.25) inset;
+  // border-top: 1px solid #ccc;
   padding:0.5em 1em 0; margin:0 -1em -1em;
   clear:both;
   ul {
@@ -56,7 +63,7 @@ nav {
         display:block;
         background:#eee;
         // border: 1px rgba(0,0,0,0.25) solid;
-        border-bottom: none;
+        // border-bottom: none;
         border-radius: 0.25em 0.25em 0 0;
         box-shadow: 0 -0.5em 1em -0.5em rgba(0,0,0,0.125) inset;
       }
@@ -66,15 +73,37 @@ nav {
     }
   }
 }
+.subnav {
+  background: transparent;
+  padding:0; margin:-1em -1em 1em;
+  clear:both;
+  ul {
+    li {
+      a, .navLink {
+        background:#eee;
+        // border: 1px rgba(0,0,0,0.25) solid;
+        // border-bottom: none;
+        border-radius: 0.25em;
+      }
+      .active {
+        background:#000; 
+        color:#fff;
+        border:none;
+        box-shadow:none;
+      }
+    }
+    // li:after {display: inline-block;content:">";}
+  }
+}
 .meat th:after, 
 .veggie th:after, 
-.dairy th:after {float: left; color: #fff; border-radius: 1em; padding:0.25em; margin:0 0.5em; min-width: 1em; min-height: 1em; text-align: center; line-height: 1;}
-.meat {background:rgba(255,0,0,0.125);}
-.meat th:after {content:'M'; background:rgba(153,0,0,0.5);}
-.veggie {background:rgba(0,153,0,0.125);}
-.veggie th:after {content:'V'; background:rgba(0,51,0,0.5);}
-.dairy {background:rgba(255,204,0,0.125);}
-.dairy th:after {content:'D'; background:rgba(153,102,0,0.5);}
+.dairy th:after {float: right; color: #fff; border-radius: 1em; padding:0.25em; margin:0 0.5em; min-width: 1em; min-height: 1em; text-align: center; line-height: 1;}
+// .meat {background:rgba(255,0,0,0.125);}
+.meat th:after {content:'M'; background:rgba(153,0,0,0.25);}
+// .veggie {background:rgba(0,153,0,0.125);}
+.veggie th:after {content:'V'; background:rgba(0,51,0,0.25);}
+// .dairy {background:rgba(255,204,0,0.125);}
+.dairy th:after {content:'D'; background:rgba(153,102,0,0.25);}
 .disabled {
   opacity:0.5;
   // a, .navLink {background:#999; color:#333;}
@@ -113,6 +142,16 @@ ul{
     &.down {a:after {content:"\025BD";}}
   }
 }
+.topping-left  
+.topping-right {
+  white-space: nowrap;
+  label {
+    .price {background: #000; color: #fff;}
+  }
+}
 .topping-left label:before, 
-.topping-right label:after {font-size: 1.5em; line-height: 0; content: "\02ACF";}
-.topping-right label:after {content: "\02AD0";}
+.topping-right label:after {font-size: 1.5em; line-height: 0;}
+// .topping-left label:after {content: "\02ACF";}
+// .topping-right label:after {content: "\02AD0";}
+
+.light {font-weight: 100;}

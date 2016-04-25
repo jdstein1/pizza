@@ -10,7 +10,7 @@ footer {
   padding: 1em;
 }
 header {
-  background: #fff;
+  background: #eee;
 }
 footer {
   background: #eee;
@@ -67,45 +67,72 @@ dl dd {
 hr {
   margin: 1em 0;
 }
-nav {
+.header {
   background: #abc;
   box-shadow: 0 1.5em 1.5em -1em rgba(0, 0, 0, 0.25) inset;
-  border-top: 1px solid #ccc;
+}
+.header h1 {
+  color: #fff;
+}
+.nav,
+.subnav {
+  background: #abc;
   padding: 0.5em 1em 0;
   margin: 0 -1em -1em;
   clear: both;
 }
-nav ul {
+.nav ul,
+.subnav ul {
   padding: 0;
   margin: 0;
   display: block;
 }
-nav ul li {
+.nav ul li,
+.subnav ul li {
   padding: 0 0.125em 0 0;
   margin: 0 0.125em 0 0;
   display: inline-block;
   list-style: none;
   text-align: center;
 }
-nav ul li a,
-nav ul li .navLink {
+.nav ul li a,
+.subnav ul li a,
+.nav ul li .navLink,
+.subnav ul li .navLink {
   padding: 0.75em 1em 0.5em;
   margin: 0;
   display: block;
   background: #eee;
-  border-bottom: none;
   border-radius: 0.25em 0.25em 0 0;
   box-shadow: 0 -0.5em 1em -0.5em rgba(0, 0, 0, 0.125) inset;
 }
-nav ul li .active {
+.nav ul li .active,
+.subnav ul li .active {
   background: #fff;
+  border: none;
+  box-shadow: none;
+}
+.subnav {
+  background: transparent;
+  padding: 0;
+  margin: -1em -1em 1em;
+  clear: both;
+}
+.subnav ul li a,
+.subnav ul li .navLink {
+  background: #eee;
+  border-radius: 0.25em;
+}
+.subnav ul li .active {
+  background: #000;
+  color: #fff;
   border: none;
   box-shadow: none;
 }
 .meat th:after,
 .veggie th:after,
 .dairy th:after {
-  float: left;
+  float: right;
   color: #fff;
   border-radius: 1em;
   padding: 0.25em;
@@ -115,26 +142,17 @@ nav ul li .active {
   text-align: center;
   line-height: 1;
 }
-.meat {
-  background: rgba(255, 0, 0, 0.125);
-}
 .meat th:after {
   content: 'M';
-  background: rgba(153, 0, 0, 0.5);
-}
-.veggie {
-  background: rgba(0, 153, 0, 0.125);
+  background: rgba(153, 0, 0, 0.25);
 }
 .veggie th:after {
   content: 'V';
-  background: rgba(0, 51, 0, 0.5);
-}
-.dairy {
-  background: rgba(255, 204, 0, 0.125);
+  background: rgba(0, 51, 0, 0.25);
 }
 .dairy th:after {
   content: 'D';
-  background: rgba(153, 102, 0, 0.5);
+  background: rgba(153, 102, 0, 0.25);
 }
 .disabled {
   opacity: 0.5;
@@ -182,12 +200,18 @@ ul.sorting li {
 .icon.arrow.down a:after {
   content: "\025BD";
 }
+.topping-left .topping-right {
+  white-space: nowrap;
+}
+.topping-left .topping-right label .price {
+  background: #000;
+  color: #fff;
+}
 .topping-left label:before,
 .topping-right label:after {
   font-size: 1.5em;
   line-height: 0;
-  content: "\02ACF";
 }
-.topping-right label:after {
-  content: "\02AD0";
+.light {
+  font-weight: 100;
 }

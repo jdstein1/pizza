@@ -13,6 +13,12 @@
         .config(['$routeProvider',
         function($routeProvider, $locationProvider) {
         $routeProvider.
+        when('/home', {
+            templateUrl: 'modules/toppings/index.html',
+            controller: 'cToppings'
+            //templateUrl: 'common/home.html',
+            //controller: 'cHome'
+        }).
         when('/about', {
             templateUrl: 'common/about.html',
             controller: 'cAbout'
@@ -34,7 +40,7 @@
             controller: 'cSizes'
         }).
         otherwise({
-            redirectTo: '/toppings'
+            redirectTo: '/home'
         });
 
         // $locationProvider.html5Mode(true);

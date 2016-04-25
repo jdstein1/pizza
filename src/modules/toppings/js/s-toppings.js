@@ -11,11 +11,11 @@
         // var title = "sToppings";
         // console.log('START',title);
 
-    // "id":3 -- Unique numerical identifier
-    // "name":"Pepperoni" -- Display name
-    // "seoname":"pepperoni" -- SEO name
-    // "price":[2.95,1.85] -- whole layout price.  half layout will be handled by a constant multiplier.
-    // "type":"meat" -- topping category
+        // "id":3 -- Unique numerical identifier
+        // "name":"Pepperoni" -- Display name
+        // "seoname":"pepperoni" -- SEO name
+        // "price":[2.95,1.85] -- whole layout price.  half layout will be handled by a constant multiplier.
+        // "type":"meat" -- topping category
 
         this.fToppingsArr = function () {
           var toppingsArr = [
@@ -33,6 +33,12 @@
               "price":3.5,
               "type":"meat"
             },{
+              "id":154,
+              "name":"Bacon",
+              "seoname":"bacon",
+              "price":3.7,
+              "type":"meat"
+            },{
               "id":89,
               "name":"Fresh Garlic",
               "seoname":"freshgarlic",
@@ -44,6 +50,12 @@
               "seoname":"sausage",
               "price":3.1,
               "type":"meat"
+            },{
+              "id":76,
+              "name":"Olives",
+              "seoname":"olives",
+              "price":2.7,
+              "type":"veggie"
             },{
               "id":76,
               "name":"Pineapple",
@@ -61,7 +73,7 @@
               "id":45,
               "name":"Buffalo Mozzarella",
               "seoname":"buffalomozzarella",
-              "price":3.7,
+              "price":3.9,
               "type":"dairy"
             }
           ];

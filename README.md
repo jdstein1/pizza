@@ -39,3 +39,6 @@ Order a pizza in a way that makes sense to your senses with Jeff Stein's Pizza C
             * [grunt-wiredep](https://github.com/stephenplusplus/grunt-wiredep)
     * [Bower]()
 * [AngularJS](http://angularjs.org)
+
+
+* [AngularJS Shopping Cart Example](http://jsfiddle.net/slav123/75m7e/3/)
