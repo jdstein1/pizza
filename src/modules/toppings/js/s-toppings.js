@@ -34,14 +34,14 @@
               "type":"meat"
             },{
               "id":154,
-              "name":"Bacon",
-              "seoname":"bacon",
+              "name":"Arugula",
+              "seoname":"arugula",
               "price":3.7,
-              "type":"meat"
+              "type":"veggie"
             },{
               "id":89,
-              "name":"Fresh Garlic",
-              "seoname":"freshgarlic",
+              "name":"Garlic",
+              "seoname":"garlic",
               "price":2.9,
               "type":"veggie"
             },{
@@ -52,14 +52,14 @@
               "type":"meat"
             },{
               "id":76,
-              "name":"Olives",
-              "seoname":"olives",
+              "name":"Ham",
+              "seoname":"ham",
               "price":2.7,
-              "type":"veggie"
+              "type":"meat"
             },{
               "id":76,
-              "name":"Pineapple",
-              "seoname":"pineapple",
+              "name":"Zucchini",
+              "seoname":"zucchini",
               "price":3.3,
               "type":"veggie"
             },{

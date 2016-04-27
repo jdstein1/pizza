@@ -1,0 +1,33 @@
+<h2>Test</h2>
+<table>
+  <tr>
+    <th>name</th>
+    <th>seoname</th>
+    <th>type</th>
+    <th>id</th>
+    <th>price</th>
+    <th>layout</th>
+    <th>charge</th>
+  </tr>
+  <tr ng-repeat="item in toppings">
+    <th>{{item.name}}</th>
+    <td>{{item.seoname}}</td>
+    <td>{{item.type}}</td>
+    <td>{{item.id}}</td>
+    <td>{{fToppingPrice(item)}}</td>
+    <td><pre>{{item.layout|json}}</pre></td>
+    <td>{{fToppingCharge(item)}}</td>
+  </tr>
+  <tr>
+    <th colspan="6">total left</th>
+    <td>{{myPizza.totals.toppings.sum.left|currency}}</td>
+  </tr>
+  <tr>
+    <th colspan="6">total right</th>
+    <td>{{myPizza.totals.toppings.sum.right|currency}}</td>
+  </tr>
+  <tr>
+    <th colspan="6">total whole</th>
+    <td>{{myPizza.totals.toppings.sum.whole|currency}}</td>
+  </tr>
+</table>

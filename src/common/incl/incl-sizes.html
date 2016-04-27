@@ -1,18 +1,40 @@
-<!-- ng-model="myPizza.size"  -->
 <h2>Size</h2>
 <table style="table-layout: fixed;">
-  <tbody>
-    <tr>
-      <th>Size
-        <select 
-          name="myPizza.size" 
-          ng-model="myPizzaForm.size" 
-          ng-options="item.label+' '+units for item in sizes">
-          <option value="">choose...</option></select>
-      </th>
-      <td>
-        {{myPizza.size.price|currency}}
-      </td>
-    </tr>
+  <tr>
+    <td>Size
+      <select 
+        name="sizeSelect" 
+        ng-model="myPizza.size" 
+        ng-options="item.label+' '+units for item in sizes">
+        <option value="">choose...</option></select>
+    </td>
+    <td>
+      {{myPizza.size.price|currency}}
+    </td>
+  </tr>
 </table>
 <hr>
+<h2>Size</h2>
+<table style="table-layout: fixed;">
+  <tr>
+    <th>Size</th>
+    <th>Price</th>
+  </tr>
+  <tr ng-repeat="item in sizes">
+    <td>
+      <label for="size{{item.value}}">{{item.label}} {{units}}
+        <input type="radio" 
+          name="sizeRadio" 
+          id="size{{item.value}}" 
+          ng-model="pizzasize" >
+      </label>
+    </td>
+    <td>{{item.price|currency}}</td>
+  </tr>
+  <tr>
+    <td>Total</td>
+    <td>
+      {{sizeRadio}}
+    </td>
+  </tr>
+</table>

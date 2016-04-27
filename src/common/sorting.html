@@ -1,0 +1,19 @@
+<ul class="sorting">
+  <li>sort by:</li>
+  <!-- <li ng-repeat="item in sortOptions" class="icon {{item.name}}" 
+    ng-class="{'arrow':predicate===item.name,'up':item.reverse===false,'down':item.reverse===true}">
+    <a class="btn" ng-click="fSorting(item.name)">{{item.name}}</a>
+  </li> -->
+  <li class="icon" 
+    ng-class="{'arrow':predicate==='seoname','up':reverse===false,'down':reverse===true}">
+    <a class="btn" ng-click="fSorting('seoname')">name</a>
+  </li>
+  <li class="icon" 
+    ng-class="{'arrow':predicate==='price','up':reverse===false,'down':reverse===true}">
+    <a class="btn" ng-click="fSorting('price')">price</a>
+  </li>
+  <li class="icon" 
+    ng-class="{'arrow':predicate==='type','up':reverse===false,'down':reverse===true}">
+    <a class="btn" ng-click="fSorting('type')">type</a>
+  </li>
+</ul>

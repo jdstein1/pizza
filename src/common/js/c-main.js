@@ -10,6 +10,7 @@
         // console.log('START '+$scope.title+' CONTROLLER');
         $rootScope.myPizza = {};
         // console.log('$rootScope.myPizza',$rootScope.myPizza);
+        $rootScope.units = "inches";
     }
 
 })();

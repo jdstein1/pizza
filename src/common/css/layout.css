@@ -1,3 +1,19 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+label,
+input {
+  line-height: 1.4;
+}
+label input[type=checkbox],
+label input[type=radio] {
+  float: left;
+  padding: 0;
+  margin: 0.25em 0.5em;
+  background: yellow;
+}
 body {
   font-family: sans-serif;
   line-height: 1.4;
@@ -21,10 +37,21 @@ article {
 }
 table {
   width: 100%;
+  margin: 0.5em 0 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 th,
 td {
   text-align: center;
+  border-bottom: 1px solid #ccc;
+  padding: 0.125em;
+}
+th {
+  font-weight: 900;
+  border-bottom: 2px solid #ccc;
+  border-top: 2px solid #ccc;
+  padding: 0.5em 0;
 }
 pre {
   overflow: hidden;
@@ -63,6 +90,26 @@ dl dd {
   font-weight: 100;
   background: #fef;
   text-indent: 1em;
+}
+h1 {
+  font-size: 2em;
+}
+h2 {
+  font-size: 1.5em;
+  border-bottom: 4px solid #ccc;
+  margin: 0.5em 0;
+}
+h3 {
+  font-size: 1.2em;
+}
+h4 {
+  font-size: 1.1em;
+}
+h5 {
+  font-size: 1em;
+}
+h6 {
+  font-size: 0.9em;
 }
 hr {
   margin: 1em 0;
@@ -129,30 +176,28 @@ hr {
   border: none;
   box-shadow: none;
 }
-.meat th:after,
-.veggie th:after,
-.dairy th:after {
-  float: right;
+.meat .type:after,
+.veggie .type:after,
+.dairy .type:after {
+  content: "";
+  float: left;
   color: #fff;
   border-radius: 1em;
   padding: 0.25em;
   margin: 0 0.5em;
-  min-width: 1em;
-  min-height: 1em;
+  min-width: 1.5em;
+  min-height: 1.5em;
   text-align: center;
   line-height: 1;
 }
-.meat th:after {
-  content: 'M';
-  background: rgba(153, 0, 0, 0.25);
+.meat .type:after {
+  background: rgba(153, 0, 0, 0.5);
 }
-.veggie th:after {
-  content: 'V';
-  background: rgba(0, 51, 0, 0.25);
+.veggie .type:after {
+  background: rgba(0, 51, 0, 0.5);
 }
-.dairy th:after {
-  content: 'D';
-  background: rgba(153, 102, 0, 0.25);
+.dairy .type:after {
+  background: rgba(153, 102, 0, 0.5);
 }
 .disabled {
   opacity: 0.5;
@@ -179,14 +224,19 @@ hr {
 .float.center {
   float: center;
 }
-ul.sorting {
+.sorting {
+  float: right;
+}
+.sorting ul {
   list-style-type: none;
   padding: 0.5em 0;
 }
-ul.sorting li {
+.sorting ul li {
   display: inline;
 }
 .btn {
+  clear: both;
+  display: inline-block;
   background: #eee;
   border-radius: 0.25em;
   padding: 0.25em 0.75em;
@@ -200,18 +250,24 @@ ul.sorting li {
 .icon.arrow.down a:after {
   content: "\025BD";
 }
-.topping-left .topping-right {
+label {
+  display: inline-block;
+  padding: 0.25em;
+  padding-right: 1em;
+}
+.topping-left,
+.topping-right {
   white-space: nowrap;
 }
-.topping-left .topping-right label .price {
-  background: #000;
+.topping-left.active label,
+.topping-right.active label {
+  background: #789;
   color: #fff;
+  border: none;
+  border-radius: 0.25em;
+  box-shadow: none;
 }
-.topping-left label:before,
-.topping-right label:after {
-  font-size: 1.5em;
-  line-height: 0;
-}
+/* semi-circle icons... */
 .light {
   font-weight: 100;
 }

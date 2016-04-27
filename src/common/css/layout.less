@@ -1,4 +1,6 @@
-
+*, *:before, *:after {box-sizing: border-box;}
+label, input {line-height: 1.4;}
+label input[type=checkbox], label input[type=radio] {float: left; padding: 0; margin: 0.25em 0.5em; background: yellow;}
 body {
   font-family: sans-serif;
   line-height: 1.4;
@@ -10,9 +12,15 @@ footer {background: #eee;
 }
 section, aside {}
 article {padding:1em; margin:0;}
-table {width:100%;}
+table {
+  width:100%;
+  margin: 0.5em 0 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
 tr {}
-th, td {text-align:center;}
+th, td {text-align:center; border-bottom: 1px solid #ccc; padding: 0.125em;}
+th {font-weight: 900; border-bottom: 2px solid #ccc; border-top: 2px solid #ccc; padding: 0.5em 0;}
 pre {overflow: hidden;text-align: left;}
 a {color: #00f;text-decoration: none;}
 ul, ol, dl {
@@ -35,6 +43,12 @@ dl {
   dt {font-weight:900;background:#eff;}
   dd {font-weight:100;background:#fef;text-indent:1em;}
 }
+h1 {font-size: 2em;}
+h2 {font-size: 1.5em; border-bottom: 4px solid #ccc; margin: 0.5em 0;}
+h3 {font-size: 1.2em;}
+h4 {font-size: 1.1em;}
+h5 {font-size: 1em;}
+h6 {font-size: 0.9em;}
 hr {margin:1em 0;}
 .header {
   background: #abc;
@@ -67,7 +81,9 @@ hr {margin:1em 0;}
         border-radius: 0.25em 0.25em 0 0;
         box-shadow: 0 -0.5em 1em -0.5em rgba(0,0,0,0.125) inset;
       }
-      .active {background:#fff; border:none;
+      .active {
+        background:#fff;
+        border:none;
         box-shadow:none;
       }
     }
@@ -95,15 +111,24 @@ hr {margin:1em 0;}
     // li:after {display: inline-block;content:">";}
   }
 }
-.meat th:after, 
-.veggie th:after, 
-.dairy th:after {float: right; color: #fff; border-radius: 1em; padding:0.25em; margin:0 0.5em; min-width: 1em; min-height: 1em; text-align: center; line-height: 1;}
+.meat .type:after, 
+.veggie .type:after, 
+.dairy .type:after {
+  content: "";
+  float: left; color: #fff; border-radius: 1em; padding:0.25em; margin:0 0.5em; min-width: 1.5em; min-height: 1.5em; text-align: center; line-height: 1;
+}
 // .meat {background:rgba(255,0,0,0.125);}
-.meat th:after {content:'M'; background:rgba(153,0,0,0.25);}
+.meat .type:after {
+  // content:'m';
+  background:rgba(153,0,0,0.5);}
 // .veggie {background:rgba(0,153,0,0.125);}
-.veggie th:after {content:'V'; background:rgba(0,51,0,0.25);}
+.veggie .type:after {
+  // content:'v';
+  background:rgba(0,51,0,0.5);}
 // .dairy {background:rgba(255,204,0,0.125);}
-.dairy th:after {content:'D'; background:rgba(153,102,0,0.25);}
+.dairy .type:after {
+  // content:'d';
+  background:rgba(153,102,0,0.5);}
 .disabled {
   opacity:0.5;
   // a, .navLink {background:#999; color:#333;}
@@ -120,8 +145,9 @@ hr {margin:1em 0;}
   &.right{float: right;}
   &.center{float: center;}
 }
-ul{
-  &.sorting {
+.sorting {
+    float: right;
+  ul{
     list-style-type: none;
     padding: 0.5em 0;
     li {
@@ -131,6 +157,8 @@ ul{
   }
 }
 .btn {
+  clear: both;
+  display: inline-block;
   background: #eee;
   border-radius: 0.25em;
   padding:0.25em 0.75em;
@@ -138,19 +166,41 @@ ul{
 .icon {
   a:after {content:"\02195";}
   &.arrow {
-    &.up {a:after {content:"\025B3";}}
-    &.down {a:after {content:"\025BD";}}
+    &.up {
+      a:after {content:"\025B3";}
+    }
+    &.down {
+      a:after {content:"\025BD";}
+    }
   }
 }
-.topping-left  
+label {
+  display: inline-block;
+  padding: 0.25em;
+  padding-right: 1em;
+}
+.topping-left,
 .topping-right {
   white-space: nowrap;
-  label {
-    .price {background: #000; color: #fff;}
+  &.active {
+    label {
+      background:#789; 
+      color:#fff;
+      border:none;
+      border-radius: 0.25em;
+      box-shadow:none;
+    }
   }
 }
-.topping-left label:before, 
-.topping-right label:after {font-size: 1.5em; line-height: 0;}
+.topping-left.active {
+  // background:#c96; 
+}
+.topping-right.active {
+  // background:#69c; 
+}
+/* semi-circle icons... */
+// .topping-left label:before, 
+// .topping-right label:after {font-size: 1.5em; line-height: 0;}
 // .topping-left label:after {content: "\02ACF";}
 // .topping-right label:after {content: "\02AD0";}
 
