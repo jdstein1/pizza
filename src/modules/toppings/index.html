@@ -79,27 +79,31 @@
           <td>Just On One Side</td>
           <td>{{subtotal.left|currency}}</td>
           <td>{{subtotal.right|currency}}</td>
+          <td colspan="3"></td>
         </tr>
         <tr>
           <td>On Both Sides</td>
           <td colspan="2">{{subtotal.both|currency}}</td>
+          <td colspan="3"></td>
         </tr>
         <tr>
           <td>Each Side Subtotal</td>
           <td>{{subtotal.left+(subtotal.both/2)|currency}}</td>
           <td>{{subtotal.right+(subtotal.both/2)|currency}}</td>
+          <td colspan="3"></td>
         </tr>
         <tr>
           <th>Toppings Subtotal</th>
           <th colspan="2">
             {{subtotal.whole|currency}}
           </th>
+          <th colspan="3"></th>
         </tr>
       </tfoot>
     </table>
     <!-- <div ng-include="'common/incl/incl-pizza-test.html'"></div> -->
     <!-- <div ng-include="'common/incl/incl-toppings-test.html'"></div> -->
     <div ng-include="'common/incl/incl-sizes.html'"></div>
-    <div ng-include="'common/incl/incl-total.html'"></div>
+    <!-- <div ng-include="'common/incl/incl-total.html'"></div> -->
   </form>
 </article>
