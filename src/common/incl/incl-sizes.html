@@ -1,19 +1,24 @@
+<ng-switch on="sizeType">
+<div ng-switch-when="select">
+
 <h2>Size</h2>
 <table style="table-layout: fixed;">
   <tr>
-    <td>Size
+    <th>Size</th>
+    <th>
       <select 
         name="sizeSelect" 
         ng-model="myPizza.size" 
         ng-options="item.label+' '+units for item in sizes">
         <option value="">choose...</option></select>
-    </td>
-    <td>
+    </th>
+    <th>
       {{myPizza.size.price|currency}}
-    </td>
+    </th>
   </tr>
 </table>
-<hr>
+</div>
+<div ng-switch-when="radio">
 <h2>Size</h2>
 <table style="table-layout: fixed;">
   <tr>
@@ -38,3 +43,5 @@
     </td>
   </tr>
 </table>
+</div>
+</ng-switch>

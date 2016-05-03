@@ -4,6 +4,7 @@ label input[type=checkbox], label input[type=radio] {float: left; padding: 0; ma
 body {
   font-family: sans-serif;
   line-height: 1.4;
+  color: #666;
 }
 header, nav, section, aside, footer {padding:1em;}
 header {background: #eee;}
@@ -14,13 +15,21 @@ section, aside {}
 article {padding:1em; margin:0;}
 table {
   width:100%;
-  margin: 0.5em 0 0;
+  margin: 0.25em 0;
   border-collapse: collapse;
   border-spacing: 0;
 }
+caption {position: relative;}
 tr {}
 th, td {text-align:center; border-bottom: 1px solid #ccc; padding: 0.125em;}
-th {font-weight: 900; border-bottom: 2px solid #ccc; border-top: 2px solid #ccc; padding: 0.5em 0;}
+th {
+  font-weight: 100;
+  /*border-bottom: 2px solid #ccc;*/
+  /*border-top: 2px solid #ccc;*/
+  background: #ccc;
+  color: #333;
+  padding: 0.5em 0;
+}
 pre {overflow: hidden;text-align: left;}
 a {color: #00f;text-decoration: none;}
 ul, ol, dl {
@@ -44,12 +53,13 @@ dl {
   dd {font-weight:100;background:#fef;text-indent:1em;}
 }
 h1 {font-size: 2em;}
-h2 {font-size: 1.5em; border-bottom: 4px solid #ccc; margin: 0.5em 0;}
+h2 {font-size: 1.5em; border-bottom: 4px solid #ccc; display: none;}
 h3 {font-size: 1.2em;}
 h4 {font-size: 1.1em;}
 h5 {font-size: 1em;}
 h6 {font-size: 0.9em;}
 hr {margin:1em 0;}
+.title {text-shadow: 0 0.0625em 0.125em rgba(0,0,0,0.5);}
 .header {
   background: #abc;
   box-shadow: 0 1.5em 1.5em -1em rgba(0,0,0,0.25) inset;
@@ -146,10 +156,16 @@ hr {margin:1em 0;}
   &.center{float: center;}
 }
 .sorting {
-    float: right;
+    /*float: right;*/
+    // top: -1em; right: 0;
+    // padding: 0;
+    // margin: 0.25em;
+    /*background: rgba(255,255,255,0.5);*/
+    /*border-radius: 0.5em;*/
+    /*border: 1px solid #ccc;*/
   ul{
     list-style-type: none;
-    padding: 0.5em 0;
+    // padding: 0.5em 0;
     li {
       display: inline;
       a {}
@@ -205,3 +221,32 @@ label {
 // .topping-right label:after {content: "\02AD0";}
 
 .light {font-weight: 100;}
+
+.pos-rel {position: relative;}
+.pos-sta {position: static;}
+.pos-abs {position: absolute;}
+.pos-fix {position: fixed;}
+
+.subtotal {background: #f8f8f8;}
+.total {background: #eee; font-weight: 900;}
+
+.discount {
+  background: rgba(0,204,0,0.75);
+  color: #fff;
+  // box-shadow: 0 0.25em 0.5em rgba(0,0,0,0.5);
+  // text-shadow: 0 0.25em 0.5em rgba(0,0,0,0.5);
+  font-size: 0.75em;
+  font-weight: 100;
+  border-radius: 1em;
+  text-align: center;
+  line-height: 1;
+  min-height: 2em;
+  height: 100%;
+  min-width: 2em;
+  width: 100%;
+  // float: right;
+  // top:0.25em;
+  // right:-1em;
+  padding: 0.5em;
+  transform: rotate(0.5);
+}

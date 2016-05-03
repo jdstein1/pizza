@@ -1,109 +1,113 @@
 <article>
   <!-- <div ng-include="'common/subnav.html'"></div> -->
-  <div class="sorting" ng-include="'common/sorting.html'"></div>
-  <h2>Toppings</h2>
   <form action="" id="myPizzaForm">
-    <table >
-      <thead>
-        <tr>
-          <th style="width:50%;">Ingredient Name</th>
-          <th class="topping-left">
-            <a ng-click="fClear('left')" class="btn">clear</a>
-          </th>
-          <th class="topping-right">
-            <a ng-click="fClear('right')" class="btn">clear</a>
-          </th>
-          <th class="">Half Price</th>
-          <th colspan="2">Charge</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr 
-          class="{{topping.type}}" 
-          ng-repeat="topping in toppings | orderBy:predicate:reverse" 
-          ng-class="{'default':topping.base}">
-          <td class="align left">
-            <label for="{{topping.seoname}}">
-            <!-- <small class="float right">{{fToppingCharge(topping,'full')}}</small> -->
-              <!-- <s class="light">{{$index}}</s> -->
-              <span>{{topping.name}}</span>
-              <i class="light" ng-show="topping.base">(default)</i>
-              <span class="type"></span>
-              <!-- <i class="light">{{topping.id}}</i> -->
-              <!-- TODO: Add mechanism to "favorite" a topping -->
-              <!-- <span>fav</span> -->
-                <!-- ng-model="myPizza.toppings[topping.seoname]"  -->
-              <!-- <input type="checkbox" name="toppings" 
-                ng-model="topping.checked" 
-                ng-checked="topping.checked" 
-                id="{{topping.seoname}}"> -->
-            </label>
-          </td>
-          <!-- LEFT -->
-          <td class="topping-left" ng-class="{'active':topping.layout.left}">
-            <label for="{{topping.seoname}}Left">
-              Left
-              <!-- <span class="price">{{fToppingPrice(topping)}}</span> -->
-                <!-- ng-model="myPizzaForm.toppings[topping.id].left"  -->
-              <input type="checkbox" 
-                name="{{topping.seoname}}" 
-                id="{{topping.seoname}}Left" 
-                ng-click="fToppingToggle('left',topping)"
-                ng-checked="topping.layout.left">
-            </label>
-          </td>
-          <!-- RIGHT -->
-          <td class="topping-right" ng-class="{'active':topping.layout.right}">
-            <label for="{{topping.seoname}}Right">
-              Right
-              <!-- <span class="price">{{fToppingPrice(topping)}}</span> -->
-                <!-- ng-model="myPizzaForm.toppings[topping.id].right"  -->
-              <input type="checkbox" 
-                name="{{topping.seoname}}" 
-                id="{{topping.seoname}}Right" 
-                ng-click="fToppingToggle('right',topping)"
-                ng-checked="topping.layout.right">
-            </label>
-          </td>
-          <!-- PRICE PER SIDE -->
-          <td class="">
-            <span class="price">{{fToppingPrice(topping)}}</span>
-          </td>
-          <td colspan="2">
-            <span>{{fToppingCharge(topping)}}</span>
-          </td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <td>Just On One Side</td>
-          <td>{{subtotal.left|currency}}</td>
-          <td>{{subtotal.right|currency}}</td>
-          <td colspan="3"></td>
-        </tr>
-        <tr>
-          <td>On Both Sides</td>
-          <td colspan="2">{{subtotal.both|currency}}</td>
-          <td colspan="3"></td>
-        </tr>
-        <tr>
-          <td>Each Side Subtotal</td>
-          <td>{{subtotal.left+(subtotal.both/2)|currency}}</td>
-          <td>{{subtotal.right+(subtotal.both/2)|currency}}</td>
-          <td colspan="3"></td>
-        </tr>
-        <tr>
-          <th>Toppings Subtotal</th>
-          <th colspan="2">
-            {{subtotal.whole|currency}}
-          </th>
-          <th colspan="3"></th>
-        </tr>
-      </tfoot>
-    </table>
+    <div class="pos-rel" id="divToppings">
+      <!-- <div class="sorting pos-abs" ng-include="'common/sorting.html'"></div> -->
+      <h2>Toppings</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Toppings</th>
+            <th>
+              <!-- Ingredient Name -->
+              <div class="sorting" ng-include="'common/sorting.html'"></div>
+            </th>
+            <th class="topping-left">
+              <a ng-click="fClear('left')" class="btn">clear</a>
+            </th>
+            <th class="topping-right">
+              <a ng-click="fClear('right')" class="btn">clear</a>
+            </th>
+            <th class="">Half Price</th>
+            <th colspan="2">Charge</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr 
+            class="{{topping.type}}" 
+            ng-repeat="topping in toppings | orderBy:predicate:reverse" 
+            ng-class="{'default':topping.base}">
+            <td class="align left" style="width:50%;" colspan="2">
+              <label for="{{topping.seoname}}">
+              <!-- <small class="float right">{{fToppingCharge(topping,'full')}}</small> -->
+                <!-- <s class="light">{{$index}}</s> -->
+                <span>{{topping.name}}</span>
+                <i class="light" ng-show="topping.base">(default)</i>
+                <span class="type"></span>
+                <!-- <i class="light">{{topping.id}}</i> -->
+                <!-- TODO: Add mechanism to "favorite" a topping -->
+                <!-- <span>fav</span> -->
+                  <!-- ng-model="myPizza.toppings[topping.seoname]"  -->
+                <!-- <input type="checkbox" name="toppings" 
+                  ng-model="topping.checked" 
+                  ng-checked="topping.checked" 
+                  id="{{topping.seoname}}"> -->
+              </label>
+            </td>
+            <!-- LEFT -->
+            <td class="topping-left" ng-class="{'active':topping.layout.left}">
+              <label for="{{topping.seoname}}Left">
+                Left
+                <!-- <span class="price">{{fToppingPrice(topping)}}</span> -->
+                  <!-- ng-model="myPizzaForm.toppings[topping.id].left"  -->
+                <input type="checkbox" 
+                  name="{{topping.seoname}}" 
+                  id="{{topping.seoname}}Left" 
+                  ng-click="fToppingToggle('left',topping)"
+                  ng-checked="topping.layout.left">
+              </label>
+            </td>
+            <!-- RIGHT -->
+            <td class="topping-right" ng-class="{'active':topping.layout.right}">
+              <label for="{{topping.seoname}}Right">
+                Right
+                <!-- <span class="price">{{fToppingPrice(topping)}}</span> -->
+                  <!-- ng-model="myPizzaForm.toppings[topping.id].right"  -->
+                <input type="checkbox" 
+                  name="{{topping.seoname}}" 
+                  id="{{topping.seoname}}Right" 
+                  ng-click="fToppingToggle('right',topping)"
+                  ng-checked="topping.layout.right">
+              </label>
+            </td>
+            <!-- PRICE PER SIDE -->
+            <td class="">
+              <span class="price">{{fToppingPrice(topping)}}</span>
+            </td>
+            <td colspan="2" class="pos-rel">
+              <span>{{fToppingCharge(topping)}}</span>
+              <span ng-if="topping.layout.right && topping.layout.left && topping.price" class="discount pos-rel">{{discountMsg}}</span>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr class="subtotal">
+            <td colspan="2">Just On One Side</td>
+            <td>{{subtotal.left|currency}}</td>
+            <td>{{subtotal.right|currency}}</td>
+            <td colspan="3"></td>
+          </tr>
+          <tr class="subtotal">
+            <td colspan="2">On Both Sides</td>
+            <td colspan="2">{{subtotal.both|currency}}</td>
+            <td colspan="3"></td>
+          </tr>
+          <tr class="subtotal">
+            <td colspan="2">Each Side Subtotal</td>
+            <td>{{subtotal.left+(subtotal.both/2)|currency}}</td>
+            <td>{{subtotal.right+(subtotal.both/2)|currency}}</td>
+            <td colspan="2"></td>
+            <td>
+              {{subtotal.whole|currency}}
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
     <!-- <div ng-include="'common/incl/incl-pizza-test.html'"></div> -->
     <!-- <div ng-include="'common/incl/incl-toppings-test.html'"></div> -->
     <div ng-include="'common/incl/incl-sizes.html'"></div>
-    <!-- <div ng-include="'common/incl/incl-total.html'"></div> -->
+    <div ng-include="'common/incl/incl-crusts.html'"></div>
+    <div ng-include="'common/incl/incl-total.html'"></div>
   </form>
 </article>

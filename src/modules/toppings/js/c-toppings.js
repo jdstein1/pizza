@@ -7,7 +7,7 @@
     .module('pizza')
     .controller('cToppings', cToppings)
 
-  function cToppings($scope, $rootScope, sToppings, sSizes, MULTIPLIER, $filter) {
+  function cToppings($scope, $rootScope, sToppings, sSizes, sCrusts, MULTIPLIER, $filter) {
 
     $scope.title = "cToppings";
     console.group('START',$scope.title);
@@ -18,6 +18,9 @@
     $rootScope.myPizza.totals = {};
     $rootScope.myPizza.totals.toppings = {"left":[],"right":[],"whole":[],"sum":{"left":0,"right":0,"whole":0}};
 
+    $scope.sizeType = "select";
+    $scope.crustType = "select";
+
     // declare private vars
     var toppingsDefaultsArr = [11,5]; // id of default ingredient(s)
     var discount = 0;
@@ -25,7 +28,7 @@
     // Calculate the current discount rate for topping whole 
     // pizza with ingredient...
     if (1-MULTIPLIER.WHOLE>0) {
-      discount = Math.round((1-MULTIPLIER.WHOLE)*100)+'%';
+      discount = Math.round((1-MULTIPLIER.WHOLE)*100)+'% off';
       console.log('discount', discount);
     }
 
@@ -116,12 +119,18 @@
     };
 
     // SIZES ARRAY
-    // console.log('sSizes.fSizesArr(): ', sSizes.fSizesArr());
     $scope.sizes = sSizes.fSizesArr();
     // console.log('$scope.sizes: ', $scope.sizes);
     $scope.defaultSize = $scope.sizes[1];
     // console.log('$scope.defaultSize: ', $scope.defaultSize);
     $rootScope.myPizza.size = $scope.defaultSize;
+
+    // CRUSTS ARRAY
+    $scope.crusts = sCrusts.fCrustsArr();
+    // console.log('$scope.crusts: ', $scope.crusts);
+    $scope.defaultCrust = $scope.crusts[1];
+    // console.log('$scope.defaultCrust: ', $scope.defaultCrust);
+    $rootScope.myPizza.crust = $scope.defaultCrust;
 
     $scope.fToppingPrice = function (item) {
       // console.group('START fToppingPrice FUNCTION');
@@ -140,7 +149,7 @@
     // pie layout...
     $scope.fToppingCharge = function (item,layout) {
       console.group('START fToppingCharge FUNCTION');
-      var price = 0, discountMsg = '';
+      var price = 0;
 
       // if layout undefined, use layout object of item
       if (!layout) {
@@ -160,7 +169,9 @@
             // charge for topping on whole pizza
             price = item.price * MULTIPLIER.WHOLE;
             if (discount) {
-              discountMsg = ' (' + discount + ' off!)';
+              $scope.discountMsg = discount;
+            } else {
+              $scope.discountMsg = false;
             }
           } else if (!layout.left && !layout.right) {
             // charge for no topping
@@ -170,7 +181,7 @@
             price = item.price * MULTIPLIER.HALF;
           }
           price = $filter('currency')(price);
-          price = price + discountMsg;
+          // price = price + $scope.discountMsg;
         } else {
           // topping is free
           price = "FREE";

@@ -21,8 +21,8 @@
           var toppingsArr = [
             {
               "id":11,
-              "name":"Cheese",
-              "seoname":"cheese",
+              "name":"Pizza Cheese",
+              "seoname":"pizzacheese",
               "price":0,
               "type":"dairy",
               "base":true

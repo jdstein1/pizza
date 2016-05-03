@@ -2,10 +2,11 @@
 <table style="table-layout: fixed;">
   <tbody>
     <tr>
-      <td>Total</td>
-      <td>
-        {{myPizza.totals|currency}}
-      </td>
+      <th>Total</th>
+      <th></th>
+      <th>
+        {{(myPizza.crust.price*myPizza.size.price)+subtotal.whole|currency}}
+      </th>
     </tr>
   </tbody>
 </table>

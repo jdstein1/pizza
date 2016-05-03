@@ -1,0 +1,47 @@
+<ng-switch on="crustType">
+<div ng-switch-when="select">
+
+<h2>Crust</h2>
+<table style="table-layout: fixed;">
+  <tr>
+    <th>Crust</th>
+    <th>
+      <select 
+        name="crustSelect" 
+        ng-model="myPizza.crust" 
+        ng-options="item.label for item in crusts">
+        <option value="">choose...</option></select>
+    </th>
+    <th>
+      multiplier: {{myPizza.crust.price}}
+    </th>
+  </tr>
+</table>
+</div>
+<div ng-switch-when="radio">
+<h2>Crust</h2>
+<table style="table-layout: fixed;">
+  <tr>
+    <th>Crust</th>
+    <th>Price</th>
+  </tr>
+  <tr ng-repeat="item in crusts">
+    <td>
+      <label for="crust{{item.value}}">{{item.label}}
+        <input type="radio" 
+          name="crustRadio" 
+          id="crust{{item.value}}" 
+          ng-model="pizzacrust" >
+      </label>
+    </td>
+    <td>{{item.price}}</td>
+  </tr>
+  <tr>
+    <td>Total</td>
+    <td>
+      {{crustRadio}}
+    </td>
+  </tr>
+</table>
+</div>
+</ng-switch>
