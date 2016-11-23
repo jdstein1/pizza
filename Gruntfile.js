@@ -58,7 +58,7 @@ module.exports = function(grunt) {
         options: {
           watchTask: true,
           server: {
-            baseDir: 'src',
+            baseDir: './src/',
             index: 'index.html'
           }
         }
@@ -82,7 +82,7 @@ module.exports = function(grunt) {
         options: {
           watchTask: true,
           server: {
-            baseDir: 'dist',
+            baseDir: './dist/',
             index: 'index.html'
           }
         }

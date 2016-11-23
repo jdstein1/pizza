@@ -5,6 +5,7 @@
   "main": "server.js",
   "dependencies": {},
   "devDependencies": {
+    "express": "^4.14.0",
     "grunt": "^0.4.5",
     "grunt-bower-concat": "^1.0.0",
     "grunt-browser-sync": "^2.2.0",
@@ -29,6 +30,7 @@
   },
   "author": "jdstein1",
   "license": "ISC",
+  "private": true,
   "bugs": {
     "url": "https://github.com/jdstein1/pizza/issues"
   },
